@@ -1,4 +1,4 @@
-package klas;
+package groupProject;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -27,7 +27,9 @@ public class Test extends Application {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 
 		Image earth = new Image("test/ball.png");
-		Image sun = new Image("test/ball.png");
+		//Image sun = new Image("image/ball.png");
+		
+	
 
 		final long startNanoTime = System.nanoTime();
 
@@ -40,8 +42,8 @@ public class Test extends Application {
 
 				// background image clears canvas
 
-				gc.drawImage(earth, x, y);
-				gc.drawImage(sun, 196, 196);
+				gc.drawImage(earth, 10, y);
+				//gc.drawImage(sun, 196, 196);
 			}
 		}.start();
 
