@@ -74,11 +74,13 @@ public class Main extends Application {
   
   // reposition the map. it is scrolling from bottom of the background to top of the background
   //backgroundImageView.relocate( 0, -backgroundImageView.getImage().getHeight() + SCENE_HEIGHT);
-  backgroundImageView.relocate(backgroundImageView.getImage().getWidth(), 0);
+  backgroundImageView.relocate(-backgroundImageView.getImage().getWidth() + SCENE_WIDTH, 0);
   //backgroundImageView.relocate(500,0);
   
   // add background to layer
   backgroundLayer.getChildren().add( backgroundImageView);
+  backgroundImageView.localToSceneTransformProperty();
+  
   
  }
  
@@ -103,9 +105,9 @@ public class Main extends Application {
              // x = 0;
             // }
              
-             if(backgroundImageView.getLayoutX() > 0)
+             if(backgroundImageView.getLayoutX() < 0)
              {
-            	 x = -500;
+            	 x = 500;
              }
              
              
