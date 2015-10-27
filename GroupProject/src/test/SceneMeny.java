@@ -7,13 +7,24 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.Glow;
+import javafx.scene.effect.MotionBlur;
+import javafx.scene.effect.Reflection;
+import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class SceneMeny extends Application {
+	
+	Background b=new Background();
 
 	public void start(Stage theStage) {
 
@@ -25,25 +36,33 @@ public class SceneMeny extends Application {
 
 		FlowPane pane = new FlowPane(Orientation.VERTICAL, 10, 10);
 		pane.setAlignment(Pos.TOP_CENTER);
+		
+		b.loadBackGround();
+		   b.startBackGroundLoop();
+		
 		Font font = new Font("Arial Black", 40);
 		
-		Label title = new Label("Jump and stuff");
+		Text title = new Text("Jump and stuff");
+		
 		title.setFont(Font.font("Arial Black", 60));
+		title.setFill(Color.RED);
+		title.setStroke(Color.BLACK);
+		
 
-		title.setAlignment(Pos.CENTER);
-
+		
+		
 		Label newGame = new Label("New game");
 		Label rules = new Label("How to play");
 		Label scores = new Label("High score");
 		Label exit = new Label("Exit Game");
 		newGame.setFont(font);
-		newGame.setTextFill(Color.BLACK);
+		newGame.setTextFill(Color.WHITE);
 		rules.setFont(font);
-		rules.setTextFill(Color.BLACK);
+		rules.setTextFill(Color.WHITE);
 		scores.setFont(font);
-		scores.setTextFill(Color.BLACK);
+		scores.setTextFill(Color.WHITE);
 		exit.setFont(font);
-		exit.setTextFill(Color.BLACK);
+		exit.setTextFill(Color.WHITE);
 		
 
 		hoverOver(newGame);
@@ -63,7 +82,7 @@ public class SceneMeny extends Application {
 		meny.getChildren().addAll(newGame, rules, scores, exit);
 		pane.getChildren().addAll(title, meny);
 
-		root.getChildren().add(pane);
+		root.getChildren().addAll(b.backgroundImageView,b.backgroundImageView2,pane);
 
 		theStage.show();
 	}
@@ -72,12 +91,13 @@ public class SceneMeny extends Application {
 		
 		
 		label.setOnMouseEntered(e -> {
-
-			label.setTextFill(Color.RED);
+			label.setEffect(new Glow(50));
+			label.setTextFill(Color.DARKRED);
 
 		});
 		label.setOnMouseExited(e -> {
-			label.setTextFill(Color.BLACK);
+			label.setEffect(null);
+			label.setTextFill(Color.WHITE);
 		});
 
 		
