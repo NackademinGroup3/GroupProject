@@ -1,61 +1,131 @@
+ 
 package test;
-	
+ 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
+public class Main extends Application {
+ 
+ private double SCENE_WIDTH = 500
+		 ;
+ private double SCENE_HEIGHT = 500;
+ 
+ /**
+  * Main game loop
+  */
+ private AnimationTimer gameLoop;
 
-public class Main extends Application 
-{
-	@Override
-	public void start(Stage primaryStage) 
-	{
-		Group root = new Group();
-		Scene theScene = new Scene(root);
-		
-		primaryStage.setScene(theScene);
-		
-		Canvas canvas = new Canvas(500,500);
-		root.getChildren().add(canvas);
-		
-		GraphicsContext gc = canvas.getGraphicsContext2D();
+ /**
+  * Container for the background image
+  */
+ ImageView backgroundImageView;
+ 
+ /**
+  * Scrolling speed of the background
+  */
+ double backgroundScrollSpeed = 0.5;
+ 
+ /**
+  * Layer for the background
+  */
+ Pane backgroundLayer;
+ 
+ @Override
+ public void start(Stage primaryStage) {
+  try {
 
-		Image sun = new Image("textures/sun.png");
-		Image space = new Image("textures/space.jpg");
+   // create root node
+   Group root = new Group();
 
+   // create layers
+   backgroundLayer = new Pane();
+   
+   // add layers to scene root
+   root.getChildren().add( backgroundLayer);
+   
+   // create scene
+   Scene scene = new Scene( root, SCENE_WIDTH,SCENE_HEIGHT);
+   
+   // show stage
+   primaryStage.setScene(scene);
+   primaryStage.show();
 
+   // load game assets
+   loadGame();
 
+   // start the game
+   startGameLoop();
+   
+  } catch(Exception e) {
+   e.printStackTrace();
+  }
+ }
 
-		final long startNanoTime = System.nanoTime();
-		 
-	    new AnimationTimer()
-	    {
-	        public void handle(long currentNanoTime)
-	        {
-	            double t = (currentNanoTime - startNanoTime) / 1000000000.0; 
-	 
-	            double x1 =  -500 * Math.cos(t);
-	            double y1 = 1; // Math.sin(t);
-	    
-	            // background image clears canvas
-	            gc.drawImage( space,x1,y1);
+ private void loadGame() {
+  
+  // background
+  // --------------------------------
+  backgroundImageView = new ImageView( getClass().getResource( "/textures/space2.jpg").toExternalForm());
+  
+  // reposition the map. it is scrolling from bottom of the background to top of the background
+  //backgroundImageView.relocate( 0, -backgroundImageView.getImage().getHeight() + SCENE_HEIGHT);
+  backgroundImageView.relocate(backgroundImageView.getImage().getWidth()  , 0);
+  //backgroundImageView.relocate(500,0);
+  
+  // add background to layer
+  backgroundLayer.getChildren().add( backgroundImageView);
+  
+ }
+ 
+ private void startGameLoop() {
 
-	            gc.drawImage( sun, 100, 70 );
-	        }
-	    }.start();
-	 
+  // game loop
+        gameLoop = new AnimationTimer() {
+         
+            @Override
+            public void handle(long l) {
+            
+             // scroll background
+             // ---------------------------
+             // calculate new position
+            
+             double x = backgroundImageView.getLayoutX() + backgroundScrollSpeed;
+             //double x1 = backgroundImageView.getLayoutX() + backgroundScrollSpeed;
+             
+             // check bounds. we scroll upwards, so the y position is negative. once it's > 0 we have reached the end of the map and stop scrolling
 
-		primaryStage.show();
-	}
-	
-	public static void main(String[] args) 
-	{
-		launch(args);
-	}
+             //if( Double.compare( x, 0) >= 500) {
+             // x = 0;
+            // }
+             
+             if(backgroundImageView.getLayoutX() > 0)
+             {
+            	 x = -500;
+             }
+             
+             
+             
+
+             // move background
+             //
+             backgroundImageView.setLayoutX(x);
+
+             
+            }
+ 
+        };
+        
+        gameLoop.start();
+        
+ }
+ 
+ public static void main(String[] args) {
+  launch(args);
+ }
 }
