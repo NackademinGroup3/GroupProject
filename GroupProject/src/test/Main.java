@@ -45,8 +45,9 @@ public class Main extends Application
 	    
 	            // background image clears canvas
 	            gc.drawImage( space,x1,y1);
-
+	            System.out.println(t);
 	            gc.drawImage( sun, 100, 70 );
+	            
 	        }
 	    }.start();
 	 
