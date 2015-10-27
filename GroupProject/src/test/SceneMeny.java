@@ -7,17 +7,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Blend;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.effect.Bloom;
 import javafx.scene.effect.Glow;
-import javafx.scene.effect.MotionBlur;
-import javafx.scene.effect.Reflection;
-import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -25,6 +18,7 @@ import javafx.stage.Stage;
 public class SceneMeny extends Application {
 	
 	Background b=new Background();
+	
 
 	public void start(Stage theStage) {
 
@@ -45,8 +39,9 @@ public class SceneMeny extends Application {
 		Text title = new Text("Jump and stuff");
 		
 		title.setFont(Font.font("Arial Black", 60));
-		title.setFill(Color.RED);
+		title.setFill(Color.GREEN);
 		title.setStroke(Color.BLACK);
+		title.setEffect(new Glow(10));
 		
 
 		
