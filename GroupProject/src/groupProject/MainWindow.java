@@ -28,6 +28,7 @@ public class MainWindow extends Application {
 		
 		n.setOnAction(event ->{
 			primaryStage.setScene(scene2);
+			
 		});
 		
 		
