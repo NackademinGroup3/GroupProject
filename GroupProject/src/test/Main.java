@@ -12,8 +12,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
  
- private double SCENE_WIDTH = 500
-		 ;
+ private double SCENE_WIDTH = 500;
  private double SCENE_HEIGHT = 500;
  
  /**
