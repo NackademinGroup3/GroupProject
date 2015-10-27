@@ -96,14 +96,12 @@ public class Main extends Application {
              // ---------------------------
              // calculate new position
             
-             double x = backgroundImageView.getLayoutX() - backgroundScrollSpeed;
+             double x = backgroundImageView.getLayoutX() + backgroundScrollSpeed;
              //double x1 = backgroundImageView.getLayoutX() + backgroundScrollSpeed;
              
-             // check bounds. we scroll upwards, so the y position is negative. once it's > 0 we have reached the end of the map and stop scrolling
+            
 
-             //if( Double.compare( x, 0) >= 500) {
-             // x = 0;
-            // }
+           
              
              if(backgroundImageView.getLayoutX() < 0)
              {
