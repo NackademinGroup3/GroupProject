@@ -71,7 +71,7 @@ public class Main extends Application {
   
   // background
   // --------------------------------
-  backgroundImageView = new ImageView( getClass().getResource( "/assets/space2.jpg").toExternalForm());
+  backgroundImageView = new ImageView( getClass().getResource( "/textures/space2.jpg").toExternalForm());
   
   // reposition the map. it is scrolling from bottom of the background to top of the background
   //backgroundImageView.relocate( 0, -backgroundImageView.getImage().getHeight() + SCENE_HEIGHT);
