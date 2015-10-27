@@ -71,11 +71,11 @@ public class Main extends Application {
   
   // background
   // --------------------------------
-  backgroundImageView = new ImageView( getClass().getResource( "/textures/space2.jpg").toExternalForm());
+  backgroundImageView = new ImageView( getClass().getResource("/textures/space2.jpg").toExternalForm());
   
   // reposition the map. it is scrolling from bottom of the background to top of the background
   //backgroundImageView.relocate( 0, -backgroundImageView.getImage().getHeight() + SCENE_HEIGHT);
-  backgroundImageView.relocate(backgroundImageView.getImage().getWidth()  , 0);
+  backgroundImageView.relocate(backgroundImageView.getImage().getWidth(), 0);
   //backgroundImageView.relocate(500,0);
   
   // add background to layer
@@ -95,7 +95,7 @@ public class Main extends Application {
              // ---------------------------
              // calculate new position
             
-             double x = backgroundImageView.getLayoutX() + backgroundScrollSpeed;
+             double x = backgroundImageView.getLayoutX() - backgroundScrollSpeed;
              //double x1 = backgroundImageView.getLayoutX() + backgroundScrollSpeed;
              
              // check bounds. we scroll upwards, so the y position is negative. once it's > 0 we have reached the end of the map and stop scrolling

@@ -26,7 +26,7 @@ public class Test extends Application {
 
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 
-		Image earth = new Image("test/ball.png");
+		Image earth = new Image("textures/sun.png");
 		//Image sun = new Image("image/ball.png");
 		
 	
