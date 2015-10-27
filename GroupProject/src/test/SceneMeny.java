@@ -51,6 +51,12 @@ public class SceneMeny extends Application {
 		hoverOver(scores);
 		hoverOver(exit);
 
+		menyChoice(newGame);
+		menyChoice(rules);
+		menyChoice(scores);
+		menyChoice(exit);
+		
+
 		VBox meny = new VBox(20);
 		
 		meny.setAlignment(Pos.CENTER);
@@ -63,7 +69,8 @@ public class SceneMeny extends Application {
 	}
 
 	private void hoverOver(Label label) {
-
+		
+		
 		label.setOnMouseEntered(e -> {
 
 			label.setTextFill(Color.RED);
@@ -73,9 +80,18 @@ public class SceneMeny extends Application {
 			label.setTextFill(Color.BLACK);
 		});
 
+		
+
+	}
+	
+	private void menyChoice(Label label){
+		
+		
+		
 		label.setOnMouseClicked(e -> {
 			switch (label.getText()) {
 			case "New game":
+				
 				System.out.println("new game");
 				break;
 			case "How to play":
@@ -93,7 +109,7 @@ public class SceneMeny extends Application {
 			}
 
 		});
-
+		
 	}
 
 	public static void main(String[] args) {
