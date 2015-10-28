@@ -32,7 +32,6 @@ import javafx.util.Duration;
 
 public class SceneMeny extends Application {
 
-	Background b = new Background();
 	Scene meny;
 	Scene game;
 	Scene gameOver;
@@ -62,7 +61,8 @@ public class SceneMeny extends Application {
 	}
 
 	private Scene createHowToPlayScene(){
-		
+
+		Background b = new Background();
 		Group root = new Group();
 		Scene scene = new Scene(root, 500, 500);
 		
@@ -113,6 +113,8 @@ public class SceneMeny extends Application {
 	}
 	
 	private Scene createMenyScene() {
+
+		Background b = new Background();
 		Group root = new Group();
 		Scene theScene = new Scene(root, 500, 500);
 
@@ -168,6 +170,8 @@ public class SceneMeny extends Application {
 	}
 
 	private Scene createGameScene() {
+
+		Background b = new Background();
 		double SCENE_WIDTH = 1000;
 		double SCENE_HEIGHT = 500;
 		Pane backgroundLayer;
@@ -246,7 +250,8 @@ public class SceneMeny extends Application {
 	}
 
 	private Scene createGameOverScreen(){
-		
+
+		Background b = new Background();
 		Group root = new Group();
 		Scene gameOverScene = new Scene(root, 1000, 500);
 
