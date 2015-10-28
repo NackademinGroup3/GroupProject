@@ -10,6 +10,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -35,6 +36,7 @@ public class SceneMeny extends Application {
 	Scene meny;
 	Scene game;
 	Scene gameOver;
+	Scene howToPlay;
 	
 	Stage mainStage;
 	Group gameRoot; 
@@ -53,11 +55,63 @@ public class SceneMeny extends Application {
 		meny = createMenyScene();
 		game = createGameScene();
 		gameOver = createGameOverScreen();
+		howToPlay = createHowToPlayScene();
 
 		mainStage.setScene(meny);
 		mainStage.show();
 	}
 
+	private Scene createHowToPlayScene(){
+		
+		Group root = new Group();
+		Scene scene = new Scene(root, 500, 500);
+		
+		/*FlowPane pane = new FlowPane(Orientation.VERTICAL, 10, 10);
+		pane.setAlignment(Pos.TOP_CENTER);*/
+		
+		BorderPane pane = new BorderPane();
+		
+		b.loadBackGround();
+		   b.startBackGroundLoop();
+		
+		
+		//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		
+		Label rules = new Label("     How to play");
+		
+		Label text = new Label("          Welcome to The Running Game, you will\n\n "
+				             + "          be encountering obstacles that you will\n\n"
+				             + "          need to evade. By evading the obstacles \n\n"
+				             + "   		  you will use the SPACE key to jump \n\n"
+				             + "          over them and try to survive for as \n\n"
+				             + "			     long as you can");
+	text.setMaxWidth(450);
+		text.setWrapText(true);
+		
+		
+		Font font = new Font("Arial Black", 40);
+		Font font2 = new Font("Arial Black", 17);
+		VBox vbox = new VBox(20);
+		
+		
+		
+		text.setFont(font2);
+		text.setTextFill(Color.WHITE);
+		
+		vbox.getChildren().addAll(rules, text);
+		
+		vbox.setAlignment(Pos.CENTER);
+		
+		rules.setFont(font);
+		rules.setTextFill(Color.WHITE);
+		
+		root.getChildren().addAll(b.backgroundImageView,b.backgroundImageView2,pane);
+		
+		pane.setRight(vbox);
+		
+		return scene;
+	}
+	
 	private Scene createMenyScene() {
 		Group root = new Group();
 		Scene theScene = new Scene(root, 500, 500);
@@ -250,6 +304,7 @@ public class SceneMeny extends Application {
 				System.out.println("new game");
 				break;
 			case "How to play":
+				mainStage.setScene(howToPlay);
 				playSoundEffect(2);
 				System.out.println("how to play");
 				break;
