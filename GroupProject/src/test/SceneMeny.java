@@ -107,7 +107,7 @@ public class SceneMeny extends Application {
 	}
 
 	private Scene createGameScene() {
-		double SCENE_WIDTH = 500;
+		double SCENE_WIDTH = 1000;
 		double SCENE_HEIGHT = 500;
 		Pane backgroundLayer;
 		
