@@ -16,6 +16,7 @@ public class SceneMain extends Application
 	 public double SCENE_HEIGHT = 500;
 	 Pane backgroundLayer;
 	 Background b = new Background();
+	
 	 
 	 
 	@Override

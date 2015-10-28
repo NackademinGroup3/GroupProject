@@ -12,11 +12,21 @@ public class Player {
 	private Image image;
 	private boolean isDead;
 	private boolean jumping;
+	private Image[] images; 
+	private int imageCounter = 0;
 
 	Player(Image image) {
 		this.image = image;
 		this.graphics.setImage(image);
 		this.hitbox = new Rectangle(image.getWidth(), image.getHeight());
+		this.jumping = false;
+		this.isDead = false;
+
+	}
+	Player(Image[] images) {
+		this.images = images;
+		this.graphics.setImage(images[imageCounter]);
+		this.hitbox = new Rectangle(images[imageCounter].getWidth(), images[imageCounter].getHeight());
 		this.jumping = false;
 		this.isDead = false;
 
@@ -60,6 +70,14 @@ public class Player {
 	}
 	public void setJumping(boolean jumping) {
 		this.jumping = jumping;
+	}
+	
+	
+	public void refreshImg(){
+		graphics.setImage(images[imageCounter++]);
+		if (imageCounter == 2)
+			imageCounter = 0;
+		
 	}
 
 }
