@@ -39,7 +39,7 @@ public class SceneMeny extends Application {
 	Stage mainStage;
 	Group gameRoot; 
 	
-	Image[] images = { new Image("textures/runner.png"), new Image("textures/runner2.png") };
+	Image[] images = { new Image("textures/run1.png"), new Image("textures/run2.png"), new Image("textures/jump.png")};
 	Player player;
 	private double counter = 1;
 	Timeline playerLoop;
@@ -154,15 +154,17 @@ public class SceneMeny extends Application {
 					player.setJumping(true);
 					// fall.stop();
 					// jump.stop();
-					jump.setByY(-150);
+					
+					jump.setByY(-250);
 					jump.setCycleCount(1);
 					jump.play();
 					jump.setOnFinished(finishedEvent -> {
 						jump.stop();
-						fall.setByY(150);
+						fall.setByY(250);
 						fall.play();
 						fall.setOnFinished(finishedFalling -> {
 							player.setJumping(false);
+						
 						});
 
 					});

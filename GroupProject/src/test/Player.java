@@ -73,10 +73,23 @@ public class Player {
 	}
 	
 	
+
+	public int getImageCounter() {
+		return imageCounter;
+	}
+	public void setImageCounter(int imageCounter) {
+		this.imageCounter = imageCounter;
+	}
 	public void refreshImg(){
-		graphics.setImage(images[imageCounter++]);
-		if (imageCounter == 2)
-			imageCounter = 0;
+		if (!jumping){
+			graphics.setImage(images[imageCounter++]);
+			if (imageCounter == 2)
+				imageCounter = 0;
+			
+		}
+		else
+			graphics.setImage(images[2]);
+		
 		
 	}
 

@@ -65,7 +65,7 @@ public class SceneMain extends Application {
 					player.setJumping(true);
 					// fall.stop();
 					// jump.stop();
-					jump.setByY(-150);
+					jump.setByY(-250);
 					jump.setCycleCount(1);
 					jump.play();
 					jump.setOnFinished(finishedEvent -> {
