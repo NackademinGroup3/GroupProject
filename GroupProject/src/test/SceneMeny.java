@@ -37,13 +37,14 @@ public class SceneMeny extends Application {
 	Scene gameOver;
 	
 	Stage mainStage;
+	Group gameRoot; 
 	
 	Image[] images = { new Image("textures/runner.png"), new Image("textures/runner2.png") };
 	Player player;
 	private double counter = 1;
 	Timeline playerLoop;
 	
-	ArrayList<Obstacle> ObsList = new ArrayList<>();
+	ArrayList<Obstacle> obsList = new ArrayList<>();
 	Obstacle obs;
 
 	public void start(Stage theStage) {
@@ -117,16 +118,16 @@ public class SceneMeny extends Application {
 		double SCENE_HEIGHT = 500;
 		Pane backgroundLayer;
 		
-		Group root = new Group();
+		gameRoot = new Group();
 		Scene scene;
 		 try
 		 {
-		   root = new Group();
+		   gameRoot = new Group();
 		   backgroundLayer = new Pane();
 		 
-		   root.getChildren().add( backgroundLayer);
+		   gameRoot.getChildren().add( backgroundLayer);
 
-		   scene = new Scene( root, SCENE_WIDTH,SCENE_HEIGHT);
+		   scene = new Scene( gameRoot, SCENE_WIDTH,SCENE_HEIGHT);
 		   
 		   
 		   
@@ -137,7 +138,7 @@ public class SceneMeny extends Application {
 		   backgroundLayer.getChildren().add( b.backgroundImageView2);
 		   
 		   player = new Player(images);
-			root.getChildren().add(player.getGraphics());
+			gameRoot.getChildren().add(player.getGraphics());
 			
 			player.getGraphics().setTranslateX(100);
 			player.getGraphics().setTranslateY(370);
@@ -169,11 +170,11 @@ public class SceneMeny extends Application {
 
 			});
 			
-			
 			obs = new Obstacle();
 			obs.getGraphics().setTranslateX(1000);
 			obs.getGraphics().setTranslateY(370);
-			root.getChildren().add(obs.getGraphics());
+			gameRoot.getChildren().add(obs.getGraphics());
+			
 			
 		   
 	return scene;
@@ -307,7 +308,9 @@ public class SceneMeny extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				updatePlayer();
+				
 				obs.getGraphics().setTranslateX(obs.getGraphics().getTranslateX()-10);
+				
 				
 				
 			}
@@ -321,6 +324,7 @@ public class SceneMeny extends Application {
 		}
 		counter++;
 	}
+	
 
 	public static void main(String[] args) {
 		launch(args);
