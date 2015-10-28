@@ -33,6 +33,7 @@ public class SceneMeny extends Application {
 	Background b = new Background();
 	Scene meny;
 	Scene game;
+	Scene gameOver;
 	
 	Stage mainStage;
 	
@@ -46,8 +47,9 @@ public class SceneMeny extends Application {
 		mainStage = theStage;
 		meny = createMenyScene();
 		game = createGameScene();
+		gameOver = createGameOverScreen();
 
-		mainStage.setScene(meny);
+		mainStage.setScene(gameOver);
 		mainStage.show();
 	}
 
@@ -99,7 +101,7 @@ public class SceneMeny extends Application {
 		meny.setAlignment(Pos.CENTER);
 		meny.getChildren().addAll(newGame, rules, scores, exit);
 		pane.getChildren().addAll(title, meny);
-
+		
 		root.getChildren().addAll(b.backgroundImageView, b.backgroundImageView2, pane);
 		
 		return theScene;
@@ -176,6 +178,38 @@ public class SceneMeny extends Application {
     
 	}
 
+	private Scene createGameOverScreen(){
+		
+		Group root = new Group();
+		Scene gameOverScene = new Scene(root, 1000, 500);
+
+		FlowPane pane = new FlowPane(Orientation.VERTICAL, 10, 10);
+		pane.setAlignment(Pos.CENTER);
+
+		b.loadBackGround();
+		b.startBackGroundLoop();
+		
+		Text gameOver = new Text("     GAME OVER");
+		gameOver.setFont(Font.font("Arial Black",100));
+		gameOver.setFill(Color.GREEN);
+		gameOver.setEffect(new Glow(500));
+		
+		Label meny = new Label("                     Back to main meny");
+		meny.setFont(new Font("Arial Black", 40));
+		meny.setTextFill(Color.WHITE);
+		meny.setAlignment(Pos.CENTER_RIGHT);
+		hoverOver(meny);
+		menyChoice(meny);
+		pane.getChildren().add(gameOver);
+		pane.getChildren().add(meny);
+		root.getChildren().add(b.backgroundImageView);
+		root.getChildren().add(b.backgroundImageView2);
+		root.getChildren().add(pane);
+		
+		return gameOverScene;
+		
+		
+	}
 	
 	
 	private void hoverOver(Label label) {
@@ -213,6 +247,12 @@ public class SceneMeny extends Application {
 			case "Exit Game":
 				playSoundEffect(2);
 				System.exit(0);
+				break;
+				
+			case "                     Back to main meny":
+				playSoundEffect(2);
+				mainStage.setScene(meny);
+				System.out.println("new game");
 				break;
 
 			default:
