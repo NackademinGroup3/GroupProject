@@ -213,8 +213,14 @@ public class SceneMeny extends Application {
 			TranslateTransition jump = new TranslateTransition(Duration.millis(450), player.getGraphics());
 			TranslateTransition fall = new TranslateTransition(Duration.millis(450), player.getGraphics());
 			jump.setInterpolator(Interpolator.LINEAR);
+			
 			scene.setOnKeyPressed(event -> {
+				
 				if (!player.isJumping()) {
+					
+					switch (event.getCode()){
+	                case SPACE:
+
 					player.setJumping(true);
 					// fall.stop();
 					// jump.stop();
@@ -232,7 +238,10 @@ public class SceneMeny extends Application {
 						});
 
 					});
+					default:
+						break;
 				}
+			}
 
 			});
 			
