@@ -21,7 +21,7 @@ public class SceneMain extends Application {
 	Pane backgroundLayer;
 	Background b = new Background();
 	
-	
+	// used for player animations
 	Image[] images = { new Image("textures/runner.png"), new Image("textures/runner2.png") };
 	Player player;
 	private double counter = 1;
@@ -45,7 +45,9 @@ public class SceneMain extends Application {
 
 			backgroundLayer.getChildren().add(b.backgroundImageView);
 			backgroundLayer.getChildren().add(b.backgroundImageView2);
-
+			
+			
+			// added player with animations
 			player = new Player(images);
 			root.getChildren().add(player.getGraphics());
 			
