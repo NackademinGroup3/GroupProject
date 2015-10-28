@@ -258,6 +258,7 @@ public class SceneMeny extends Application {
 			public void handle(ActionEvent event) {
 				updatePlayer();
 				
+				
 			}
 		}));
 		playerLoop.setCycleCount(-1);
