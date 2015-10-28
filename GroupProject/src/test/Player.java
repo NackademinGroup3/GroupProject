@@ -1,5 +1,4 @@
 package test;
-
 import java.awt.Color;
 
 import javafx.scene.image.Image;
@@ -12,12 +11,13 @@ public class Player {
 	private Rectangle hitbox;
 	private Image image;
 	private boolean isDead;
-	
+	private boolean jumping;
 
 	Player(Image image) {
 		this.image = image;
 		this.graphics.setImage(image);
 		this.hitbox = new Rectangle(image.getWidth(), image.getHeight());
+		this.jumping = false;
 		this.isDead = false;
 
 	}
@@ -54,6 +54,12 @@ public class Player {
 		this.isDead = isDead;
 	}
 
+	public boolean isJumping() {
+		// TODO Auto-generated method stub
+		return jumping;
+	}
+	public void setJumping(boolean jumping) {
+		this.jumping = jumping;
+	}
 
-	
 }

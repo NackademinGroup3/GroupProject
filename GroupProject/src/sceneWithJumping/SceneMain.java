@@ -39,7 +39,7 @@ public class SceneMain extends Application
 		   backgroundLayer.getChildren().add( b.backgroundImageView);
 		   backgroundLayer.getChildren().add( b.backgroundImageView2);
 		   
-		   Player player = new Player(new Image("textures/runner.png"));
+		   PlayerTest player = new PlayerTest(new Image("textures/runner.png"));
 		   root.getChildren().add(player.getGraphics());
 		  
 		   player.getGraphics().setTranslateX(100);

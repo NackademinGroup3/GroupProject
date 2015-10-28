@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
-public class Player {
+public class PlayerTest {
 
 	private ImageView graphics = new ImageView();
 	private Rectangle hitbox;
@@ -14,7 +14,7 @@ public class Player {
 	private boolean isDead;
 	private boolean jumping;
 
-	Player(Image image) {
+	PlayerTest(Image image) {
 		this.image = image;
 		this.graphics.setImage(image);
 		this.hitbox = new Rectangle(image.getWidth(), image.getHeight());
