@@ -2,6 +2,8 @@ package test;
 
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -19,6 +21,8 @@ import javafx.stage.Stage;
 
 
 import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -31,6 +35,11 @@ public class SceneMeny extends Application {
 	Scene game;
 	
 	Stage mainStage;
+	
+	Image[] images = { new Image("textures/runner.png"), new Image("textures/runner2.png") };
+	Player player;
+	private double counter = 1;
+	Timeline playerLoop;
 
 	public void start(Stage theStage) {
 
@@ -121,37 +130,39 @@ public class SceneMeny extends Application {
 		   backgroundLayer.getChildren().add( b.backgroundImageView);
 		   backgroundLayer.getChildren().add( b.backgroundImageView2);
 		   
-		   Player player = new Player(new Image("textures/runner.png"));
-		   root.getChildren().add(player.getGraphics());
-		  
-		   player.getGraphics().setTranslateX(100);
-		   player.getGraphics().setTranslateY(370);	
-		   
-		   TranslateTransition jump  = new TranslateTransition(Duration.millis(450), player.getGraphics());
-		   TranslateTransition fall  = new TranslateTransition(Duration.millis(450), player.getGraphics());
-		   jump.setInterpolator(Interpolator.LINEAR);
-		   scene.setOnKeyPressed(event ->{
-			   if (!player.isJumping())
-			   {
-				   player.setJumping(true);
-				  // fall.stop();
-				   //jump.stop();
-				   jump.setByY(-150);
-				   jump.setCycleCount(1);
-				   jump.play();
-				   jump.setOnFinished(finishedEvent ->{
-					   jump.stop();
-					   fall.setByY(150);
-					   fall.play();
-					  fall.setOnFinished(finishedFalling -> {
-						  player.setJumping(false);
-					  });
-					  
-					   
-				   });
-			   }
-			   
-		   });
+		   player = new Player(images);
+			root.getChildren().add(player.getGraphics());
+			
+			player.getGraphics().setTranslateX(100);
+			player.getGraphics().setTranslateY(370);
+			
+			
+			startPlayerMovement();
+			playerLoop.play();
+			TranslateTransition jump = new TranslateTransition(Duration.millis(450), player.getGraphics());
+			TranslateTransition fall = new TranslateTransition(Duration.millis(450), player.getGraphics());
+			jump.setInterpolator(Interpolator.LINEAR);
+			scene.setOnKeyPressed(event -> {
+				if (!player.isJumping()) {
+					player.setJumping(true);
+					// fall.stop();
+					// jump.stop();
+					jump.setByY(-150);
+					jump.setCycleCount(1);
+					jump.play();
+					jump.setOnFinished(finishedEvent -> {
+						jump.stop();
+						fall.setByY(150);
+						fall.play();
+						fall.setOnFinished(finishedFalling -> {
+							player.setJumping(false);
+						});
+
+					});
+				}
+
+			});
+			
 		   
 	return scene;
 		   
@@ -238,6 +249,25 @@ public class SceneMeny extends Application {
 
 		}
 
+	}
+	
+	public void startPlayerMovement() {
+		playerLoop = new Timeline(new KeyFrame(Duration.millis(1000 /15), new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				updatePlayer();
+				
+			}
+		}));
+		playerLoop.setCycleCount(-1);
+	}
+	private void updatePlayer(){
+		if (counter %4 == 0){
+			player.refreshImg();
+			counter = 1;
+		}
+		counter++;
 	}
 
 	public static void main(String[] args) {
