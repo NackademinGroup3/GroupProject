@@ -1,8 +1,6 @@
 package test;
 
 
-import java.io.File;
-
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -12,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -20,37 +17,51 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+
+import javafx.animation.Interpolator;
+import javafx.animation.TranslateTransition;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
+
 public class SceneMeny extends Application {
+
+	Background b = new Background();
+	Scene meny;
+	Scene game;
 	
-	Background b=new Background();
-	
+	Stage mainStage;
 
 	public void start(Stage theStage) {
 
-		theStage.setTitle("Running game");
+		mainStage = theStage;
+		meny = createMenyScene();
+		game = createGameScene();
 
+		mainStage.setScene(meny);
+		mainStage.show();
+	}
+
+	private Scene createMenyScene() {
 		Group root = new Group();
 		Scene theScene = new Scene(root, 500, 500);
-		theStage.setScene(theScene);
 
 		FlowPane pane = new FlowPane(Orientation.VERTICAL, 10, 10);
 		pane.setAlignment(Pos.TOP_CENTER);
-		
+
 		b.loadBackGround();
-		   b.startBackGroundLoop();
-		
+		b.startBackGroundLoop();
+		//playSoundEffect(3);
+
 		Font font = new Font("Arial Black", 40);
-		
+
 		Text title = new Text("Jump and stuff");
-		
+
 		title.setFont(Font.font("Arial Black", 60));
 		title.setFill(Color.GREEN);
 		title.setStroke(Color.BLACK);
 		title.setEffect(new Glow(10));
-		
 
-		
-		
 		Label newGame = new Label("New game");
 		Label rules = new Label("How to play");
 		Label scores = new Label("High score");
@@ -63,7 +74,6 @@ public class SceneMeny extends Application {
 		scores.setTextFill(Color.WHITE);
 		exit.setFont(font);
 		exit.setTextFill(Color.WHITE);
-		
 
 		hoverOver(newGame);
 		hoverOver(rules);
@@ -74,24 +84,91 @@ public class SceneMeny extends Application {
 		menyChoice(rules);
 		menyChoice(scores);
 		menyChoice(exit);
-		
 
 		VBox meny = new VBox(20);
-		
+
 		meny.setAlignment(Pos.CENTER);
 		meny.getChildren().addAll(newGame, rules, scores, exit);
 		pane.getChildren().addAll(title, meny);
 
-		root.getChildren().addAll(b.backgroundImageView,b.backgroundImageView2,pane);
+		root.getChildren().addAll(b.backgroundImageView, b.backgroundImageView2, pane);
+		
+		return theScene;
 
-		theStage.show();
 	}
 
+	private Scene createGameScene() {
+		double SCENE_WIDTH = 500;
+		double SCENE_HEIGHT = 500;
+		Pane backgroundLayer;
+		
+		Group root = new Group();
+		Scene scene;
+		 try
+		 {
+		   root = new Group();
+		   backgroundLayer = new Pane();
+		 
+		   root.getChildren().add( backgroundLayer);
+
+		   scene = new Scene( root, SCENE_WIDTH,SCENE_HEIGHT);
+		   
+		   
+		   
+		   b.loadBackGround();
+		   b.startBackGroundLoop();
+		   
+		   backgroundLayer.getChildren().add( b.backgroundImageView);
+		   backgroundLayer.getChildren().add( b.backgroundImageView2);
+		   
+		   Player player = new Player(new Image("textures/runner.png"));
+		   root.getChildren().add(player.getGraphics());
+		  
+		   player.getGraphics().setTranslateX(100);
+		   player.getGraphics().setTranslateY(370);	
+		   
+		   TranslateTransition jump  = new TranslateTransition(Duration.millis(450), player.getGraphics());
+		   TranslateTransition fall  = new TranslateTransition(Duration.millis(450), player.getGraphics());
+		   jump.setInterpolator(Interpolator.LINEAR);
+		   scene.setOnKeyPressed(event ->{
+			   if (!player.isJumping())
+			   {
+				   player.setJumping(true);
+				  // fall.stop();
+				   //jump.stop();
+				   jump.setByY(-150);
+				   jump.setCycleCount(1);
+				   jump.play();
+				   jump.setOnFinished(finishedEvent ->{
+					   jump.stop();
+					   fall.setByY(150);
+					   fall.play();
+					  fall.setOnFinished(finishedFalling -> {
+						  player.setJumping(false);
+					  });
+					  
+					   
+				   });
+			   }
+			   
+		   });
+		   
+	return scene;
+		   
+		  } 
+		 catch(Exception e)
+		 {
+		   e.printStackTrace();
+		 }
+		 
+		return null;
+    
+	}
+
+	
+	
 	private void hoverOver(Label label) {
-		
-		
-		
-		
+
 		label.setOnMouseEntered(e -> {
 			playSoundEffect(1);
 			label.setEffect(new Glow(50));
@@ -103,18 +180,15 @@ public class SceneMeny extends Application {
 			label.setTextFill(Color.WHITE);
 		});
 
-		
-
 	}
-	
-	private void menyChoice(Label label){
-		
-		
-		
+
+	private void menyChoice(Label label) {
+
 		label.setOnMouseClicked(e -> {
 			switch (label.getText()) {
 			case "New game":
 				playSoundEffect(2);
+				mainStage.setScene(game);
 				System.out.println("new game");
 				break;
 			case "How to play":
@@ -135,29 +209,34 @@ public class SceneMeny extends Application {
 			}
 
 		});
-		
-	}
-	
-	private void playMedia(Media m){
-	    if (m != null){
-	        MediaPlayer mp = new MediaPlayer(m);
-	        mp.play();
-	    }
+
 	}
 
-	public void playSoundEffect(int i){
-	    try{
-	    	
-	    	if(i==1){
-	        Media someSound = new Media(getClass().getResource("/sounds/Click.mp3").toString());
-	        playMedia(someSound);}
-	    	else if(i==2){
-	    		Media someSound = new Media(getClass().getResource("/sounds/Punch.mp3").toString());
-		        playMedia(someSound);}	
-	    	
-	    }catch(Exception ex){
-	       
-	    }
+	private void playMedia(Media m) {
+		if (m != null) {
+			MediaPlayer mp = new MediaPlayer(m);
+			mp.play();
+		}
+	}
+
+	public void playSoundEffect(int i) {
+		try {
+
+			if (i == 1) {
+				Media someSound = new Media(getClass().getResource("/sounds/Click.mp3").toString());
+				playMedia(someSound);
+			} else if (i == 2) {
+				Media someSound = new Media(getClass().getResource("/sounds/Punch.mp3").toString());
+				playMedia(someSound);
+			}
+			else if (i == 3) {
+				Media someSound = new Media(getClass().getResource("/sounds/crazy.mp3").toString());
+				playMedia(someSound);
+			}
+
+		} catch (Exception ex) {
+
+		}
 
 	}
 
@@ -165,3 +244,4 @@ public class SceneMeny extends Application {
 		launch(args);
 	}
 }
+
