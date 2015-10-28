@@ -19,6 +19,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -41,6 +42,9 @@ public class SceneMeny extends Application {
 	Player player;
 	private double counter = 1;
 	Timeline playerLoop;
+	
+	ArrayList<Obstacle> ObsList = new ArrayList<>();
+	Obstacle obs;
 
 	public void start(Stage theStage) {
 
@@ -164,6 +168,12 @@ public class SceneMeny extends Application {
 				}
 
 			});
+			
+			
+			obs = new Obstacle();
+			obs.getGraphics().setTranslateX(1000);
+			obs.getGraphics().setTranslateY(370);
+			root.getChildren().add(obs.getGraphics());
 			
 		   
 	return scene;
@@ -297,6 +307,7 @@ public class SceneMeny extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				updatePlayer();
+				obs.getGraphics().setTranslateX(obs.getGraphics().getTranslateX()-10);
 				
 				
 			}

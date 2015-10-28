@@ -10,13 +10,11 @@ public class Obstacle {
 	private Image image;
 	
 	
-	Obstacle(Image image){
-		this.image = image;
+	Obstacle(){
+		this.image = new Image("textures/obstacles.jpg");
 		this.graphics.setImage(image);
-		this.hitbox = new Rectangle(image.getWidth(), image.getHeight());
-		
+		this.hitbox = new Rectangle(image.getWidth(), image.getHeight());	
 	}
-
 
 	public ImageView getGraphics() {
 		return graphics;
