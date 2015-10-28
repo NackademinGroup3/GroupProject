@@ -54,7 +54,7 @@ public class SceneMeny extends Application {
 		game = createGameScene();
 		gameOver = createGameOverScreen();
 
-		mainStage.setScene(gameOver);
+		mainStage.setScene(meny);
 		mainStage.show();
 	}
 
