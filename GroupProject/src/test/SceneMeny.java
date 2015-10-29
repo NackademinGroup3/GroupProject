@@ -88,22 +88,28 @@ public class SceneMeny extends Application {
 	text.setMaxWidth(450);
 		text.setWrapText(true);
 		
+		Label goBack = new Label(" Return to menu");
 		
 		Font font = new Font("Arial Black", 40);
 		Font font2 = new Font("Arial Black", 17);
+		Font font3 = new Font("Arial Black", 35);
 		VBox vbox = new VBox(20);
 		
-		
+		hoverOver(goBack);
+		menyChoice(goBack);
 		
 		text.setFont(font2);
 		text.setTextFill(Color.WHITE);
 		
-		vbox.getChildren().addAll(rules, text);
+		vbox.getChildren().addAll(rules, text, goBack);
 		
 		vbox.setAlignment(Pos.CENTER);
 		
 		rules.setFont(font);
 		rules.setTextFill(Color.WHITE);
+		
+		goBack.setFont(font3);
+		goBack.setTextFill(Color.WHITE);
 		
 		root.getChildren().addAll(b.backgroundImageView,b.backgroundImageView2,pane);
 		
@@ -207,8 +213,14 @@ public class SceneMeny extends Application {
 			TranslateTransition jump = new TranslateTransition(Duration.millis(450), player.getGraphics());
 			TranslateTransition fall = new TranslateTransition(Duration.millis(450), player.getGraphics());
 			jump.setInterpolator(Interpolator.LINEAR);
+			
 			scene.setOnKeyPressed(event -> {
+				
 				if (!player.isJumping()) {
+					
+					switch (event.getCode()){
+	                case SPACE:
+
 					player.setJumping(true);
 					// fall.stop();
 					// jump.stop();
@@ -226,7 +238,10 @@ public class SceneMeny extends Application {
 						});
 
 					});
+					default:
+						break;
 				}
+			}
 
 			});
 			
@@ -328,6 +343,13 @@ public class SceneMeny extends Application {
 				mainStage.setScene(meny);
 				System.out.println("new game");
 				break;
+				
+			case " Return to menu":
+				playSoundEffect(2);
+				mainStage.setScene(meny);
+				System.out.println("new game");
+				break;
+				
 
 			default:
 				break;
