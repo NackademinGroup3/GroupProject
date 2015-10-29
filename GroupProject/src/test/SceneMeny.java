@@ -20,6 +20,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.TimerTask;
+
+import javax.management.timer.Timer;
 
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -181,6 +184,14 @@ public class SceneMeny extends Application {
 		double SCENE_HEIGHT = 500;
 		Pane backgroundLayer;
 
+		int counter = 0;
+		Label score = new Label("Score: " + counter);
+		score.setFont(Font.font("Arial Black", 40));
+		score.setTextFill(Color.WHITE);
+		score.setAlignment(Pos.TOP_RIGHT);
+		
+		
+		
 		gameRoot = new Group();
 		Scene scene;
 		try {
@@ -244,7 +255,9 @@ public class SceneMeny extends Application {
 			obs.getGraphics().setTranslateX(1000);
 			obs.getGraphics().setTranslateY(370);
 			gameRoot.getChildren().add(obs.getGraphics());
-
+			gameRoot.getChildren().add(score);
+			
+			
 			return scene;
 
 		} catch (Exception e) {
@@ -346,6 +359,8 @@ public class SceneMeny extends Application {
 		});
 
 	}
+	
+
 
 	private void playMedia(Media m) {
 		if (m != null) {
