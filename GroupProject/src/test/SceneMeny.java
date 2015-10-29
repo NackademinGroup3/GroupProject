@@ -272,6 +272,7 @@ public class SceneMeny extends Application {
 		meny.setAlignment(Pos.CENTER_RIGHT);
 		hoverOver(meny);
 		menyChoice(meny);
+		
 		pane.getChildren().add(gameOver);
 		pane.getChildren().add(meny);
 		root.getChildren().add(b.backgroundImageView);
