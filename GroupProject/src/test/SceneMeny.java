@@ -1,6 +1,5 @@
 package test;
 
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -36,15 +35,15 @@ public class SceneMeny extends Application {
 	Scene game;
 	Scene gameOver;
 	Scene howToPlay;
-	
+
 	Stage mainStage;
-	Group gameRoot; 
-	
-	Image[] images = { new Image("textures/run1.png"), new Image("textures/run2.png"), new Image("textures/jump.png")};
+	Group gameRoot;
+
+	Image[] images = { new Image("textures/run1.png"), new Image("textures/run2.png"), new Image("textures/jump.png") };
 	Player player;
 	private double counter = 1;
 	Timeline playerLoop;
-	
+
 	ArrayList<Obstacle> obsList = new ArrayList<>();
 	Obstacle obs;
 
@@ -60,64 +59,64 @@ public class SceneMeny extends Application {
 		mainStage.show();
 	}
 
-	private Scene createHowToPlayScene(){
+	private Scene createHowToPlayScene() {
 
 		Background b = new Background();
 		Group root = new Group();
 		Scene scene = new Scene(root, 500, 500);
-		
-		/*FlowPane pane = new FlowPane(Orientation.VERTICAL, 10, 10);
-		pane.setAlignment(Pos.TOP_CENTER);*/
-		
+
+		/*
+		 * FlowPane pane = new FlowPane(Orientation.VERTICAL, 10, 10);
+		 * pane.setAlignment(Pos.TOP_CENTER);
+		 */
+
 		BorderPane pane = new BorderPane();
-		
+
 		b.loadBackGround();
-		   b.startBackGroundLoop();
-		
-		
-		//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		
+		b.startBackGroundLoop();
+
+		// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
 		Label rules = new Label("     How to play");
-		
+
 		Label text = new Label("          Welcome to The Running Game, you will\n\n "
-				             + "          be encountering obstacles that you will\n\n"
-				             + "          need to evade. By evading the obstacles \n\n"
-				             + "   		  you will use the SPACE key to jump \n\n"
-				             + "          over them and try to survive for as \n\n"
-				             + "			     long as you can");
-	text.setMaxWidth(450);
+				+ "          be encountering obstacles that you will\n\n"
+				+ "          need to evade. By evading the obstacles \n\n"
+				+ "   		  you will use the SPACE key to jump \n\n"
+				+ "          over them and try to survive for as \n\n" + "			     long as you can");
+		text.setMaxWidth(450);
 		text.setWrapText(true);
-		
+
 		Label goBack = new Label(" Return to menu");
-		
+
 		Font font = new Font("Arial Black", 40);
 		Font font2 = new Font("Arial Black", 17);
 		Font font3 = new Font("Arial Black", 35);
 		VBox vbox = new VBox(20);
-		
+
 		hoverOver(goBack);
 		menyChoice(goBack);
-		
+
 		text.setFont(font2);
 		text.setTextFill(Color.WHITE);
-		
+
 		vbox.getChildren().addAll(rules, text, goBack);
-		
+
 		vbox.setAlignment(Pos.CENTER);
-		
+
 		rules.setFont(font);
 		rules.setTextFill(Color.WHITE);
-		
+
 		goBack.setFont(font3);
 		goBack.setTextFill(Color.WHITE);
-		
-		root.getChildren().addAll(b.backgroundImageView,b.backgroundImageView2,pane);
-		
+
+		root.getChildren().addAll(b.backgroundImageView, b.backgroundImageView2, pane);
+
 		pane.setRight(vbox);
-		
+
 		return scene;
 	}
-	
+
 	private Scene createMenyScene() {
 
 		Background b = new Background();
@@ -129,7 +128,7 @@ public class SceneMeny extends Application {
 
 		b.loadBackGround();
 		b.startBackGroundLoop();
-		//playSoundEffect(3);
+		// playSoundEffect(3);
 
 		Font font = new Font("Arial Black", 40);
 
@@ -168,9 +167,9 @@ public class SceneMeny extends Application {
 		meny.setAlignment(Pos.CENTER);
 		meny.getChildren().addAll(newGame, rules, scores, exit);
 		pane.getChildren().addAll(title, meny);
-		
+
 		root.getChildren().addAll(b.backgroundImageView, b.backgroundImageView2, pane);
-		
+
 		return theScene;
 
 	}
@@ -181,90 +180,82 @@ public class SceneMeny extends Application {
 		double SCENE_WIDTH = 1000;
 		double SCENE_HEIGHT = 500;
 		Pane backgroundLayer;
-		
+
 		gameRoot = new Group();
 		Scene scene;
-		 try
-		 {
-		   gameRoot = new Group();
-		   backgroundLayer = new Pane();
-		 
-		   gameRoot.getChildren().add( backgroundLayer);
+		try {
+			gameRoot = new Group();
+			backgroundLayer = new Pane();
 
-		   scene = new Scene( gameRoot, SCENE_WIDTH,SCENE_HEIGHT);
-		   
-		   
-		   
-		   b.loadBackGround();
-		   b.startBackGroundLoop();
-		   
-		   backgroundLayer.getChildren().add( b.backgroundImageView);
-		   backgroundLayer.getChildren().add( b.backgroundImageView2);
-		   
-		   player = new Player(images);
+			gameRoot.getChildren().add(backgroundLayer);
+
+			scene = new Scene(gameRoot, SCENE_WIDTH, SCENE_HEIGHT);
+
+			b.loadBackGround();
+			b.startBackGroundLoop();
+
+			backgroundLayer.getChildren().add(b.backgroundImageView);
+			backgroundLayer.getChildren().add(b.backgroundImageView2);
+
+			player = new Player(images);
 			gameRoot.getChildren().add(player.getGraphics());
-			
+
 			player.getGraphics().setTranslateX(100);
 			player.getGraphics().setTranslateY(370);
-			
-			
+
 			startPlayerMovement();
 			playerLoop.play();
 			TranslateTransition jump = new TranslateTransition(Duration.millis(450), player.getGraphics());
 			TranslateTransition fall = new TranslateTransition(Duration.millis(450), player.getGraphics());
 			jump.setInterpolator(Interpolator.LINEAR);
-			
+
 			scene.setOnKeyPressed(event -> {
-				
+
 				if (!player.isJumping()) {
-					
-					switch (event.getCode()){
-	                case SPACE:
 
-					player.setJumping(true);
-					// fall.stop();
-					// jump.stop();
-					
-					jump.setByY(-250);
-					jump.setCycleCount(1);
-					jump.play();
-					jump.setOnFinished(finishedEvent -> {
-						jump.stop();
-						fall.setByY(250);
-						fall.play();
-						fall.setOnFinished(finishedFalling -> {
-							player.setJumping(false);
-						
+					switch (event.getCode()) {
+					case SPACE:
+
+						player.setJumping(true);
+						// fall.stop();
+						// jump.stop();
+						playSoundEffect(3);
+						jump.setByY(-250);
+						jump.setCycleCount(1);
+						jump.play();
+						jump.setOnFinished(finishedEvent -> {
+							jump.stop();
+							fall.setByY(250);
+							fall.play();
+							fall.setOnFinished(finishedFalling -> {
+								player.setJumping(false);
+
+							});
+
 						});
-
-					});
 					default:
 						break;
+					}
 				}
-			}
 
 			});
-			
+
 			obs = new Obstacle();
 			obs.getGraphics().setTranslateX(1000);
 			obs.getGraphics().setTranslateY(370);
 			gameRoot.getChildren().add(obs.getGraphics());
-			
-			
-		   
-	return scene;
-		   
-		  } 
-		 catch(Exception e)
-		 {
-		   e.printStackTrace();
-		 }
-		 
+
+			return scene;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return null;
-    
+
 	}
 
-	private Scene createGameOverScreen(){
+	private Scene createGameOverScreen() {
 
 		Background b = new Background();
 		Group root = new Group();
@@ -275,31 +266,29 @@ public class SceneMeny extends Application {
 
 		b.loadBackGround();
 		b.startBackGroundLoop();
-		
+
 		Text gameOver = new Text("     GAME OVER");
-		gameOver.setFont(Font.font("Arial Black",100));
+		gameOver.setFont(Font.font("Arial Black", 100));
 		gameOver.setFill(Color.GREEN);
 		gameOver.setEffect(new Glow(500));
-		
+
 		Label meny = new Label("                     Back to main meny");
 		meny.setFont(new Font("Arial Black", 40));
 		meny.setTextFill(Color.WHITE);
 		meny.setAlignment(Pos.CENTER_RIGHT);
 		hoverOver(meny);
 		menyChoice(meny);
-		
+
 		pane.getChildren().add(gameOver);
 		pane.getChildren().add(meny);
 		root.getChildren().add(b.backgroundImageView);
 		root.getChildren().add(b.backgroundImageView2);
 		root.getChildren().add(pane);
-		
+
 		return gameOverScene;
-		
-		
+
 	}
-	
-	
+
 	private void hoverOver(Label label) {
 
 		label.setOnMouseEntered(e -> {
@@ -337,19 +326,18 @@ public class SceneMeny extends Application {
 				playSoundEffect(2);
 				System.exit(0);
 				break;
-				
+
 			case "                     Back to main meny":
 				playSoundEffect(2);
 				mainStage.setScene(meny);
 				System.out.println("new game");
 				break;
-				
+
 			case " Return to menu":
 				playSoundEffect(2);
 				mainStage.setScene(meny);
 				System.out.println("new game");
 				break;
-				
 
 			default:
 				break;
@@ -375,9 +363,8 @@ public class SceneMeny extends Application {
 			} else if (i == 2) {
 				Media someSound = new Media(getClass().getResource("/sounds/Punch.mp3").toString());
 				playMedia(someSound);
-			}
-			else if (i == 3) {
-				Media someSound = new Media(getClass().getResource("/sounds/crazy.mp3").toString());
+			}else if (i == 3) {
+				Media someSound = new Media(getClass().getResource("/sounds/jump.wav").toString());
 				playMedia(someSound);
 			}
 
@@ -386,33 +373,30 @@ public class SceneMeny extends Application {
 		}
 
 	}
-	
+
 	public void startPlayerMovement() {
-		playerLoop = new Timeline(new KeyFrame(Duration.millis(1000 /15), new EventHandler<ActionEvent>() {
+		playerLoop = new Timeline(new KeyFrame(Duration.millis(1000 / 15), new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 				updatePlayer();
-				
-				obs.getGraphics().setTranslateX(obs.getGraphics().getTranslateX()-10);
-				
-				
-				
+
+				obs.getGraphics().setTranslateX(obs.getGraphics().getTranslateX() - 10);
+
 			}
 		}));
 		playerLoop.setCycleCount(-1);
 	}
-	private void updatePlayer(){
-		if (counter %4 == 0){
+
+	private void updatePlayer() {
+		if (counter % 4 == 0) {
 			player.refreshImg();
 			counter = 1;
 		}
 		counter++;
 	}
-	
 
 	public static void main(String[] args) {
 		launch(args);
 	}
 }
-
