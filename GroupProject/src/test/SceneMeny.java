@@ -55,6 +55,7 @@ public class SceneMeny extends Application {
 
 	Timeline timeline;
 	Duration time = Duration.ZERO;
+	
 	Label timerLabel = new Label();
 	DoubleProperty timeSeconds = new SimpleDoubleProperty();
 
@@ -193,7 +194,7 @@ public class SceneMeny extends Application {
 		double SCENE_WIDTH = 1000;
 		double SCENE_HEIGHT = 500;
 		Pane backgroundLayer;
-
+		
 		timerLabel.textProperty().bind(timeSeconds.asString());
 		timerLabel.setFont(Font.font("Arial Black", 40));
 		timerLabel.setTextFill(Color.WHITE);
