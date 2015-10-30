@@ -405,15 +405,33 @@ public class SceneMeny extends Application {
 
 	}
 
+	int i = 0;
+	
 	public void startPlayerMovement() {
+		obsList.add(new Obstacle());
+		System.out.println(obsList.isEmpty());
 		playerLoop = new Timeline(new KeyFrame(Duration.millis(1000 / 15), new EventHandler<ActionEvent>() {
-
+			
 			@Override
 			public void handle(ActionEvent event) {
+				//if (obsList.isEmpty())
+					
 				updatePlayer();
-
-				obs.getGraphics().setTranslateX(obs.getGraphics().getTranslateX() - 10);
-
+				if (obsList.get(0).getTranslateX() <= -200){
+					obsList.remove(0);
+					Obstacle obst = new Obstacle();	
+						
+						obsList.add(obst);
+						obst.setTranslateX(obsList.get(obsList.size()-1).getTranslateX()-1);
+						gameRoot.getChildren().remove(obst);
+						gameRoot.getChildren().add(obst);
+				}
+				for (int i = 0; i < obsList.size(); i++) {
+					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX()-50);
+				}
+				
+				
+					
 			}
 		}));
 		playerLoop.setCycleCount(-1);
