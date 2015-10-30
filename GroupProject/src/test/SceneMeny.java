@@ -52,9 +52,11 @@ public class SceneMeny extends Application {
 
 	ArrayList<Obstacle> obsList = new ArrayList<>();
 	Obstacle obs;
-	
+
 	Timeline timeline;
 	Duration time = Duration.ZERO;
+	Label timerLabel = new Label();
+	DoubleProperty timeSeconds = new SimpleDoubleProperty();
 
 	public void start(Stage theStage) {
 
@@ -184,49 +186,27 @@ public class SceneMeny extends Application {
 	}
 
 	private Scene createGameScene() {
+
 		
-		
-	    Label timerLabel = new Label();
-	    DoubleProperty timeSeconds = new SimpleDoubleProperty();        
-	   
-	   
+
 		Background b = new Background();
 		double SCENE_WIDTH = 1000;
 		double SCENE_HEIGHT = 500;
 		Pane backgroundLayer;
 
-		timerLabel.textProperty().bind(timeSeconds.asString());    
-       // timerLabel.setStyle("-fx-font-size: 4em;");
+		timerLabel.textProperty().bind(timeSeconds.asString());
 		timerLabel.setFont(Font.font("Arial Black", 40));
 		timerLabel.setTextFill(Color.WHITE);
+
 		
-		 timerLabel.setOnMouseClicked(e -> {
-	        	
-	        	timeline = new Timeline(
-	                    new KeyFrame(Duration.millis(100),
-	                    new EventHandler<ActionEvent>() {
-	                        @Override
-	                        public void handle(ActionEvent t) {
-	                            Duration duration = ((KeyFrame)t.getSource()).getTime();
-	                            time = time.add(duration);
-	                           
-	                            timeSeconds.set(time.toSeconds());
-	                           
-	                        }
-	                    })
-	                );
-	                timeline.setCycleCount(Timeline.INDEFINITE);
-	                timeline.play();
-	        	
-	        });
 		HBox hbox = new HBox(5);
 		Label score = new Label("Score: ");
 		score.setFont(Font.font("Arial Black", 40));
 		score.setTextFill(Color.WHITE);
 		score.setAlignment(Pos.TOP_RIGHT);
-		
+
 		hbox.getChildren().addAll(score, timerLabel);
-		
+
 		gameRoot = new Group();
 		Scene scene;
 		try {
@@ -291,8 +271,7 @@ public class SceneMeny extends Application {
 			obs.getGraphics().setTranslateY(370);
 			gameRoot.getChildren().add(obs.getGraphics());
 			gameRoot.getChildren().add(hbox);
-			
-			
+
 			return scene;
 
 		} catch (Exception e) {
@@ -359,6 +338,18 @@ public class SceneMeny extends Application {
 			case "New game":
 				playSoundEffect(2);
 				mainStage.setScene(game);
+				timeline = new Timeline(new KeyFrame(Duration.millis(100), new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent t) {
+						Duration duration = ((KeyFrame) t.getSource()).getTime();
+						time = time.add(duration);
+
+						timeSeconds.set(time.toSeconds());
+
+					}
+				}));
+				timeline.setCycleCount(Timeline.INDEFINITE);
+				timeline.play();
 				System.out.println("new game");
 				break;
 			case "How to play":
@@ -394,8 +385,6 @@ public class SceneMeny extends Application {
 		});
 
 	}
-	
-
 
 	private void playMedia(Media m) {
 		if (m != null) {
@@ -413,7 +402,7 @@ public class SceneMeny extends Application {
 			} else if (i == 2) {
 				Media someSound = new Media(getClass().getResource("/sounds/Punch.mp3").toString());
 				playMedia(someSound);
-			}else if (i == 3) {
+			} else if (i == 3) {
 				Media someSound = new Media(getClass().getResource("/sounds/jump.wav").toString());
 				playMedia(someSound);
 			}
