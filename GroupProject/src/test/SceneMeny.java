@@ -1,6 +1,10 @@
 package test;
 
 import javafx.application.Application;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
@@ -11,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -49,6 +54,12 @@ public class SceneMeny extends Application {
 
 	ArrayList<Obstacle> obsList = new ArrayList<>();
 	Obstacle obs;
+
+	Timeline timeline;
+	Duration time = Duration.ZERO;
+	
+	Label timerLabel = new Label();
+	IntegerProperty timeSeconds = new SimpleIntegerProperty();
 
 	public void start(Stage theStage) {
 
@@ -179,19 +190,26 @@ public class SceneMeny extends Application {
 
 	private Scene createGameScene() {
 
+		
+
 		Background b = new Background();
 		double SCENE_WIDTH = 1000;
 		double SCENE_HEIGHT = 500;
 		Pane backgroundLayer;
+		
+		timerLabel.textProperty().bind(timeSeconds.asString());
+		timerLabel.setFont(Font.font("Arial Black", 40));
+		timerLabel.setTextFill(Color.WHITE);
 
-		int counter = 0;
-		Label score = new Label("Score: " + counter);
+		
+		HBox hbox = new HBox(5);
+		Label score = new Label("Score: ");
 		score.setFont(Font.font("Arial Black", 40));
 		score.setTextFill(Color.WHITE);
 		score.setAlignment(Pos.TOP_RIGHT);
-		
-		
-		
+
+		hbox.getChildren().addAll(score, timerLabel);
+
 		gameRoot = new Group();
 		Scene scene;
 		try {
@@ -255,9 +273,8 @@ public class SceneMeny extends Application {
 			obs.getGraphics().setTranslateX(1000);
 			obs.getGraphics().setTranslateY(370);
 			gameRoot.getChildren().add(obs.getGraphics());
-			gameRoot.getChildren().add(score);
-			
-			
+			gameRoot.getChildren().add(hbox);
+
 			return scene;
 
 		} catch (Exception e) {
@@ -324,6 +341,7 @@ public class SceneMeny extends Application {
 			case "New game":
 				playSoundEffect(2);
 				mainStage.setScene(game);
+				startScoreCounter();
 				System.out.println("new game");
 				break;
 			case "How to play":
@@ -359,8 +377,6 @@ public class SceneMeny extends Application {
 		});
 
 	}
-	
-
 
 	private void playMedia(Media m) {
 		if (m != null) {
@@ -378,7 +394,7 @@ public class SceneMeny extends Application {
 			} else if (i == 2) {
 				Media someSound = new Media(getClass().getResource("/sounds/Punch.mp3").toString());
 				playMedia(someSound);
-			}else if (i == 3) {
+			} else if (i == 3) {
 				Media someSound = new Media(getClass().getResource("/sounds/jump.wav").toString());
 				playMedia(someSound);
 			}
@@ -401,6 +417,23 @@ public class SceneMeny extends Application {
 			}
 		}));
 		playerLoop.setCycleCount(-1);
+	}
+	
+	public void startScoreCounter(){
+		timeline = new Timeline(new KeyFrame(Duration.millis(100), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent t) {
+				Duration duration = ((KeyFrame) t.getSource()).getTime();
+				time = time.add(duration);
+
+				timeSeconds.set((int)time.toSeconds());
+
+			}
+		}));
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.play();
+		
+		
 	}
 
 	private void updatePlayer() {
