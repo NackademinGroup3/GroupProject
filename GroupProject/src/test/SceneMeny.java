@@ -341,18 +341,7 @@ public class SceneMeny extends Application {
 			case "New game":
 				playSoundEffect(2);
 				mainStage.setScene(game);
-				timeline = new Timeline(new KeyFrame(Duration.millis(100), new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent t) {
-						Duration duration = ((KeyFrame) t.getSource()).getTime();
-						time = time.add(duration);
-
-						timeSeconds.set((int)time.toSeconds());
-
-					}
-				}));
-				timeline.setCycleCount(Timeline.INDEFINITE);
-				timeline.play();
+				startScoreCounter();
 				System.out.println("new game");
 				break;
 			case "How to play":
@@ -428,6 +417,23 @@ public class SceneMeny extends Application {
 			}
 		}));
 		playerLoop.setCycleCount(-1);
+	}
+	
+	public void startScoreCounter(){
+		timeline = new Timeline(new KeyFrame(Duration.millis(100), new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent t) {
+				Duration duration = ((KeyFrame) t.getSource()).getTime();
+				time = time.add(duration);
+
+				timeSeconds.set((int)time.toSeconds());
+
+			}
+		}));
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.play();
+		
+		
 	}
 
 	private void updatePlayer() {
