@@ -2,7 +2,9 @@ package test;
 
 import javafx.application.Application;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
@@ -57,7 +59,7 @@ public class SceneMeny extends Application {
 	Duration time = Duration.ZERO;
 	
 	Label timerLabel = new Label();
-	DoubleProperty timeSeconds = new SimpleDoubleProperty();
+	IntegerProperty timeSeconds = new SimpleIntegerProperty();
 
 	public void start(Stage theStage) {
 
@@ -345,7 +347,7 @@ public class SceneMeny extends Application {
 						Duration duration = ((KeyFrame) t.getSource()).getTime();
 						time = time.add(duration);
 
-						timeSeconds.set(time.toSeconds());
+						timeSeconds.set((int)time.toSeconds());
 
 					}
 				}));
