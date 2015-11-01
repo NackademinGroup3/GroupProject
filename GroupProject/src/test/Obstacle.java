@@ -1,5 +1,7 @@
 package test;
 
+import java.util.Random;
+
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -9,17 +11,34 @@ public class Obstacle extends Group{
 	private ImageView graphics = new ImageView();
 	private Rectangle hitbox;
 	private Image image;
-	
-	
-	Obstacle(){
-		this.image = new Image("textures/obstacles.jpg");
+	private Random rand = new Random();
+	private int randomizedObject = rand.nextInt(3) + 1;
+
+	Obstacle() {
+		this.randomObstacles();
 		this.graphics.setImage(image);
-		this.hitbox = new Rectangle(image.getWidth(), image.getHeight());	
+		this.hitbox = new Rectangle(image.getWidth(), image.getHeight());
 		this.getChildren().addAll(graphics);
 		this.setTranslateX(1000);
-		this.setTranslateY(370);
 	}
 
+	private void randomObstacles() {
+		switch (randomizedObject) {
+		case 1:
+			this.image = new Image("textures/obstacles.jpg");
+			this.setTranslateY(370);
+			break;
+		case 2:
+			this.image = new Image("textures/obstacles2.jpg");
+			this.setTranslateY(350);
+			break;
+
+		default:
+			this.image = new Image("textures/obstacles3.jpg");
+			this.setTranslateY(370);
+			break;
+		}
+	}
 	public ImageView getGraphics() {
 		return graphics;
 	}
