@@ -41,7 +41,8 @@ public class SceneMeny extends Application {
 	Scene howToPlay;
 	Stage mainStage;
 	Group gameRoot;
-	Image[] images = { new Image("textures/run1.png"), new Image("textures/run2.png"), new Image("textures/jump.png") };
+	Image[] images = { new Image("textures/run1.png"), new Image("textures/run2.png"), new Image("textures/jump.png"),
+			new Image("textures/slide.png") };
 	Player player;
 	private double counter = 1;
 	Timeline playerLoop;
@@ -56,7 +57,6 @@ public class SceneMeny extends Application {
 
 		mainStage = theStage;
 		meny = createMenyScene();
-		
 
 		mainStage.setScene(meny);
 		mainStage.show();
@@ -86,8 +86,7 @@ public class SceneMeny extends Application {
 				+ "          be encountering obstacles that you will\n\n"
 				+ "          need to evade. By evading the obstacles \n\n"
 				+ "   		  you will use the SPACE key to jump \n\n"
-				+ "          over them and try to survive for as \n\n"
-				+ "			     long as you can");
+				+ "          over them and try to survive for as \n\n" + "			     long as you can");
 		text.setMaxWidth(450);
 		text.setWrapText(true);
 
@@ -184,12 +183,11 @@ public class SceneMeny extends Application {
 		double SCENE_WIDTH = 1000;
 		double SCENE_HEIGHT = 500;
 		Pane backgroundLayer;
-		
+
 		timerLabel.textProperty().bind(timeSeconds.asString());
 		timerLabel.setFont(Font.font("Arial Black", 40));
 		timerLabel.setTextFill(Color.WHITE);
-		
-		
+
 		HBox hbox = new HBox(5);
 		Label score = new Label("Score: ");
 		score.setFont(Font.font("Arial Black", 40));
@@ -231,7 +229,7 @@ public class SceneMeny extends Application {
 				if (!player.isJumping()) {
 
 					switch (event.getCode()) {
-					case SPACE:
+					case UP:
 
 						player.setJumping(true);
 						// fall.stop();
@@ -249,6 +247,14 @@ public class SceneMeny extends Application {
 
 							});
 						});
+					case DOWN:
+						if (!player.isJumping()) {
+							player.setSlide(true);
+							scene.setOnKeyReleased(slideEvent -> {
+								player.setSlide(false);
+							});
+						}
+
 					default:
 						break;
 					}
@@ -285,7 +291,7 @@ public class SceneMeny extends Application {
 		gameOver.setFont(Font.font("Arial Black", 100));
 		gameOver.setFill(Color.GREEN);
 		gameOver.setEffect(new Glow(500));
-		
+
 		Label score = new Label("                       Your score is: " + timerLabel.getText());
 		score.setFont(new Font("Arial Black", 40));
 		score.setTextFill(Color.RED);
@@ -323,21 +329,19 @@ public class SceneMeny extends Application {
 	}
 
 	private void menyChoice(Label label) {
-		
-		
-		
+
 		label.setOnMouseClicked(e -> {
 			switch (label.getText()) {
 			case "New game":
 				playSoundEffect(2);
 				game = createGameScene();
 				mainStage.setScene(game);
-				
+
 				startScoreCounter();
 				System.out.println("new game");
 				break;
 			case "How to play":
-				
+
 				playSoundEffect(2);
 				howToPlay = createHowToPlayScene();
 				mainStage.setScene(howToPlay);
@@ -400,57 +404,56 @@ public class SceneMeny extends Application {
 	}
 
 	int i = 0;
-	
+
 	public void startPlayerMovement() {
 		obsList.add(new Obstacle());
 		gameRoot.getChildren().add(obsList.get(0));
 		System.out.println(obsList.isEmpty());
 		playerLoop = new Timeline(new KeyFrame(Duration.millis(1000 / 15), new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
-				//if (obsList.isEmpty())
-					
+				// if (obsList.isEmpty())
+
 				updatePlayer();
 				if (hit == false)
 					checkCollision();
-				if (obsList.get(0).getTranslateX() <= -200){
-					//obsList.remove(0);
+				if (obsList.get(0).getTranslateX() <= -200) {
+					// obsList.remove(0);
 					obsList.removeAll(obsList);
-					
-					Obstacle obst = new Obstacle();	
-						
-						obsList.add(obst);
-						obst.setTranslateX(obsList.get(obsList.size()-1).getTranslateX()-1);
-						gameRoot.getChildren().remove(obst);
-						gameRoot.getChildren().add(obst);
+
+					Obstacle obst = new Obstacle();
+
+					obsList.add(obst);
+					obst.setTranslateX(obsList.get(obsList.size() - 1).getTranslateX() - 1);
+					gameRoot.getChildren().remove(obst);
+					gameRoot.getChildren().add(obst);
 				}
 				for (int i = 0; i < obsList.size(); i++) {
-					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX()-50);
+					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 50);
 				}
 				hit = false;
-					
+
 			}
 		}));
 		playerLoop.setCycleCount(-1);
 	}
-	
-	public void startScoreCounter(){
+
+	public void startScoreCounter() {
 		timeline = new Timeline(new KeyFrame(Duration.millis(100), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent t) {
 				Duration duration = ((KeyFrame) t.getSource()).getTime();
 				time = time.add(duration);
 
-				timeSeconds.set((int)time.toSeconds());
+				timeSeconds.set((int) time.toSeconds());
 
 			}
 		}));
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.setAutoReverse(true);
 		timeline.play();
-		
-		
+
 	}
 
 	private void updatePlayer() {
@@ -460,43 +463,44 @@ public class SceneMeny extends Application {
 		}
 		counter++;
 	}
-	
-	//flytta instansvariabler
+
+	// flytta instansvariabler
 	boolean hit = false;
 	int hitTimer = 0;
-	private void checkCollision(){   	
 
-	     player.getGraphics().boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
-	        @Override
-	        public void changed(ObservableValue<? extends Bounds> arg0,Bounds oldValue, Bounds newValue) {
-	            if(obsList.get(0).getBoundsInParent().intersects(newValue)){
-	            	hit = true;
-	            	if (hit && hitTimer == 0){
-	            	System.out.println("Collide ============= Collide");
-	            	playSoundEffect(2);
-	            	hitTimer=1;
-	            	player.setHitPoints(player.getHitPoints()-1);
-	            	}
-	               //createGameOverScreen();
-	            }
-	        }
-	    }
-	 ); hitTimer = 0;
-	if (player.getHitPoints() == 0){
-		gameOver = createGameOverScreen();
-		mainStage.setScene(gameOver);
-		playerLoop.stop();
-		timeline.stop();
-		time = Duration.ZERO;
-		//obsList.removeAll(obsList);
-		//obsList.add(obs);
-		//gameRoot.getChildren().removeAll(obsList);
-		System.out.println("game Over");
-		
+	private void checkCollision() {
+
+		player.getGraphics().boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
+			@Override
+			public void changed(ObservableValue<? extends Bounds> arg0, Bounds oldValue, Bounds newValue) {
+				if (obsList.get(0).getBoundsInParent().intersects(newValue)) {
+					hit = true;
+					if (hit && hitTimer == 0) {
+						System.out.println("Collide ============= Collide");
+						playSoundEffect(2);
+						hitTimer = 1;
+						player.setHitPoints(player.getHitPoints() - 1);
+					}
+					// createGameOverScreen();
+				}
+			}
+		});
+		hitTimer = 0;
+		if (player.getHitPoints() == 0) {
+			gameOver = createGameOverScreen();
+			mainStage.setScene(gameOver);
+			playerLoop.stop();
+			timeline.stop();
+			time = Duration.ZERO;
+			// obsList.removeAll(obsList);
+			// obsList.add(obs);
+			// gameRoot.getChildren().removeAll(obsList);
+			System.out.println("game Over");
+
+		}
+
+		hit = false;
 	}
-		
-	 hit = false;
-	     }
 
 	public static void main(String[] args) {
 		launch(args);

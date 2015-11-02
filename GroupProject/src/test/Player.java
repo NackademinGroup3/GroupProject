@@ -1,7 +1,5 @@
 package test;
 
-import java.awt.Color;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
@@ -15,13 +13,15 @@ public class Player {
 	private boolean jumping;
 	private Image[] images;
 	private int imageCounter = 0;
-	private int hitPoints = 4;
+	private int hitPoints = 3;
+	private boolean slide;
 
 	Player(Image image) {
 		this.image = image;
 		this.graphics.setImage(image);
 		this.hitbox = new Rectangle(image.getWidth(), image.getHeight());
 		this.jumping = false;
+		this.slide = false;
 		this.isDead = false;
 		this.hitPoints = 3;
 
@@ -93,6 +93,15 @@ public class Player {
 	public void setHitPoints(int hitPoints) {
 		this.hitPoints = hitPoints;
 	}
+	
+
+	public boolean isSlide() {
+		return slide;
+	}
+
+	public void setSlide(boolean slide) {
+		this.slide = slide;
+	}
 
 	public void refreshImg() {
 		if (!jumping) {
@@ -106,8 +115,12 @@ public class Player {
 			hitbox.xProperty().bind(graphics.translateXProperty().add(images[0].getWidth()));
 			hitbox.yProperty().bind(graphics.translateYProperty().add(images[0].getHeight()));
 			
-		} else
+		}  
+		else
 			graphics.setImage(images[2]);
+		if (slide){
+			graphics.setImage(images[3]);
+		}
 
 	}
 
