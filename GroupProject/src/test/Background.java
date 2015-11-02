@@ -13,8 +13,8 @@ public class Background
 	public void loadBackGround()
 	{
 
-		  backgroundImageView = new ImageView( getClass().getResource("/textures/space4.jpg").toExternalForm());
-		  backgroundImageView2 = new ImageView( getClass().getResource("/textures/space4.jpg").toExternalForm());
+		  backgroundImageView = new ImageView( getClass().getResource("/textures/backg2.png").toExternalForm());
+		  backgroundImageView2 = new ImageView( getClass().getResource("/textures/backg2.png").toExternalForm());
 
 		  backgroundImageView.relocate(0, 0);
 		  backgroundImageView2.relocate(backgroundImageView2.getImage().getWidth(), 0);
@@ -31,12 +31,12 @@ public class Background
              double x = backgroundImageView.getLayoutX() - backgroundScrollSpeed;
              double x2 = backgroundImageView2.getLayoutX() - backgroundScrollSpeed;
              
-             if(backgroundImageView.getLayoutX() < -1000)
+             if(backgroundImageView.getLayoutX() < -993)
              {
             	 x += backgroundImageView.getImage().getWidth() * 2;
              }
              
-             if(backgroundImageView2.getLayoutX() < -1000)
+             if(backgroundImageView2.getLayoutX() < -993)
              {
                  x2 += backgroundImageView2.getImage().getWidth() * 2;
              }

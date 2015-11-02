@@ -180,7 +180,7 @@ public class SceneMeny extends Application {
 	private Scene createGameScene() {
 
 		Background b = new Background();
-		double SCENE_WIDTH = 1000;
+		double SCENE_WIDTH = 993;
 		double SCENE_HEIGHT = 500;
 		Pane backgroundLayer;
 
