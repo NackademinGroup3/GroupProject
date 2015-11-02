@@ -63,9 +63,7 @@ public class SceneMeny extends Application {
 
 		mainStage = theStage;
 		meny = createMenyScene();
-		game = createGameScene();
 		gameOver = createGameOverScreen();
-		howToPlay = createHowToPlayScene();
 
 		mainStage.setScene(meny);
 		mainStage.show();
@@ -333,18 +331,23 @@ public class SceneMeny extends Application {
 	}
 
 	private void menyChoice(Label label) {
-
+		
+		
+		
 		label.setOnMouseClicked(e -> {
 			switch (label.getText()) {
 			case "New game":
 				playSoundEffect(2);
+				game = createGameScene();
 				mainStage.setScene(game);
 				startScoreCounter();
 				System.out.println("new game");
 				break;
 			case "How to play":
-				mainStage.setScene(howToPlay);
+				
 				playSoundEffect(2);
+				howToPlay = createHowToPlayScene();
+				mainStage.setScene(howToPlay);
 				System.out.println("how to play");
 				break;
 			case "High score":
