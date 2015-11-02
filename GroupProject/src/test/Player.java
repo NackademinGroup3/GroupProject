@@ -1,4 +1,5 @@
 package test;
+
 import java.awt.Color;
 
 import javafx.scene.image.Image;
@@ -12,8 +13,9 @@ public class Player {
 	private Image image;
 	private boolean isDead;
 	private boolean jumping;
-	private Image[] images; 
+	private Image[] images;
 	private int imageCounter = 0;
+	int hitPoints;
 
 	Player(Image image) {
 		this.image = image;
@@ -21,8 +23,10 @@ public class Player {
 		this.hitbox = new Rectangle(image.getWidth(), image.getHeight());
 		this.jumping = false;
 		this.isDead = false;
+		this.hitPoints = 3;
 
 	}
+
 	Player(Image[] images) {
 		this.images = images;
 		this.graphics.setImage(images[imageCounter]);
@@ -68,29 +72,34 @@ public class Player {
 		// TODO Auto-generated method stub
 		return jumping;
 	}
+
 	public void setJumping(boolean jumping) {
 		this.jumping = jumping;
 	}
-	
-	
 
 	public int getImageCounter() {
 		return imageCounter;
 	}
+
 	public void setImageCounter(int imageCounter) {
 		this.imageCounter = imageCounter;
 	}
-	public void refreshImg(){
-		if (!jumping){
+
+	public void refreshImg() {
+		if (!jumping) {
 			graphics.setImage(images[imageCounter++]);
 			if (imageCounter == 2)
 				imageCounter = 0;
 			
-		}
-		else
+			//bort?
+			hitbox.setHeight(graphics.getFitHeight());
+			hitbox.setWidth(graphics.getFitWidth());
+			hitbox.xProperty().bind(graphics.translateXProperty().add(images[0].getWidth()));
+			hitbox.yProperty().bind(graphics.translateYProperty().add(images[0].getHeight()));
+			
+		} else
 			graphics.setImage(images[2]);
-		
-		
+
 	}
 
 }

@@ -5,8 +5,11 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -43,21 +46,16 @@ public class SceneMeny extends Application {
 	Scene game;
 	Scene gameOver;
 	Scene howToPlay;
-
 	Stage mainStage;
 	Group gameRoot;
-
 	Image[] images = { new Image("textures/run1.png"), new Image("textures/run2.png"), new Image("textures/jump.png") };
 	Player player;
 	private double counter = 1;
 	Timeline playerLoop;
-
 	ArrayList<Obstacle> obsList = new ArrayList<>();
 	Obstacle obs;
-
 	Timeline timeline;
 	Duration time = Duration.ZERO;
-	
 	Label timerLabel = new Label();
 	IntegerProperty timeSeconds = new SimpleIntegerProperty();
 
@@ -97,7 +95,8 @@ public class SceneMeny extends Application {
 				+ "          be encountering obstacles that you will\n\n"
 				+ "          need to evade. By evading the obstacles \n\n"
 				+ "   		  you will use the SPACE key to jump \n\n"
-				+ "          over them and try to survive for as \n\n" + "			     long as you can");
+				+ "          over them and try to survive for as \n\n"
+				+ "			     long as you can");
 		text.setMaxWidth(450);
 		text.setWrapText(true);
 
@@ -190,8 +189,6 @@ public class SceneMeny extends Application {
 
 	private Scene createGameScene() {
 
-		
-
 		Background b = new Background();
 		double SCENE_WIDTH = 1000;
 		double SCENE_HEIGHT = 500;
@@ -253,6 +250,7 @@ public class SceneMeny extends Application {
 						jump.setCycleCount(1);
 						jump.play();
 						jump.setOnFinished(finishedEvent -> {
+							System.out.println(player.getGraphics().getTranslateY()+ "" + " " + player.getHitbox().getTranslateY());
 							jump.stop();
 							fall.setByY(250);
 							fall.play();
@@ -417,6 +415,8 @@ public class SceneMeny extends Application {
 				//if (obsList.isEmpty())
 					
 				updatePlayer();
+				if (hit == false)
+				checkCollision();
 				if (obsList.get(0).getTranslateX() <= -200){
 					obsList.remove(0);
 					Obstacle obst = new Obstacle();	
@@ -429,8 +429,7 @@ public class SceneMeny extends Application {
 				for (int i = 0; i < obsList.size(); i++) {
 					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX()-50);
 				}
-				
-				
+				hit = false;
 					
 			}
 		}));
@@ -461,6 +460,31 @@ public class SceneMeny extends Application {
 		}
 		counter++;
 	}
+	
+	//flytta instansvariabler
+	boolean hit = false;
+	int hitTimer = 0;
+	void checkCollision(){   
+	
+
+	     player.getGraphics().boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
+	        @Override
+	        public void changed(ObservableValue<? extends Bounds> arg0,Bounds oldValue, Bounds newValue) {
+	            if(obsList.get(0).getBoundsInParent().intersects(newValue)){
+	            	hit = true;
+	            	if (hit && hitTimer == 0){
+	            	System.out.println("Collide ============= Collide");
+	            	hitTimer=1;
+	            	player.hitPoints = player.hitPoints-1;
+	            	}
+	               //createGameOverScreen();
+	            }
+	        }
+	    }
+	 ); hitTimer = 0;
+	 System.out.println(player.hitPoints);
+	 hit = false;
+	     }
 
 	public static void main(String[] args) {
 		launch(args);
