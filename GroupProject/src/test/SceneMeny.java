@@ -241,7 +241,6 @@ public class SceneMeny extends Application {
 						jump.setCycleCount(1);
 						jump.play();
 						jump.setOnFinished(finishedEvent -> {
-							System.out.println(player.getGraphics().getTranslateY()+ "" + " " + player.getHitbox().getTranslateY());
 							jump.stop();
 							fall.setByY(250);
 							fall.play();
@@ -249,13 +248,11 @@ public class SceneMeny extends Application {
 								player.setJumping(false);
 
 							});
-
 						});
 					default:
 						break;
 					}
 				}
-
 			});
 
 			obs = new Obstacle();
@@ -269,9 +266,7 @@ public class SceneMeny extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return null;
-
 	}
 
 	private Scene createGameOverScreen() {
@@ -465,7 +460,7 @@ public class SceneMeny extends Application {
 	//flytta instansvariabler
 	boolean hit = false;
 	int hitTimer = 0;
-	void checkCollision(){   	
+	private void checkCollision(){   	
 
 	     player.getGraphics().boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
 	        @Override
@@ -487,6 +482,7 @@ public class SceneMeny extends Application {
 		gameOver = createGameOverScreen();
 		mainStage.setScene(gameOver);
 		playerLoop.stop();
+		
 		System.out.println("game Over");
 		
 	}
