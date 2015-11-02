@@ -1,5 +1,9 @@
 package test;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -25,8 +29,8 @@ public class Highscore {
 		return "Highscore [name=" + name + ", score=" + score + "]";
 	}
 
-	public static void main(String[] args) {
-
+		
+	private void sortList(){ 
 		// SceneMeny sceneMeny = new SceneMeny();
 
 		List<Highscore> highScoreList = new LinkedList<>(Arrays.asList(new Highscore("Robin", 3), new Highscore("Elliot", 9), new Highscore("Patrik", 20)));
@@ -45,6 +49,38 @@ public class Highscore {
 		});
 
 		System.out.println("efter sortering: " + highScoreList);
-	}
+		
+		}
+		
+		
+	private void readFile(){
+		// Läsa in testfil med highscores, test
+		
+		String pathName = "/Users/patrikhornqvist/Documents/Text/highscore";
+		String oneRowOfText = "";
+		String textFromFile = "";
+
+		try (BufferedReader instream = new BufferedReader(new FileReader(pathName + ".txt"))) { 
+			
+			while ((oneRowOfText = instream.readLine()) != null) {
+				textFromFile += "\n" + oneRowOfText;
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("Fil hittades inte");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Fel med I/O");
+			e.printStackTrace();
+		}
+		System.out.println(textFromFile);
+
+}
+
+		public static void main(String[] args) {
+			
+			Highscore highscore = new Highscore("test", 3);
+			highscore.sortList();
+			
+		}
 
 }
