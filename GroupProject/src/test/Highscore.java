@@ -18,7 +18,7 @@ public class Highscore {
 	private int score;
 	private String name;
 	List<Highscore> highScoreList = new LinkedList<>(Arrays.asList()); // Läs på mer om Arrays.asList
-	String pathName = "highscore/highscore.txt";
+	String pathName = "src/highscore/highscore.txt";
 
 	Highscore(String name, int score) {
 		this.score = score;
