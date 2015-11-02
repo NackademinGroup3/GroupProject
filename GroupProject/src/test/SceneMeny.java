@@ -1,9 +1,7 @@
 package test;
 
 import javafx.application.Application;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -26,12 +24,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
-import java.util.TimerTask;
-
-import javax.management.timer.Timer;
-
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -195,7 +188,7 @@ public class SceneMeny extends Application {
 		timerLabel.textProperty().bind(timeSeconds.asString());
 		timerLabel.setFont(Font.font("Arial Black", 40));
 		timerLabel.setTextFill(Color.WHITE);
-
+		
 		
 		HBox hbox = new HBox(5);
 		Label score = new Label("Score: ");
@@ -419,7 +412,7 @@ public class SceneMeny extends Application {
 					
 				updatePlayer();
 				if (hit == false)
-				checkCollision();
+					checkCollision();
 				if (obsList.get(0).getTranslateX() <= -200){
 					obsList.remove(0);
 					Obstacle obst = new Obstacle();	
@@ -467,8 +460,7 @@ public class SceneMeny extends Application {
 	//flytta instansvariabler
 	boolean hit = false;
 	int hitTimer = 0;
-	void checkCollision(){   
-	
+	void checkCollision(){   	
 
 	     player.getGraphics().boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
 	        @Override
@@ -478,14 +470,19 @@ public class SceneMeny extends Application {
 	            	if (hit && hitTimer == 0){
 	            	System.out.println("Collide ============= Collide");
 	            	hitTimer=1;
-	            	player.hitPoints = player.hitPoints-1;
+	            	player.setHitPoints(player.getHitPoints()-1);
 	            	}
 	               //createGameOverScreen();
 	            }
 	        }
 	    }
 	 ); hitTimer = 0;
-	 System.out.println(player.hitPoints);
+	if (player.getHitPoints() == 0){
+		playerLoop.stop();
+		System.out.println("game Over");
+		
+	}
+		
 	 hit = false;
 	     }
 
