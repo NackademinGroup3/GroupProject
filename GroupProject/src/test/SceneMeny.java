@@ -56,7 +56,7 @@ public class SceneMeny extends Application {
 
 		mainStage = theStage;
 		meny = createMenyScene();
-		gameOver = createGameOverScreen();
+		
 
 		mainStage.setScene(meny);
 		mainStage.show();
@@ -469,6 +469,7 @@ public class SceneMeny extends Application {
 	            	hit = true;
 	            	if (hit && hitTimer == 0){
 	            	System.out.println("Collide ============= Collide");
+	            	playSoundEffect(2);
 	            	hitTimer=1;
 	            	player.setHitPoints(player.getHitPoints()-1);
 	            	}
@@ -478,6 +479,8 @@ public class SceneMeny extends Application {
 	    }
 	 ); hitTimer = 0;
 	if (player.getHitPoints() == 0){
+		gameOver = createGameOverScreen();
+		mainStage.setScene(gameOver);
 		playerLoop.stop();
 		System.out.println("game Over");
 		
