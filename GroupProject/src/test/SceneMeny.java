@@ -482,6 +482,8 @@ public class SceneMeny extends Application {
 		gameOver = createGameOverScreen();
 		mainStage.setScene(gameOver);
 		playerLoop.stop();
+		timeline.stop();
+		
 		
 		System.out.println("game Over");
 		
