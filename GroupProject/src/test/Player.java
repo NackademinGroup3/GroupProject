@@ -15,7 +15,7 @@ public class Player {
 	private boolean jumping;
 	private Image[] images;
 	private int imageCounter = 0;
-	private int hitPoints = 3;
+	private int hitPoints = 4;
 
 	Player(Image image) {
 		this.image = image;

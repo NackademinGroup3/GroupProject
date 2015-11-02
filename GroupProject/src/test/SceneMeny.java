@@ -56,7 +56,7 @@ public class SceneMeny extends Application {
 
 		mainStage = theStage;
 		meny = createMenyScene();
-		gameOver = createGameOverScreen();
+		
 
 		mainStage.setScene(meny);
 		mainStage.show();
@@ -241,7 +241,6 @@ public class SceneMeny extends Application {
 						jump.setCycleCount(1);
 						jump.play();
 						jump.setOnFinished(finishedEvent -> {
-							System.out.println(player.getGraphics().getTranslateY()+ "" + " " + player.getHitbox().getTranslateY());
 							jump.stop();
 							fall.setByY(250);
 							fall.play();
@@ -249,13 +248,11 @@ public class SceneMeny extends Application {
 								player.setJumping(false);
 
 							});
-
 						});
 					default:
 						break;
 					}
 				}
-
 			});
 
 			obs = new Obstacle();
@@ -269,9 +266,7 @@ public class SceneMeny extends Application {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return null;
-
 	}
 
 	private Scene createGameOverScreen() {
@@ -290,7 +285,10 @@ public class SceneMeny extends Application {
 		gameOver.setFont(Font.font("Arial Black", 100));
 		gameOver.setFill(Color.GREEN);
 		gameOver.setEffect(new Glow(500));
-
+		
+		Label score = new Label("                       Your score is: " + timerLabel.getText());
+		score.setFont(new Font("Arial Black", 40));
+		score.setTextFill(Color.RED);
 		Label meny = new Label("                     Back to main meny");
 		meny.setFont(new Font("Arial Black", 40));
 		meny.setTextFill(Color.WHITE);
@@ -299,6 +297,7 @@ public class SceneMeny extends Application {
 		menyChoice(meny);
 
 		pane.getChildren().add(gameOver);
+		pane.getChildren().add(score);
 		pane.getChildren().add(meny);
 		root.getChildren().add(b.backgroundImageView);
 		root.getChildren().add(b.backgroundImageView2);
@@ -333,6 +332,7 @@ public class SceneMeny extends Application {
 				playSoundEffect(2);
 				game = createGameScene();
 				mainStage.setScene(game);
+				
 				startScoreCounter();
 				System.out.println("new game");
 				break;
@@ -403,6 +403,7 @@ public class SceneMeny extends Application {
 	
 	public void startPlayerMovement() {
 		obsList.add(new Obstacle());
+		gameRoot.getChildren().add(obsList.get(0));
 		System.out.println(obsList.isEmpty());
 		playerLoop = new Timeline(new KeyFrame(Duration.millis(1000 / 15), new EventHandler<ActionEvent>() {
 			
@@ -414,7 +415,9 @@ public class SceneMeny extends Application {
 				if (hit == false)
 					checkCollision();
 				if (obsList.get(0).getTranslateX() <= -200){
-					obsList.remove(0);
+					//obsList.remove(0);
+					obsList.removeAll(obsList);
+					
 					Obstacle obst = new Obstacle();	
 						
 						obsList.add(obst);
@@ -444,6 +447,7 @@ public class SceneMeny extends Application {
 			}
 		}));
 		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.setAutoReverse(true);
 		timeline.play();
 		
 		
@@ -460,7 +464,7 @@ public class SceneMeny extends Application {
 	//flytta instansvariabler
 	boolean hit = false;
 	int hitTimer = 0;
-	void checkCollision(){   	
+	private void checkCollision(){   	
 
 	     player.getGraphics().boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
 	        @Override
@@ -469,6 +473,7 @@ public class SceneMeny extends Application {
 	            	hit = true;
 	            	if (hit && hitTimer == 0){
 	            	System.out.println("Collide ============= Collide");
+	            	playSoundEffect(2);
 	            	hitTimer=1;
 	            	player.setHitPoints(player.getHitPoints()-1);
 	            	}
@@ -478,7 +483,14 @@ public class SceneMeny extends Application {
 	    }
 	 ); hitTimer = 0;
 	if (player.getHitPoints() == 0){
+		gameOver = createGameOverScreen();
+		mainStage.setScene(gameOver);
 		playerLoop.stop();
+		timeline.stop();
+		time = Duration.ZERO;
+		//obsList.removeAll(obsList);
+		//obsList.add(obs);
+		//gameRoot.getChildren().removeAll(obsList);
 		System.out.println("game Over");
 		
 	}
