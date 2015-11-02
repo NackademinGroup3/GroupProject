@@ -13,8 +13,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-//http://stackoverflow.com/questions/33190156/sort-a-linkedlist-of-objects-by-objects-variable
-
 public class Highscore {
 
 	private int score;
