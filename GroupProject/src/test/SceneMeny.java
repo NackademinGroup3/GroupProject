@@ -403,6 +403,7 @@ public class SceneMeny extends Application {
 	
 	public void startPlayerMovement() {
 		obsList.add(new Obstacle());
+		gameRoot.getChildren().add(obsList.get(0));
 		System.out.println(obsList.isEmpty());
 		playerLoop = new Timeline(new KeyFrame(Duration.millis(1000 / 15), new EventHandler<ActionEvent>() {
 			
