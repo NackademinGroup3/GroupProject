@@ -390,10 +390,18 @@ public class SceneMeny extends Application {
 				Media someSound = new Media(getClass().getResource("/sounds/Click.mp3").toString());
 				playMedia(someSound);
 			} else if (i == 2) {
-				Media someSound = new Media(getClass().getResource("/sounds/Punch.mp3").toString());
+				Media someSound = new Media(getClass().getResource("/sounds/button.mp3").toString());
 				playMedia(someSound);
 			} else if (i == 3) {
 				Media someSound = new Media(getClass().getResource("/sounds/jump.wav").toString());
+				playMedia(someSound);
+			}
+			else if(i==4){
+				Media someSound = new Media(getClass().getResource("/sounds/Punch.mp3").toString());
+				playMedia(someSound);
+			}
+			else if(i==5){
+				Media someSound = new Media(getClass().getResource("/sounds/game_over.mp3").toString());
 				playMedia(someSound);
 			}
 
@@ -477,7 +485,7 @@ public class SceneMeny extends Application {
 					hit = true;
 					if (hit && hitTimer == 0) {
 						System.out.println("Collide ============= Collide");
-						playSoundEffect(2);
+						playSoundEffect(4);
 						hitTimer = 1;
 						player.setHitPoints(player.getHitPoints() - 1);
 					}
@@ -489,6 +497,7 @@ public class SceneMeny extends Application {
 		if (player.getHitPoints() == 0) {
 			gameOver = createGameOverScreen();
 			mainStage.setScene(gameOver);
+			playSoundEffect(5);
 			playerLoop.stop();
 			timeline.stop();
 			time = Duration.ZERO;
