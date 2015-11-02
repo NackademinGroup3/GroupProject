@@ -290,7 +290,10 @@ public class SceneMeny extends Application {
 		gameOver.setFont(Font.font("Arial Black", 100));
 		gameOver.setFill(Color.GREEN);
 		gameOver.setEffect(new Glow(500));
-
+		
+		Label score = new Label("                       Your score is: " + timerLabel.getText());
+		score.setFont(new Font("Arial Black", 40));
+		score.setTextFill(Color.RED);
 		Label meny = new Label("                     Back to main meny");
 		meny.setFont(new Font("Arial Black", 40));
 		meny.setTextFill(Color.WHITE);
@@ -299,6 +302,7 @@ public class SceneMeny extends Application {
 		menyChoice(meny);
 
 		pane.getChildren().add(gameOver);
+		pane.getChildren().add(score);
 		pane.getChildren().add(meny);
 		root.getChildren().add(b.backgroundImageView);
 		root.getChildren().add(b.backgroundImageView2);
@@ -333,6 +337,7 @@ public class SceneMeny extends Application {
 				playSoundEffect(2);
 				game = createGameScene();
 				mainStage.setScene(game);
+				
 				startScoreCounter();
 				System.out.println("new game");
 				break;
