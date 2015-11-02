@@ -42,7 +42,7 @@ public class SceneMeny extends Application {
 	Stage mainStage;
 	Group gameRoot;
 	Image[] images = { new Image("textures/run1.png"), new Image("textures/run2.png"), new Image("textures/jump.png"),
-			new Image("textures/slide.png") };
+			new Image("textures/slide.png")};
 	Player player;
 	private double counter = 1;
 	Timeline playerLoop;
@@ -250,8 +250,10 @@ public class SceneMeny extends Application {
 					case DOWN:
 						if (!player.isJumping()) {
 							player.setSlide(true);
+							player.getGraphics().setTranslateY(400);
 							scene.setOnKeyReleased(slideEvent -> {
 								player.setSlide(false);
+								player.getGraphics().setTranslateY(370);
 							});
 						}
 
