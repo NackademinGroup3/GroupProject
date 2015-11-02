@@ -414,7 +414,9 @@ public class SceneMeny extends Application {
 				if (hit == false)
 					checkCollision();
 				if (obsList.get(0).getTranslateX() <= -200){
-					obsList.remove(0);
+					//obsList.remove(0);
+					obsList.removeAll(obsList);
+					
 					Obstacle obst = new Obstacle();	
 						
 						obsList.add(obst);
@@ -444,6 +446,7 @@ public class SceneMeny extends Application {
 			}
 		}));
 		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.setAutoReverse(true);
 		timeline.play();
 		
 		
@@ -483,8 +486,10 @@ public class SceneMeny extends Application {
 		mainStage.setScene(gameOver);
 		playerLoop.stop();
 		timeline.stop();
-		
-		
+		time = Duration.ZERO;
+		//obsList.removeAll(obsList);
+		//obsList.add(obs);
+		//gameRoot.getChildren().removeAll(obsList);
 		System.out.println("game Over");
 		
 	}
