@@ -125,7 +125,6 @@ public class SceneMeny extends Application {
 		Background b = new Background();
 		Group root = new Group();
 		Scene theScene = new Scene(root, 500, 500);
-
 		FlowPane pane = new FlowPane(Orientation.VERTICAL, 10, 10);
 		pane.setAlignment(Pos.TOP_CENTER);
 
@@ -268,7 +267,6 @@ public class SceneMeny extends Application {
 			obs.getGraphics().setTranslateY(370);
 			gameRoot.getChildren().add(obs.getGraphics());
 			gameRoot.getChildren().add(hbox);
-
 			return scene;
 
 		} catch (Exception e) {
@@ -497,12 +495,13 @@ public class SceneMeny extends Application {
 		});
 		hitTimer = 0;
 		if (player.getHitPoints() == 0) {
-			gameOver = createGameOverScreen();
-			mainStage.setScene(gameOver);
+			
 			playSoundEffect(5);
 			playerLoop.stop();
 			timeline.stop();
 			time = Duration.ZERO;
+			gameOver = createGameOverScreen();
+			mainStage.setScene(gameOver);
 			// obsList.removeAll(obsList);
 			// obsList.add(obs);
 			// gameRoot.getChildren().removeAll(obsList);
