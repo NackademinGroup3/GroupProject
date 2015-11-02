@@ -17,6 +17,9 @@ public class Highscore {
 
 	private String name;
 	private int score;
+	
+	//List<Highscore> highScoreList = new LinkedList<>(Arrays.asList(new Highscore("Robin", 3), new Highscore("Elliot", 9), new Highscore("Patrik", 20), new Highscore("Simon", 15)));
+		List<Highscore> highScoreList = new LinkedList<>(Arrays.asList());
 
 	Highscore(String name, int score) {
 		this.name = name;
@@ -26,15 +29,14 @@ public class Highscore {
 
 	@Override
 	public String toString() {
-		return "Highscore [name=" + name + ", score=" + score + "]";
+		return "[name=" + name + ", score=" + score + "]";
 	}
 
 		
 	private void sortList(){ 
 		// SceneMeny sceneMeny = new SceneMeny();
 
-		List<Highscore> highScoreList = new LinkedList<>(Arrays.asList(new Highscore("Robin", 3), new Highscore("Elliot", 9), new Highscore("Patrik", 20)));
-
+		
 		System.out.println("före sortering: " + highScoreList);
 
 		
@@ -63,8 +65,13 @@ public class Highscore {
 		try (BufferedReader instream = new BufferedReader(new FileReader(pathName + ".txt"))) { 
 			
 			while ((oneRowOfText = instream.readLine()) != null) {
-				textFromFile += "\n" + oneRowOfText;
+				String[] rowArray = oneRowOfText.split(" ");
+				int rowScore = Integer.parseInt(rowArray[0]);
+				String rowName = rowArray[1];
+				//System.out.println(rowScore + " " + rowName);
+				highScoreList.add(new Highscore(rowName, rowScore));
 			}
+			
 		} catch (FileNotFoundException e) {
 			System.out.println("Fil hittades inte");
 			e.printStackTrace();
@@ -78,7 +85,11 @@ public class Highscore {
 
 		public static void main(String[] args) {
 			
+			// Skapa ett testobjekt bara för att komma åt att testa metoderna
 			Highscore highscore = new Highscore("test", 3);
+			
+			
+			highscore.readFile();
 			highscore.sortList();
 			
 		}
