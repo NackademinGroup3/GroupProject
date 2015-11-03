@@ -385,23 +385,23 @@ public class SceneMeny extends Application {
 
 	public void playSoundEffect(int i) {
 		try {
-
+			Media someSound;
 			if (i == 1) {
-				Media someSound = new Media(getClass().getResource("/sounds/Click.mp3").toString());
+				someSound = new Media(getClass().getResource("/sounds/Click.mp3").toString());
 				playMedia(someSound);
 			} else if (i == 2) {
-				Media someSound = new Media(getClass().getResource("/sounds/button.mp3").toString());
+				someSound = new Media(getClass().getResource("/sounds/button.mp3").toString());
 				playMedia(someSound);
 			} else if (i == 3) {
-				Media someSound = new Media(getClass().getResource("/sounds/jump.wav").toString());
+				someSound = new Media(getClass().getResource("/sounds/jump.wav").toString());
 				playMedia(someSound);
 			}
 			else if(i==4){
-				Media someSound = new Media(getClass().getResource("/sounds/Punch.mp3").toString());
+				someSound = new Media(getClass().getResource("/sounds/Punch.mp3").toString());
 				playMedia(someSound);
 			}
 			else if(i==5){
-				Media someSound = new Media(getClass().getResource("/sounds/game_over.mp3").toString());
+				someSound = new Media(getClass().getResource("/sounds/game_over.mp3").toString());
 				playMedia(someSound);
 			}
 
