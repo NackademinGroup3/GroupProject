@@ -42,9 +42,13 @@ public class SceneMeny extends Application {
 	Scene howToPlay;
 	Stage mainStage;
 	Group gameRoot;
-	Image[] images = { new Image("textures/run1.png"), new Image("textures/run2.png"), 
-			new Image("textures/player_textures/Jump__000.png"),
-			new Image("textures/slide.png")};
+	Image[] images = { new Image("textures/player_textures/Run__000.png"), new Image("textures/player_textures/Run__001.png"),
+			new Image("textures/player_textures/Run__002.png"), new Image("textures/player_textures/Run__003.png"),
+			new Image("textures/player_textures/Run__004.png"),new Image("textures/player_textures/Run__005.png"),
+			new Image("textures/player_textures/Run__006.png"),new Image("textures/player_textures/Run__007.png"),
+			new Image("textures/player_textures/Run__008.png"),new Image("textures/player_textures/Run__009.png"),
+			new Image("textures/player_textures/Jump__002.png"),new Image("textures/player_textures/Slide__001.png"), 
+					new Image("textures/player_textures/Dead__000.png")};
 	Media[] soundEffects = { new Media(getClass().getResource("/sounds/Click.mp3").toString()),
 			new Media(getClass().getResource("/sounds/button.mp3").toString()),
 			new Media(getClass().getResource("/sounds/jump.wav").toString()),
@@ -429,7 +433,7 @@ public class SceneMeny extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				// if (obsList.isEmpty())
-
+				player.setDead(false);
 				updatePlayer();
 				if (hit == false)
 					checkCollision();
@@ -497,6 +501,7 @@ public class SceneMeny extends Application {
 						hitTimer = 1;
 						player.setHitPoints(player.getHitPoints() - 1);
 						lives.setText(String.valueOf(player.getHitPoints()));
+						player.setDead(true);
 					}
 					// createGameOverScreen();
 				}

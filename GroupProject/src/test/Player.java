@@ -106,7 +106,7 @@ public class Player {
 	public void refreshImg() {
 		if (!jumping) {
 			graphics.setImage(images[imageCounter++]);
-			if (imageCounter == 2)
+			if (imageCounter == 9)
 				imageCounter = 0;
 			
 			//bort?
@@ -117,9 +117,15 @@ public class Player {
 			
 		}  
 		else
-			graphics.setImage(images[2]);
+			graphics.setImage(images[10]);
+			
 		if (slide){
-			graphics.setImage(images[3]);
+			
+			graphics.setImage(images[11]);
+			
+		}
+		if (isDead){
+			graphics.setImage(images[12]);
 		}
 
 	}
