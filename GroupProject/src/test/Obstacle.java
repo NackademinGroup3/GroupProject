@@ -29,8 +29,8 @@ public class Obstacle extends Group{
 			this.setTranslateY(400);
 			break;
 		case 2:
-			this.image = new Image("textures/obstacles2.jpg");
-			this.setTranslateY(350);
+			this.image = new Image("textures/obstacle_fire.gif");
+			this.setTranslateY(385);
 			break;
 		case 3:
 			this.image = new Image("textures/obstacle_fire.gif");
