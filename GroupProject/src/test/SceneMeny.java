@@ -15,9 +15,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Labeled;
+import javafx.scene.control.TextArea;
 import javafx.scene.effect.Glow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -41,6 +43,7 @@ public class SceneMeny extends Application {
 	Scene game;
 	Scene gameOver;
 	Scene howToPlay;
+	Scene highscore;
 	Stage mainStage;
 	Group gameRoot;
 	Image[] images = { new Image("textures/run1.png"), new Image("textures/run2.png"), 
@@ -74,11 +77,6 @@ public class SceneMeny extends Application {
 		Background b = new Background();
 		Group root = new Group();
 		Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
-
-		/*
-		 * FlowPane pane = new FlowPane(Orientation.VERTICAL, 10, 10);
-		 * pane.setAlignment(Pos.TOP_CENTER);
-		 */
 
 		BorderPane pane = new BorderPane();
 
@@ -305,7 +303,7 @@ public class SceneMeny extends Application {
 		Scene gameOverScene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
 
 		FlowPane pane = new FlowPane(Orientation.VERTICAL, 10, 10);
-		pane.setAlignment(Pos.CENTER);
+		
 
 		b.loadBackGround();
 		b.startBackGroundLoop();
@@ -314,6 +312,7 @@ public class SceneMeny extends Application {
 		gameOver.setFont(Font.font("Arial Black", 100));
 		gameOver.setFill(Color.GREEN);
 		gameOver.setEffect(new Glow(500));
+		
 
 		finalScore = Integer.parseInt(timerLabel.getText());
 		Label score = new Label("                       Your score is: " + finalScore + "\n Enter you name:");
@@ -338,6 +337,53 @@ public class SceneMeny extends Application {
 
 		return gameOverScene;
 
+	}
+	
+	private Scene createHighscoreScene(){
+		
+		Background b = new Background();
+		Group root = new Group();
+		Scene highscoreScene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
+
+		GridPane pane = new GridPane();
+
+		b.loadBackGround();
+		b.startBackGroundLoop();
+
+		// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+		Label header = new Label("High scores");
+
+		// text.setMaxWidth(450);
+		// text.setWrapText(true);
+		
+		TextArea textArea = new TextArea("test"/*stringvariabel från highscoreklassen*/);
+
+		Label goBack = new Label("Return to menu");
+
+		Font font = new Font("Arial Black", 40);
+		Font font2 = new Font("Arial Black", 17);
+		Font font3 = new Font("Arial Black", 35);
+
+		hoverOver(goBack);
+		menyChoice(goBack);
+
+		textArea.setFont(font2);
+
+		header.setFont(font);
+		header.setTextFill(Color.GREEN);
+		
+		VBox vbox = new VBox(30);
+		vbox.setAlignment(Pos.CENTER);
+		vbox.getChildren().addAll(header, textArea, goBack);
+
+		goBack.setFont(font3);
+		goBack.setTextFill(Color.WHITE);
+
+		pane.add(vbox, 100, 5);
+		root.getChildren().addAll(b.backgroundImageView, b.backgroundImageView2, pane);
+
+		return highscoreScene;
 	}
 
 	private void hoverOver(Label label) {
@@ -376,20 +422,22 @@ public class SceneMeny extends Application {
 				break;
 			case "High score":
 				playSoundEffect(2);
-				System.out.println("high score");
+				highscore = createHighscoreScene();
+				mainStage.setScene(highscore);
+				System.out.println("highscore");
 				break;
 			case "Exit Game":
 				playSoundEffect(2);
 				System.exit(0);
 				break;
 
-			case "                     Back to main meny":
+			case "Back to main meny":
 				playSoundEffect(2);
 				mainStage.setScene(meny);
 				System.out.println("new game");
 				break;
 
-			case "   Return to menu":
+			case "Return to menu":
 				playSoundEffect(2);
 				mainStage.setScene(meny);
 				System.out.println("new game");
