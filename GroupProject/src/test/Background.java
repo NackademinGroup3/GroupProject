@@ -1,24 +1,60 @@
+/**
+ * 
+ * @author Patrik O 
+ * 
+ * JAVA15
+ */
+
 package test;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.ImageView;
 
-
+/**
+ * Background class generates a scrolling background
+ */
 public class Background
 {
-	 public AnimationTimer gameLoop;
-	 ImageView backgroundImageView, backgroundImageView2;
-	 double backgroundScrollSpeed = 1.5;
+	private AnimationTimer gameLoop;	
+	private double backgroundScrollSpeed;
+	ImageView backgroundImageView, backgroundImageView2;
+	
+	Background()
+	{
+		backgroundScrollSpeed = 1.5;
+	}
+
+	 public ImageView getBackgroundImageView() {
+		return backgroundImageView;
+	}
+
+	public void setBackgroundImageView(ImageView backgroundImageView) {
+		this.backgroundImageView = backgroundImageView;
+	}
+
+	public ImageView getBackgroundImageView2() {
+		return backgroundImageView2;
+	}
+
+	public void setBackgroundImageView2(ImageView backgroundImageView2) {
+		this.backgroundImageView2 = backgroundImageView2;
+	}
+	
+	public double getBackgroundScrollSpeed() {
+		return backgroundScrollSpeed;
+	}
+	
+	public void setBackgroundScrollSpeed(double backgroundScrollSpeed) {
+		this.backgroundScrollSpeed = backgroundScrollSpeed;
+	}
 	
 	public void loadBackGround()
 	{
-
 		  backgroundImageView = new ImageView( getClass().getResource("/textures/backg2.png").toExternalForm());
 		  backgroundImageView2 = new ImageView( getClass().getResource("/textures/backg2.png").toExternalForm());
 
 		  backgroundImageView.relocate(0, 0);
 		  backgroundImageView2.relocate(backgroundImageView2.getImage().getWidth(), 0);
-
 	}
 	
 	public void startBackGroundLoop()
@@ -26,7 +62,8 @@ public class Background
 		gameLoop = new AnimationTimer() {
 	         
             @Override
-            public void handle(long l) {
+            public void handle(long l) 
+            {
             
              double x = backgroundImageView.getLayoutX() - backgroundScrollSpeed;
              double x2 = backgroundImageView2.getLayoutX() - backgroundScrollSpeed;
@@ -49,6 +86,4 @@ public class Background
         
         gameLoop.start();
 	}
-
-	
 }
