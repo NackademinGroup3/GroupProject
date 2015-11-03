@@ -371,7 +371,16 @@ public class SceneMeny extends Application {
 		// text.setMaxWidth(450);
 		// text.setWrapText(true);
 		
-		TextArea textArea = new TextArea("test"/*stringvariabel från highscoreklassen*/);
+		Highscore highscore = new Highscore("test", 5);
+		highscore.readFile();
+		highscore.sortList();
+		String highscoreList = "";
+		for(int i = 0; i <= 9; i++ ){
+			highscoreList += i+1 + "  " + highscore.highScoreList.get(i).toString() + "\n";
+		}
+			
+			
+		TextArea textArea = new TextArea(highscoreList);
 
 		Label goBack = new Label("Return to menu");
 

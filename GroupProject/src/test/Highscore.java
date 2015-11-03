@@ -27,11 +27,11 @@ public class Highscore {
 	
 	@Override
 	public String toString() {
-		return "[score = " + score + " name = " + name + "]";
+		return "Score = " + score + " Name = " + name;
 	}
 
 	// Sortera lista med highscore objekt
-	private void sortList(){ 
+	void sortList(){ 
 
 		System.out.println("före sortering: " + highScoreList);
 
@@ -51,7 +51,7 @@ public class Highscore {
 		}
 		
 	// Läsa in testfil med highscores och lägg in som element i listan
-	private void readFile(){
+	void readFile(){
 		
 		
 		String oneRowOfText = "";
@@ -79,7 +79,7 @@ public class Highscore {
 }
 	
 
-	private void writeFile(List<Highscore> highScoreList) {
+	void writeFile(List<Highscore> highScoreList) {
 		try (BufferedWriter outstream = new BufferedWriter(new FileWriter(pathName))){
 		//	outstream.write();
 		//	loopa igenom 10 listan och skriv ut score + name på en ny rad för varje objekt.	
