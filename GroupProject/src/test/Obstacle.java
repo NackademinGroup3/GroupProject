@@ -12,7 +12,7 @@ public class Obstacle extends Group{
 	private Rectangle hitbox;
 	private Image image;
 	private Random rand = new Random();
-	private int randomizedObject = rand.nextInt(4) + 1;
+	private int randomizedObject = rand.nextInt(3) + 1;
 
 	Obstacle() {
 		this.randomObstacles();
@@ -25,20 +25,20 @@ public class Obstacle extends Group{
 	private void randomObstacles() {
 		switch (randomizedObject) {
 		case 1:
-			this.image = new Image("textures/t3_obstacle_fire.gif");
-			this.setTranslateY(400);
+			this.image = new Image("textures/block.jpg");
+			this.setTranslateY(300);
 			break;
 		case 2:
-			this.image = new Image("textures/obstacle_fire.gif");
-			this.setTranslateY(385);
+			this.image = new Image("textures/2blockH.jpg");
+			this.setTranslateY(300);
 			break;
 		case 3:
-			this.image = new Image("textures/obstacle_fire.gif");
-			this.setTranslateY(370);
+			this.image = new Image("textures/2blockL.jpg");
+			this.setTranslateY(280);
 			break;
 		default:
-			this.image = new Image("textures/t2_obstacle_fire.gif");
-			this.setTranslateY(270);
+			this.image = new Image("textures/images.jpg");
+			this.setTranslateY(350);
 			break;
 		}
 	}
