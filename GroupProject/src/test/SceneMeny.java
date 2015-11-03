@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.Glow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -52,6 +53,9 @@ public class SceneMeny extends Application {
 	Duration time = Duration.ZERO;
 	Label timerLabel = new Label();
 	IntegerProperty timeSeconds = new SimpleIntegerProperty();
+	final int SCENE_WIDTH = 990;
+	final int SCENE_HEIGHT = 500;
+	int i = 0;
 
 	public void start(Stage theStage) {
 
@@ -66,7 +70,7 @@ public class SceneMeny extends Application {
 
 		Background b = new Background();
 		Group root = new Group();
-		Scene scene = new Scene(root, 500, 500);
+		Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
 
 		/*
 		 * FlowPane pane = new FlowPane(Orientation.VERTICAL, 10, 10);
@@ -124,9 +128,10 @@ public class SceneMeny extends Application {
 
 		Background b = new Background();
 		Group root = new Group();
-		Scene theScene = new Scene(root, 500, 500);
+		Scene theScene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
+		
 		FlowPane pane = new FlowPane(Orientation.VERTICAL, 10, 10);
-		pane.setAlignment(Pos.TOP_CENTER);
+		
 
 		b.loadBackGround();
 		b.startBackGroundLoop();
@@ -179,8 +184,8 @@ public class SceneMeny extends Application {
 	private Scene createGameScene() {
 
 		Background b = new Background();
-		double SCENE_WIDTH = 993;
-		double SCENE_HEIGHT = 500;
+		//double SCENE_WIDTH = 993;
+		//double SCENE_HEIGHT = 500;
 		Pane backgroundLayer;
 
 		timerLabel.textProperty().bind(timeSeconds.asString());
@@ -277,9 +282,10 @@ public class SceneMeny extends Application {
 
 	private Scene createGameOverScreen() {
 
+		int finalScore;
 		Background b = new Background();
 		Group root = new Group();
-		Scene gameOverScene = new Scene(root, 1000, 500);
+		Scene gameOverScene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
 
 		FlowPane pane = new FlowPane(Orientation.VERTICAL, 10, 10);
 		pane.setAlignment(Pos.CENTER);
@@ -292,9 +298,12 @@ public class SceneMeny extends Application {
 		gameOver.setFill(Color.GREEN);
 		gameOver.setEffect(new Glow(500));
 
-		Label score = new Label("                       Your score is: " + timerLabel.getText());
+		finalScore = Integer.parseInt(timerLabel.getText());
+		Label score = new Label("                       Your score is: " + finalScore + "\n Enter you name:");
 		score.setFont(new Font("Arial Black", 40));
 		score.setTextFill(Color.RED);
+		score.setAlignment(Pos.CENTER);
+		TextField playerName = new TextField();
 		Label meny = new Label("                     Back to main meny");
 		meny.setFont(new Font("Arial Black", 40));
 		meny.setTextFill(Color.WHITE);
@@ -304,6 +313,7 @@ public class SceneMeny extends Application {
 
 		pane.getChildren().add(gameOver);
 		pane.getChildren().add(score);
+		pane.getChildren().add(playerName);
 		pane.getChildren().add(meny);
 		root.getChildren().add(b.backgroundImageView);
 		root.getChildren().add(b.backgroundImageView2);
@@ -410,8 +420,6 @@ public class SceneMeny extends Application {
 		}
 
 	}
-
-	int i = 0;
 
 	public void startPlayerMovement() {
 		obsList.add(new Obstacle());
