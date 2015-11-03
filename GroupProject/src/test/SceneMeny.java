@@ -38,6 +38,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
@@ -50,6 +51,10 @@ public class SceneMeny extends Application {
 	Scene highscore;
 	Stage mainStage;
 	Group gameRoot;
+	
+	ImageView graphics = new ImageView();
+	Image hearts[] = {new Image("textures/heart.gif"),new Image("textures/heart2.gif"),new Image("textures/heart3.gif")};
+	
 	Image[] images = { new Image("textures/player_textures/Run__000.png"), new Image("textures/player_textures/Run__001.png"),
 			new Image("textures/player_textures/Run__002.png"), new Image("textures/player_textures/Run__003.png"),
 			new Image("textures/player_textures/Run__004.png"),new Image("textures/player_textures/Run__005.png"),
@@ -216,7 +221,6 @@ public class SceneMeny extends Application {
 	}
 
 	private Scene createGameScene() {
-
 		Background b = new Background();
 		//double SCENE_WIDTH = 993;
 		//double SCENE_HEIGHT = 500;
@@ -232,17 +236,20 @@ public class SceneMeny extends Application {
 		score.setTextFill(Color.WHITE);
 		score.setAlignment(Pos.TOP_RIGHT);
 		
-		Label lifeLabel = new Label("Lives: ");
+		Label lifeLabel = new Label("Lives : ");
 		lifeLabel.setFont(Font.font("Arial Black", 40));
-		lifeLabel.setTextFill(Color.WHITE);
+		lifeLabel.setTextFill(Color.RED);
 		
 		HBox hbox2 = new HBox(5);
-		lives.setFont(Font.font("Arial Black", 40));
+		/*lives.setFont(Font.font("Arial Black", 40));
 		lives.setTextFill(Color.WHITE);
-		lives.setAlignment(Pos.TOP_RIGHT);
+		lives.setAlignment(Pos.TOP_RIGHT);*/
+		
+		graphics.setImage(hearts[2]);
+		
 		
 		VBox vbox = new VBox();
-		hbox2.getChildren().addAll(lifeLabel, lives );
+		hbox2.getChildren().addAll(lifeLabel, graphics);
 
 		hbox.getChildren().addAll(score, timerLabel);
 		
@@ -597,7 +604,13 @@ public class SceneMeny extends Application {
 						playMedia(soundEffects[3]);
 						hitTimer = 1;
 						player.setHitPoints(player.getHitPoints() - 1);
-						lives.setText(String.valueOf(player.getHitPoints()));
+						//lives.setText(String.valueOf(player.getHitPoints()));
+						
+						if (player.getHitPoints() == 2) {
+							graphics.setImage(hearts[1]);
+						}else if (player.getHitPoints() == 1) {
+							graphics.setImage(hearts[0]);
+						}
 						player.setDead(true);
 					}
 					// createGameOverScreen();
