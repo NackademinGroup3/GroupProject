@@ -77,7 +77,7 @@ public class SceneMeny extends Application {
 	Obstacle obs;
 	Timeline timeline;
 	Duration time = Duration.ZERO;
-	Label timerLabel = new Label();
+	Text timerLabel = new Text();
 	IntegerProperty timeSeconds = new SimpleIntegerProperty();
 	final int SCENE_WIDTH = 990;
 	final int SCENE_HEIGHT = 500;
@@ -233,17 +233,22 @@ public class SceneMeny extends Application {
 
 		timerLabel.textProperty().bind(timeSeconds.asString());
 		timerLabel.setFont(Font.font("Arial Black", 40));
-		timerLabel.setTextFill(Color.WHITE);
+		timerLabel.setFill(Color.RED);
+		timerLabel.setStroke(Color.BLACK);
+		timerLabel.setEffect(new Glow(5));
 
 		HBox hbox = new HBox(5);
-		Label score = new Label("Score: ");
+		Text score = new Text("Score: ");
 		score.setFont(Font.font("Arial Black", 40));
-		score.setTextFill(Color.WHITE);
-		score.setAlignment(Pos.TOP_RIGHT);
+		score.setFill(Color.RED);
+		score.setStroke(Color.BLACK);
+		score.setEffect(new Glow(10));
 		
-		Label lifeLabel = new Label("Lives : ");
+		Text lifeLabel = new Text("Lives : ");
 		lifeLabel.setFont(Font.font("Arial Black", 40));
-		lifeLabel.setTextFill(Color.RED);
+		lifeLabel.setFill(Color.RED);
+		lifeLabel.setStroke(Color.BLACK);
+		lifeLabel.setEffect(new Glow(10));
 		
 		HBox hbox2 = new HBox(5);
 		/*lives.setFont(Font.font("Arial Black", 40));
@@ -364,16 +369,18 @@ public class SceneMeny extends Application {
 		HBox nameEntry = new HBox();
 		VBox scoreItems = new VBox();
 		nameEntry.setAlignment(Pos.CENTER);
-		Label score = new Label("Your score is: " + finalScore);
-		score.setAlignment(Pos.CENTER);
-		Label enterName = new Label("Enter your name: ");
+		Text score = new Text("Your score is: " + finalScore);
+		//score.setAlignment(Pos.CENTER);
+		Text enterName = new Text("Enter your name: ");
 		enterName.setFont(new Font("Arial Black", 20));
-		enterName.setTextFill(Color.RED);
+		enterName.setFill(Color.RED);
+		enterName.setStroke(Color.BLACK);
 		
 		
 		score.setFont(new Font("Arial Black", 40));
-		score.setTextFill(Color.RED);
-		score.setAlignment(Pos.CENTER);
+		score.setFill(Color.RED);
+		score.setStroke(Color.BLACK);
+		//score.setAlignment(Pos.CENTER);
 		TextField playerName = new TextField();
 		playerName.setPrefColumnCount(10);
 		
