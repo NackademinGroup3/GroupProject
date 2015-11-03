@@ -14,7 +14,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Labeled;
 import javafx.scene.effect.Glow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -242,6 +241,7 @@ public class SceneMeny extends Application {
 			backgroundLayer.getChildren().add(b.backgroundImageView2);
 
 			player = new Player(images);
+			lives.setText(""+player.getHitPoints());
 			gameRoot.getChildren().add(player.getGraphics());
 
 			player.getGraphics().setTranslateX(100);
