@@ -46,6 +46,14 @@ public class SceneMeny extends Application {
 	Image[] images = { new Image("textures/run1.png"), new Image("textures/run2.png"), 
 			new Image("textures/player_textures/Jump__000.png"),
 			new Image("textures/slide.png")};
+	Media[] soundEffects = { new Media(getClass().getResource("/sounds/Click.mp3").toString()),
+			new Media(getClass().getResource("/sounds/button.mp3").toString()),
+			new Media(getClass().getResource("/sounds/jump.wav").toString()),
+			new Media(getClass().getResource("/sounds/Punch.mp3").toString()),
+			new Media(getClass().getResource("/sounds/game_over.mp3").toString())
+	};
+	
+	
 	Player player;
 	private double counter = 1;
 	Timeline playerLoop;
@@ -255,7 +263,7 @@ public class SceneMeny extends Application {
 						player.setJumping(true);
 						// fall.stop();
 						// jump.stop();
-						playSoundEffect(3);
+						playMedia(soundEffects[2]);
 						jump.setByY(-250);
 						jump.setCycleCount(1);
 						jump.play();
@@ -343,7 +351,7 @@ public class SceneMeny extends Application {
 	private void hoverOver(Label label) {
 
 		label.setOnMouseEntered(e -> {
-			playSoundEffect(1);
+			playMedia(soundEffects[0]);
 			label.setEffect(new Glow(50));
 			label.setTextFill(Color.DARKRED);
 
@@ -360,7 +368,7 @@ public class SceneMeny extends Application {
 		label.setOnMouseClicked(e -> {
 			switch (label.getText()) {
 			case "New game":
-				playSoundEffect(2);
+				playMedia(soundEffects[1]);
 				game = createGameScene();
 				mainStage.setScene(game);
 
@@ -369,28 +377,28 @@ public class SceneMeny extends Application {
 				break;
 			case "How to play":
 
-				playSoundEffect(2);
+				playMedia(soundEffects[1]);
 				howToPlay = createHowToPlayScene();
 				mainStage.setScene(howToPlay);
 				System.out.println("how to play");
 				break;
 			case "High score":
-				playSoundEffect(2);
+				playMedia(soundEffects[1]);
 				System.out.println("high score");
 				break;
 			case "Exit Game":
-				playSoundEffect(2);
+				playMedia(soundEffects[1]);
 				System.exit(0);
 				break;
 
 			case "                     Back to main meny":
-				playSoundEffect(2);
+				playMedia(soundEffects[1]);
 				mainStage.setScene(meny);
 				System.out.println("new game");
 				break;
 
 			case "   Return to menu":
-				playSoundEffect(2);
+				playMedia(soundEffects[1]);
 				mainStage.setScene(meny);
 				System.out.println("new game");
 				break;
@@ -410,33 +418,7 @@ public class SceneMeny extends Application {
 		}
 	}
 
-	public void playSoundEffect(int i) {
-		try {
-
-			if (i == 1) {
-				Media someSound = new Media(getClass().getResource("/sounds/Click.mp3").toString());
-				playMedia(someSound);
-			} else if (i == 2) {
-				Media someSound = new Media(getClass().getResource("/sounds/button.mp3").toString());
-				playMedia(someSound);
-			} else if (i == 3) {
-				Media someSound = new Media(getClass().getResource("/sounds/jump.wav").toString());
-				playMedia(someSound);
-			}
-			else if(i==4){
-				Media someSound = new Media(getClass().getResource("/sounds/Punch.mp3").toString());
-				playMedia(someSound);
-			}
-			else if(i==5){
-				Media someSound = new Media(getClass().getResource("/sounds/game_over.mp3").toString());
-				playMedia(someSound);
-			}
-
-		} catch (Exception ex) {
-
-		}
-
-	}
+	
 
 	public void startPlayerMovement() {
 		obsList.add(new Obstacle());
@@ -511,7 +493,7 @@ public class SceneMeny extends Application {
 					if (hit && hitTimer == 0) {
 						gameRoot.getChildren().remove(obsList.get(0));
 						System.out.println("Collide ============= Collide");
-						playSoundEffect(4);
+						playMedia(soundEffects[3]);
 						hitTimer = 1;
 						player.setHitPoints(player.getHitPoints() - 1);
 						lives.setText(String.valueOf(player.getHitPoints()));
@@ -523,7 +505,7 @@ public class SceneMeny extends Application {
 		hitTimer = 0;
 		if (player.getHitPoints() == 0) {
 			
-			playSoundEffect(5);
+			playMedia(soundEffects[4]);
 			playerLoop.stop();
 			timeline.stop();
 			time = Duration.ZERO;
