@@ -8,10 +8,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -144,8 +146,10 @@ public class SceneMeny extends Application {
 		Group root = new Group();
 		Scene theScene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
 		
-		FlowPane pane = new FlowPane(Orientation.VERTICAL, 10, 10);
-		
+		GridPane pane = new GridPane();
+		 pane.setHgap(10);
+		    pane.setVgap(10);
+		    pane.setPadding(new Insets(0, 10, 0, 10));
 
 		b.loadBackGround();
 		b.startBackGroundLoop();
@@ -154,7 +158,7 @@ public class SceneMeny extends Application {
 		Font font = new Font("Arial Black", 40);
 
 		Text title = new Text("Jump and stuff");
-
+        
 		title.setFont(Font.font("Arial Black", 60));
 		title.setFill(Color.GREEN);
 		title.setStroke(Color.BLACK);
@@ -187,7 +191,8 @@ public class SceneMeny extends Application {
 
 		meny.setAlignment(Pos.CENTER);
 		meny.getChildren().addAll(newGame, rules, scores, exit);
-		pane.getChildren().addAll(title, meny);
+		pane.add(title, 25,5);
+		pane.add(meny,25, 6);
 
 		root.getChildren().addAll(b.backgroundImageView, b.backgroundImageView2, pane);
 
@@ -309,42 +314,58 @@ public class SceneMeny extends Application {
 		return null;
 	}
 
-	private Scene createGameOverScreen() {
+	private Scene createGameOverScene() {
 
 		int finalScore;
 		Background b = new Background();
 		Group root = new Group();
 		Scene gameOverScene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
 
-		FlowPane pane = new FlowPane(Orientation.VERTICAL, 10, 10);
-		
-
+		GridPane pane = new GridPane();
+		pane.setHgap(10);
+	    pane.setVgap(10);
+	    pane.setPadding(new Insets(0, 5, 0, 5));
 		b.loadBackGround();
 		b.startBackGroundLoop();
 
-		Text gameOver = new Text("     GAME OVER");
+		Text gameOver = new Text("GAME OVER");
 		gameOver.setFont(Font.font("Arial Black", 100));
 		gameOver.setFill(Color.GREEN);
 		gameOver.setEffect(new Glow(500));
-		
 
 		finalScore = Integer.parseInt(timerLabel.getText());
-		Label score = new Label("                       Your score is: " + finalScore + "\n Enter you name:");
+		HBox nameEntry = new HBox();
+		VBox scoreItems = new VBox();
+		nameEntry.setAlignment(Pos.CENTER);
+		Label score = new Label("Your score is: " + finalScore);
+		score.setAlignment(Pos.CENTER);
+		Label enterName = new Label("Enter your name: ");
+		enterName.setFont(new Font("Arial Black", 20));
+		enterName.setTextFill(Color.RED);
+		
+		
 		score.setFont(new Font("Arial Black", 40));
 		score.setTextFill(Color.RED);
 		score.setAlignment(Pos.CENTER);
 		TextField playerName = new TextField();
-		Label meny = new Label("                     Back to main meny");
+		playerName.setPrefColumnCount(10);
+		
+		Button submitButton = new Button("Submit");
+		submitButton.setAlignment(Pos.CENTER);
+		Label meny = new Label("Back to main meny");
 		meny.setFont(new Font("Arial Black", 40));
 		meny.setTextFill(Color.WHITE);
-		meny.setAlignment(Pos.CENTER_RIGHT);
+		meny.setAlignment(Pos.CENTER);
 		hoverOver(meny);
 		menyChoice(meny);
+		scoreItems.getChildren().addAll(score,nameEntry,meny);
+		nameEntry.getChildren().addAll(enterName,playerName,submitButton);
+		scoreItems.setAlignment(Pos.CENTER);
+		pane.add(gameOver,15,1);
+		pane.add(scoreItems,15,2);
+		
 
-		pane.getChildren().add(gameOver);
-		pane.getChildren().add(score);
-		pane.getChildren().add(playerName);
-		pane.getChildren().add(meny);
+
 		root.getChildren().add(b.backgroundImageView);
 		root.getChildren().add(b.backgroundImageView2);
 		root.getChildren().add(pane);
@@ -576,7 +597,7 @@ public class SceneMeny extends Application {
 			timeline.stop();
 			time = Duration.ZERO;
 			gameRoot.getChildren().removeAll(gameRoot.getChildren());
-			gameOver = createGameOverScreen();
+			gameOver = createGameOverScene();
 			mainStage.setScene(gameOver);
 			// obsList.removeAll(obsList);
 			// obsList.add(obs);
