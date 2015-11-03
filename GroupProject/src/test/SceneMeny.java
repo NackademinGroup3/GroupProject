@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.effect.Glow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -43,14 +44,6 @@ public class SceneMeny extends Application {
 	Group gameRoot;
 	Image[] images = { new Image("textures/run1.png"), new Image("textures/run2.png"), new Image("textures/jump.png"),
 			new Image("textures/slide.png")};
-	Media[] soundEffects = {new Media(getClass().getResource("/sounds/Click.mp3").toString()),
-			new Media(getClass().getResource("/sounds/button.mp3").toString()),
-			new Media(getClass().getResource("/sounds/jump.wav").toString()),
-			new Media(getClass().getResource("/sounds/Punch.mp3").toString()),
-			new Media(getClass().getResource("/sounds/game_over.mp3").toString())};
-	
-	
-	
 	Player player;
 	private double counter = 1;
 	Timeline playerLoop;
@@ -60,6 +53,7 @@ public class SceneMeny extends Application {
 	Duration time = Duration.ZERO;
 	Label timerLabel = new Label();
 	IntegerProperty timeSeconds = new SimpleIntegerProperty();
+	Label lives = new Label("3");
 
 	public void start(Stage theStage) {
 
@@ -200,8 +194,22 @@ public class SceneMeny extends Application {
 		score.setFont(Font.font("Arial Black", 40));
 		score.setTextFill(Color.WHITE);
 		score.setAlignment(Pos.TOP_RIGHT);
+		
+		Label lifeLabel = new Label("Lives: ");
+		lifeLabel.setFont(Font.font("Arial Black", 40));
+		lifeLabel.setTextFill(Color.WHITE);
+		
+		HBox hbox2 = new HBox(5);
+		lives.setFont(Font.font("Arial Black", 40));
+		lives.setTextFill(Color.WHITE);
+		lives.setAlignment(Pos.TOP_RIGHT);
+		
+		VBox vbox = new VBox();
+		hbox2.getChildren().addAll(lifeLabel, lives );
 
 		hbox.getChildren().addAll(score, timerLabel);
+		
+		vbox.getChildren().addAll(hbox,hbox2);
 
 		gameRoot = new Group();
 		Scene scene;
@@ -241,7 +249,7 @@ public class SceneMeny extends Application {
 						player.setJumping(true);
 						// fall.stop();
 						// jump.stop();
-						playMedia(soundEffects[2]);
+						playSoundEffect(3);
 						jump.setByY(-250);
 						jump.setCycleCount(1);
 						jump.play();
@@ -274,7 +282,7 @@ public class SceneMeny extends Application {
 			obs.getGraphics().setTranslateX(1000);
 			obs.getGraphics().setTranslateY(370);
 			gameRoot.getChildren().add(obs.getGraphics());
-			gameRoot.getChildren().add(hbox);
+			gameRoot.getChildren().addAll(vbox);
 			return scene;
 
 		} catch (Exception e) {
@@ -324,7 +332,7 @@ public class SceneMeny extends Application {
 	private void hoverOver(Label label) {
 
 		label.setOnMouseEntered(e -> {
-			playMedia(soundEffects[0]);
+			playSoundEffect(1);
 			label.setEffect(new Glow(50));
 			label.setTextFill(Color.DARKRED);
 
@@ -341,7 +349,7 @@ public class SceneMeny extends Application {
 		label.setOnMouseClicked(e -> {
 			switch (label.getText()) {
 			case "New game":
-				playMedia(soundEffects[1]);
+				playSoundEffect(2);
 				game = createGameScene();
 				mainStage.setScene(game);
 
@@ -350,28 +358,28 @@ public class SceneMeny extends Application {
 				break;
 			case "How to play":
 
-				playMedia(soundEffects[1]);
+				playSoundEffect(2);
 				howToPlay = createHowToPlayScene();
 				mainStage.setScene(howToPlay);
 				System.out.println("how to play");
 				break;
 			case "High score":
-				playMedia(soundEffects[1]);
+				playSoundEffect(2);
 				System.out.println("high score");
 				break;
 			case "Exit Game":
-				playMedia(soundEffects[1]);
+				playSoundEffect(2);
 				System.exit(0);
 				break;
 
 			case "                     Back to main meny":
-				playMedia(soundEffects[1]);
+				playSoundEffect(2);
 				mainStage.setScene(meny);
 				System.out.println("new game");
 				break;
 
 			case " Return to menu":
-				playMedia(soundEffects[1]);
+				playSoundEffect(2);
 				mainStage.setScene(meny);
 				System.out.println("new game");
 				break;
@@ -391,7 +399,33 @@ public class SceneMeny extends Application {
 		}
 	}
 
+	public void playSoundEffect(int i) {
+		try {
 
+			if (i == 1) {
+				Media someSound = new Media(getClass().getResource("/sounds/Click.mp3").toString());
+				playMedia(someSound);
+			} else if (i == 2) {
+				Media someSound = new Media(getClass().getResource("/sounds/button.mp3").toString());
+				playMedia(someSound);
+			} else if (i == 3) {
+				Media someSound = new Media(getClass().getResource("/sounds/jump.wav").toString());
+				playMedia(someSound);
+			}
+			else if(i==4){
+				Media someSound = new Media(getClass().getResource("/sounds/Punch.mp3").toString());
+				playMedia(someSound);
+			}
+			else if(i==5){
+				Media someSound = new Media(getClass().getResource("/sounds/game_over.mp3").toString());
+				playMedia(someSound);
+			}
+
+		} catch (Exception ex) {
+
+		}
+
+	}
 
 	int i = 0;
 
@@ -467,9 +501,10 @@ public class SceneMeny extends Application {
 					hit = true;
 					if (hit && hitTimer == 0) {
 						System.out.println("Collide ============= Collide");
-						playMedia(soundEffects[3]);
+						playSoundEffect(4);
 						hitTimer = 1;
 						player.setHitPoints(player.getHitPoints() - 1);
+						lives.setText(String.valueOf(player.getHitPoints()));
 					}
 					// createGameOverScreen();
 				}
@@ -478,7 +513,7 @@ public class SceneMeny extends Application {
 		hitTimer = 0;
 		if (player.getHitPoints() == 0) {
 			
-			playMedia(soundEffects[4]);
+			playSoundEffect(5);
 			playerLoop.stop();
 			timeline.stop();
 			time = Duration.ZERO;
