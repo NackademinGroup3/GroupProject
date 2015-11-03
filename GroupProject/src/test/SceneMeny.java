@@ -87,12 +87,12 @@ public class SceneMeny extends Application {
 		Label text = new Label("          Welcome to The Running Game, you will\n\n "
 				+ "          be encountering obstacles that you will\n\n"
 				+ "          need to evade. By evading the obstacles \n\n"
-				+ "   		  you will use the SPACE key to jump \n\n"
-				+ "          over them and try to survive for as \n\n" + "			     long as you can");
+				+ "   		you will use the UP-Arrow key to\n\n 	jump and the DOWN-Arrow key to slide\n\n"
+				+ "          		and try to survive for as \n\n" + "			     long as you can");
 		text.setMaxWidth(450);
 		text.setWrapText(true);
 
-		Label goBack = new Label(" Return to menu");
+		Label goBack = new Label("   Return to menu");
 
 		Font font = new Font("Arial Black", 40);
 		Font font2 = new Font("Arial Black", 17);
@@ -110,7 +110,7 @@ public class SceneMeny extends Application {
 		vbox.setAlignment(Pos.CENTER);
 
 		rules.setFont(font);
-		rules.setTextFill(Color.WHITE);
+		rules.setTextFill(Color.GREEN);
 
 		goBack.setFont(font3);
 		goBack.setTextFill(Color.WHITE);
@@ -378,7 +378,7 @@ public class SceneMeny extends Application {
 				System.out.println("new game");
 				break;
 
-			case " Return to menu":
+			case "   Return to menu":
 				playSoundEffect(2);
 				mainStage.setScene(meny);
 				System.out.println("new game");
