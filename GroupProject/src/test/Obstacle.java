@@ -25,20 +25,20 @@ public class Obstacle extends Group{
 	private void randomObstacles() {
 		switch (randomizedObject) {
 		case 1:
-			this.image = new Image("textures/obstacles.jpg");
-			this.setTranslateY(370);
+			this.image = new Image("textures/t3_obstacle_fire.gif");
+			this.setTranslateY(400);
 			break;
 		case 2:
 			this.image = new Image("textures/obstacles2.jpg");
 			this.setTranslateY(350);
 			break;
 		case 3:
-			this.image = new Image("textures/obstacles3.jpg");
-			this.setTranslateY(350);
+			this.image = new Image("textures/obstacle_fire.gif");
+			this.setTranslateY(370);
 			break;
 		default:
-			this.image = new Image("textures/obstacles4.jpg");
-			this.setTranslateY(290);
+			this.image = new Image("textures/t2_obstacle_fire.gif");
+			this.setTranslateY(270);
 			break;
 		}
 	}
