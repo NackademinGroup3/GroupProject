@@ -42,7 +42,8 @@ public class SceneMeny extends Application {
 	Scene howToPlay;
 	Stage mainStage;
 	Group gameRoot;
-	Image[] images = { new Image("textures/run1.png"), new Image("textures/run2.png"), new Image("textures/jump.png"),
+	Image[] images = { new Image("textures/run1.png"), new Image("textures/run2.png"), 
+			new Image("textures/player_textures/Jump__000.png"),
 			new Image("textures/slide.png")};
 	Player player;
 	private double counter = 1;
@@ -500,6 +501,7 @@ public class SceneMeny extends Application {
 				if (obsList.get(0).getBoundsInParent().intersects(newValue)) {
 					hit = true;
 					if (hit && hitTimer == 0) {
+						gameRoot.getChildren().remove(obsList.get(0));
 						System.out.println("Collide ============= Collide");
 						playSoundEffect(4);
 						hitTimer = 1;
@@ -517,6 +519,7 @@ public class SceneMeny extends Application {
 			playerLoop.stop();
 			timeline.stop();
 			time = Duration.ZERO;
+			gameRoot.getChildren().removeAll(gameRoot.getChildren());
 			gameOver = createGameOverScreen();
 			mainStage.setScene(gameOver);
 			// obsList.removeAll(obsList);
