@@ -30,6 +30,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 import javafx.animation.Interpolator;
@@ -93,49 +94,63 @@ public class SceneMeny extends Application {
 		Group root = new Group();
 		Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
 
-		BorderPane pane = new BorderPane();
-
+		GridPane pane = new GridPane();
+		 pane.setHgap(10);
+		    pane.setVgap(10);
+		    pane.setPadding(new Insets(0, 10, 0, 10));
 		b.loadBackGround();
 		b.startBackGroundLoop();
 
 		// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
-		Label rules = new Label("How to play");
-
-		Label text = new Label("Welcome to The Running Game, you will\n\n "
-				+ "be encountering obstacles that you will\n\n"
-				+ "need to evade. By evading the obstacles \n\n"
-				+ "you will use the UP-Arrow key to\n\n 	jump and the DOWN-Arrow key to slide\n\n"
-				+ "and try to survive for as \n\n" + "long as you can");
-		text.setMaxWidth(450);
+		Text rules = new Text("How to play");
+        
+		Label text = new Label(
+				"     You will encounter \n"
+			
+				+ "     obstacles that you \n "
+				+ "     have to evade.\n\n"
+			
+				+ "     CONTROLS \n\n" 
+				+ "     Jump: UP-Arrow\n"
+				+ "     Slide: DOWN-Arrow\n\n"
+				+ "     Try to survive as\n"
+				+ "     long as you can!");
+		text.setMaxWidth(500);
 		text.setWrapText(true);
+		text.setTextAlignment(TextAlignment.CENTER);
+		
 
 		Label goBack = new Label("Return to menu");
 
 		Font font = new Font("Arial Black", 40);
-		Font font2 = new Font("Arial Black", 17);
+		Font font2 = new Font("Arial Black", 20);
 		Font font3 = new Font("Arial Black", 35);
-		VBox vbox = new VBox(20);
+		
 
 		hoverOver(goBack);
 		menyChoice(goBack);
 
 		text.setFont(font2);
 		text.setTextFill(Color.WHITE);
+		
 
-		vbox.getChildren().addAll(rules, text, goBack);
+		
 
-		vbox.setAlignment(Pos.CENTER);
+		//vbox.setAlignment(Pos.CENTER);
 
 		rules.setFont(font);
-		rules.setTextFill(Color.GREEN);
+		rules.setFill(Color.GREEN);
+		rules.setStroke(Color.BLACK);
+		rules.setEffect(new Glow(10));
 
 		goBack.setFont(font3);
 		goBack.setTextFill(Color.WHITE);
-
+		pane.setAlignment(Pos.CENTER);
 		root.getChildren().addAll(b.backgroundImageView, b.backgroundImageView2, pane);
-
-		pane.setRight(vbox);
+		pane.add(rules, 30, 0);
+		pane.add(text,30,1);
+		pane.add(goBack, 30, 2);
 
 		return scene;
 	}
