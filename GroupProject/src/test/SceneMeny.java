@@ -14,6 +14,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Labeled;
 import javafx.scene.effect.Glow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -42,7 +43,8 @@ public class SceneMeny extends Application {
 	Scene howToPlay;
 	Stage mainStage;
 	Group gameRoot;
-	Image[] images = { new Image("textures/run1.png"), new Image("textures/run2.png"), new Image("textures/jump.png"),
+	Image[] images = { new Image("textures/run1.png"), new Image("textures/run2.png"), 
+			new Image("textures/player_textures/Jump__000.png"),
 			new Image("textures/slide.png")};
 	Player player;
 	private double counter = 1;
@@ -56,6 +58,7 @@ public class SceneMeny extends Application {
 	final int SCENE_WIDTH = 990;
 	final int SCENE_HEIGHT = 500;
 	int i = 0;
+	Label lives = new Label("3");
 
 	public void start(Stage theStage) {
 
@@ -89,12 +92,12 @@ public class SceneMeny extends Application {
 		Label text = new Label("          Welcome to The Running Game, you will\n\n "
 				+ "          be encountering obstacles that you will\n\n"
 				+ "          need to evade. By evading the obstacles \n\n"
-				+ "   		  you will use the SPACE key to jump \n\n"
-				+ "          over them and try to survive for as \n\n" + "			     long as you can");
+				+ "   		you will use the UP-Arrow key to\n\n 	jump and the DOWN-Arrow key to slide\n\n"
+				+ "          		and try to survive for as \n\n" + "			     long as you can");
 		text.setMaxWidth(450);
 		text.setWrapText(true);
 
-		Label goBack = new Label(" Return to menu");
+		Label goBack = new Label("   Return to menu");
 
 		Font font = new Font("Arial Black", 40);
 		Font font2 = new Font("Arial Black", 17);
@@ -112,7 +115,7 @@ public class SceneMeny extends Application {
 		vbox.setAlignment(Pos.CENTER);
 
 		rules.setFont(font);
-		rules.setTextFill(Color.WHITE);
+		rules.setTextFill(Color.GREEN);
 
 		goBack.setFont(font3);
 		goBack.setTextFill(Color.WHITE);
@@ -197,8 +200,22 @@ public class SceneMeny extends Application {
 		score.setFont(Font.font("Arial Black", 40));
 		score.setTextFill(Color.WHITE);
 		score.setAlignment(Pos.TOP_RIGHT);
+		
+		Label lifeLabel = new Label("Lives: ");
+		lifeLabel.setFont(Font.font("Arial Black", 40));
+		lifeLabel.setTextFill(Color.WHITE);
+		
+		HBox hbox2 = new HBox(5);
+		lives.setFont(Font.font("Arial Black", 40));
+		lives.setTextFill(Color.WHITE);
+		lives.setAlignment(Pos.TOP_RIGHT);
+		
+		VBox vbox = new VBox();
+		hbox2.getChildren().addAll(lifeLabel, lives );
 
 		hbox.getChildren().addAll(score, timerLabel);
+		
+		vbox.getChildren().addAll(hbox,hbox2);
 
 		gameRoot = new Group();
 		Scene scene;
@@ -271,7 +288,7 @@ public class SceneMeny extends Application {
 			obs.getGraphics().setTranslateX(1000);
 			obs.getGraphics().setTranslateY(370);
 			gameRoot.getChildren().add(obs.getGraphics());
-			gameRoot.getChildren().add(hbox);
+			gameRoot.getChildren().addAll(vbox);
 			return scene;
 
 		} catch (Exception e) {
@@ -372,7 +389,7 @@ public class SceneMeny extends Application {
 				System.out.println("new game");
 				break;
 
-			case " Return to menu":
+			case "   Return to menu":
 				playSoundEffect(2);
 				mainStage.setScene(meny);
 				System.out.println("new game");
@@ -492,10 +509,12 @@ public class SceneMeny extends Application {
 				if (obsList.get(0).getBoundsInParent().intersects(newValue)) {
 					hit = true;
 					if (hit && hitTimer == 0) {
+						gameRoot.getChildren().remove(obsList.get(0));
 						System.out.println("Collide ============= Collide");
 						playSoundEffect(4);
 						hitTimer = 1;
 						player.setHitPoints(player.getHitPoints() - 1);
+						lives.setText(String.valueOf(player.getHitPoints()));
 					}
 					// createGameOverScreen();
 				}
@@ -508,6 +527,7 @@ public class SceneMeny extends Application {
 			playerLoop.stop();
 			timeline.stop();
 			time = Duration.ZERO;
+			gameRoot.getChildren().removeAll(gameRoot.getChildren());
 			gameOver = createGameOverScreen();
 			mainStage.setScene(gameOver);
 			// obsList.removeAll(obsList);
