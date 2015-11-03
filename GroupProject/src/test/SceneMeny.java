@@ -126,7 +126,7 @@ public class SceneMeny extends Application {
 		text.setTextAlignment(TextAlignment.CENTER);
 		
 
-		Label goBack = new Label("Return to menu");
+		Text goBack = new Text("Return to menu");
 
 		Font font = new Font("Arial Black", 40);
 		Font font2 = new Font("Arial Black", 20);
@@ -150,7 +150,8 @@ public class SceneMeny extends Application {
 		rules.setEffect(new Glow(10));
 
 		goBack.setFont(font3);
-		goBack.setTextFill(Color.WHITE);
+		goBack.setFill(Color.WHITE);
+		goBack.setStroke(Color.BLACK);
 		pane.setAlignment(Pos.CENTER);
 		root.getChildren().addAll(b.backgroundImageView, b.backgroundImageView2, pane);
 		pane.add(rules, 30, 0);
@@ -184,18 +185,22 @@ public class SceneMeny extends Application {
 		title.setStroke(Color.BLACK);
 		title.setEffect(new Glow(10));
 
-		Label newGame = new Label("New game");
-		Label rules = new Label("How to play");
-		Label scores = new Label("High score");
-		Label exit = new Label("Exit Game");
+		Text newGame = new Text("New game");
+		Text rules = new Text("How to play");
+		Text scores = new Text("High score");
+		Text exit = new Text("Exit Game");
 		newGame.setFont(font);
-		newGame.setTextFill(Color.WHITE);
+		newGame.setFill(Color.WHITE);
+		newGame.setStroke(Color.BLACK);
 		rules.setFont(font);
-		rules.setTextFill(Color.WHITE);
+		rules.setFill(Color.WHITE);
+		rules.setStroke(Color.BLACK);
 		scores.setFont(font);
-		scores.setTextFill(Color.WHITE);
+		scores.setFill(Color.WHITE);
+		scores.setStroke(Color.BLACK);
 		exit.setFont(font);
-		exit.setTextFill(Color.WHITE);
+		exit.setFill(Color.WHITE);
+		exit.setStroke(Color.BLACK);
 
 		hoverOver(newGame);
 		hoverOver(rules);
@@ -374,10 +379,11 @@ public class SceneMeny extends Application {
 		
 		Button submitButton = new Button("Submit");
 		submitButton.setAlignment(Pos.CENTER);
-		Label meny = new Label("Back to main meny");
+		Text meny = new Text("Back to main meny");
 		meny.setFont(new Font("Arial Black", 40));
-		meny.setTextFill(Color.WHITE);
-		meny.setAlignment(Pos.CENTER);
+		meny.setFill(Color.WHITE);
+		meny.setStroke(Color.BLACK);
+		//meny.setAlignment(Pos.CENTER);
 		hoverOver(meny);
 		menyChoice(meny);
 		scoreItems.getChildren().addAll(score,nameEntry,meny);
@@ -425,7 +431,7 @@ public class SceneMeny extends Application {
 			
 		TextArea textArea = new TextArea(highscoreList);
 
-		Label goBack = new Label("Return to menu");
+		Text goBack = new Text("Return to menu");
 
 		Font font = new Font("Arial Black", 40);
 		Font font2 = new Font("Arial Black", 17);
@@ -444,7 +450,8 @@ public class SceneMeny extends Application {
 		vbox.getChildren().addAll(header, textArea, goBack);
 
 		goBack.setFont(font3);
-		goBack.setTextFill(Color.WHITE);
+		goBack.setFill(Color.WHITE);
+		goBack.setStroke(Color.BLACK);
 
 		pane.add(vbox, 100, 5);
 		root.getChildren().addAll(b.backgroundImageView, b.backgroundImageView2, pane);
@@ -452,22 +459,22 @@ public class SceneMeny extends Application {
 		return highscoreScene;
 	}
 
-	private void hoverOver(Label label) {
+	private void hoverOver(Text label) {
 
 		label.setOnMouseEntered(e -> {
 			playMedia(soundEffects[0]);
 			label.setEffect(new Glow(50));
-			label.setTextFill(Color.DARKRED);
+			label.setFill(Color.DARKRED);
 
 		});
 		label.setOnMouseExited(e -> {
 			label.setEffect(null);
-			label.setTextFill(Color.WHITE);
+			label.setFill(Color.WHITE);
 		});
 
 	}
 
-	private void menyChoice(Label label) {
+	private void menyChoice(Text label) {
 
 		label.setOnMouseClicked(e -> {
 			switch (label.getText()) {
@@ -518,7 +525,6 @@ public class SceneMeny extends Application {
 		});
 
 	}
-
 	private void playMedia(Media m) {
 		if (m != null) {
 			MediaPlayer mp = new MediaPlayer(m);
