@@ -162,9 +162,9 @@ public class SceneMeny extends Application {
 		goBack.setStroke(Color.BLACK);
 		pane.setAlignment(Pos.CENTER);
 		root.getChildren().addAll(b.backgroundImageView, b.backgroundImageView2, pane);
-		pane.add(rules, 30, 0);
-		pane.add(text,30,1);
-		pane.add(goBack, 30, 2);
+		pane.add(rules, 33, 0);
+		pane.add(text,33,1);
+		pane.add(goBack, 33, 2);
 
 		return scene;
 	}
@@ -425,32 +425,34 @@ public class SceneMeny extends Application {
 
 	}
 	
-	private Scene createHighscoreScene(){
-		
+	private Scene createHighscoreScene() {
+
 		Background b = new Background();
 		Group root = new Group();
 		Scene highscoreScene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
 
 		GridPane pane = new GridPane();
+		pane.setHgap(10);
+		pane.setVgap(10);
+		pane.setPadding(new Insets(0, 10, 0, 10));
 
 		b.loadBackGround();
 		b.startBackGroundLoop();
 
 		// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
-		Label header = new Label("High scores");
+		Text header = new Text("Highscore");
 
 		// text.setMaxWidth(450);
 		// text.setWrapText(true);
-		
+
 		highscoreList = highscoreRef.readFile();
 		// highscoreRef.sortList();
 		String highscoreString = "";
-		for(int i = 0; i <= 9; i++ ){
-			highscoreString += i+1 + "." + "  " + highscoreList.get(i).toString() + "\n";
+		for (int i = 0; i <= 9; i++) {
+			highscoreString += i + 1 + "." + "  " + highscoreList.get(i).toString() + "\n";
 		}
-			
-			
+
 		TextArea textArea = new TextArea(highscoreString);
 
 		Text goBack = new Text("Return to menu");
@@ -463,10 +465,14 @@ public class SceneMeny extends Application {
 		menyChoice(goBack);
 
 		textArea.setFont(font2);
+		textArea.setEditable(false);
+		textArea.setPrefSize(180,300);
 
 		header.setFont(font);
-		header.setTextFill(Color.GREEN);
-		
+		header.setFill(Color.GREEN);
+		header.setStroke(Color.BLACK);
+		header.setEffect(new Glow(10));
+
 		VBox vbox = new VBox(30);
 		vbox.setAlignment(Pos.CENTER);
 		vbox.getChildren().addAll(header, textArea, goBack);
@@ -475,7 +481,7 @@ public class SceneMeny extends Application {
 		goBack.setFill(Color.WHITE);
 		goBack.setStroke(Color.BLACK);
 
-		pane.add(vbox, 100, 5);
+		pane.add(vbox, 33, 0);
 		root.getChildren().addAll(b.backgroundImageView, b.backgroundImageView2, pane);
 
 		return highscoreScene;
