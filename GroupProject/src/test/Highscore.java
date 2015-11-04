@@ -18,7 +18,6 @@ public class Highscore {
 	private int score;
 	private String name;
 	
-	
 	String pathName = "src/highscore/highscore.txt";
 
 	Highscore(){
