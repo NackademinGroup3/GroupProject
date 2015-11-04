@@ -26,15 +26,15 @@ public class Obstacle extends Group{
 		switch (randomizedObject) {
 		case 1:
 			this.image = new Image("textures/block1.jpg");
-			this.setTranslateY(315);
+			this.setTranslateY(350);
 			break;
 		case 2:
-			this.image = new Image("textures/block2H.jpg");
-			this.setTranslateY(325);
+			this.image = new Image("textures/block4L.jpg");
+			this.setTranslateY(250);
 			break;
 		case 3:
 			this.image = new Image("textures/block2L.jpg");
-			this.setTranslateY(300);
+			this.setTranslateY(295);
 			break;
 		case 4:
 			this.image = new Image("textures/block3L.jpg");
