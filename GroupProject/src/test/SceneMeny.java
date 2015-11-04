@@ -65,7 +65,6 @@ public class SceneMeny extends Application {
 			new Media(getClass().getResource("/sounds/game_over.mp3").toString())
 	};
 	
-	
 	Player player;
 	private double counter = 1;
 	Timeline playerLoop;
@@ -548,14 +547,13 @@ public class SceneMeny extends Application {
 		});
 
 	}
+	
 	private void playMedia(Media m) {
 		if (m != null) {
 			MediaPlayer mp = new MediaPlayer(m);
 			mp.play();
 		}
 	}
-
-	
 
 	public void startPlayerMovement() {
 		obsList.add(new Obstacle());
