@@ -99,6 +99,8 @@ public class SceneMeny extends Application {
 		mainStage.setTitle("Jump and stuff");
 		mainStage.setScene(meny);
 		mainStage.show();
+		
+		highscoreList = highscoreRef.readFile();
 	}
 
 	private Scene createHowToPlayScene() {
@@ -398,7 +400,15 @@ public class SceneMeny extends Application {
 		submitButton.setOnAction(e -> {
 			
 			Highscore gamehighscore = new Highscore(playerName.getText(), finalScore);
+			System.out.println(gamehighscore.toString());
+			
 			highscoreList.add(gamehighscore);
+			
+			highscoreList = highscoreRef.sortList(highscoreList);
+			System.out.println(highscoreList.toString());
+			
+			mainStage.setScene(meny);
+			
 			
 		});
 		
@@ -443,8 +453,9 @@ public class SceneMeny extends Application {
 		// text.setMaxWidth(450);
 		// text.setWrapText(true);
 		
-		highscoreList = highscoreRef.readFile();
+		//highscoreList = highscoreRef.readFile();
 		// highscoreRef.sortList();
+		highscoreList = highscoreRef.sortList(highscoreList);
 		String highscoreString = "";
 		for(int i = 0; i <= 9; i++ ){
 			highscoreString += i+1 + "." + "  " + highscoreList.get(i).toString() + "\n";

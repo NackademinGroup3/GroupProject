@@ -35,23 +35,24 @@ public class Highscore {
 	}
 
 	// Sortera lista med highscore objekt
-	void sortList(){ 
+	List<Highscore> sortList(List<Highscore> hsl){ 
 
-		System.out.println("före sortering: " + highScoreList);
+		//System.out.println("före sortering: " + hsl);
 
 		// Alternativ Java 8 kod med lambda:
 		//Collections.sort(highScoreList, Comparator.comparingInt(obj ->
 		//obj.score).reversed());
 		
-		Collections.sort(highScoreList, new Comparator<Highscore>() {
+		Collections.sort(hsl, new Comparator<Highscore>() {
 		@Override
 		public int compare(Highscore o1, Highscore o2) {
 				return o2.score - o1.score;
 			}
 		});
 
-		System.out.println("efter sortering: " + highScoreList);
+		//System.out.println("efter sortering: " + hsl);
 		
+		return hsl;
 		}
 		
 	// Läsa in testfil med highscores och lägg in som element i listan
