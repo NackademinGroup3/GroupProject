@@ -388,15 +388,10 @@ public class SceneMeny extends Application {
 		submitButton.setOnAction(e -> {
 			
 			Highscore gamehighscore = new Highscore(playerName.getText(), finalScore);
-			System.out.println(gamehighscore.toString());
 			
 			highscoreList.add(gamehighscore);
-			
 			highscoreList = highscoreRef.sortList(highscoreList);
-			System.out.println(highscoreList.toString());
-			
 			mainStage.setScene(meny);
-			
 			
 		});
 		
@@ -504,20 +499,17 @@ public class SceneMeny extends Application {
 				game = createGameScene();
 				mainStage.setScene(game);
 				startScoreCounter();
-				System.out.println("new game");
 				break;
 				
 			case "How to play":
 				playMedia(soundEffects[1]);
 				howToPlay = createHowToPlayScene();
 				mainStage.setScene(howToPlay);
-				System.out.println("how to play");
 				break;
 				
 			case "High score":
 				highscore = createHighscoreScene();
 				mainStage.setScene(highscore);
-				System.out.println("highscore");
 				playMedia(soundEffects[1]);
 				System.out.println("high score");
 				break;
@@ -531,13 +523,11 @@ public class SceneMeny extends Application {
 			case "Back to main meny":
 				playMedia(soundEffects[1]);
 				mainStage.setScene(meny);
-				System.out.println("new game");
 				break;
 
 			case "Return to menu":
 				playMedia(soundEffects[1]);
 				mainStage.setScene(meny);
-				System.out.println("new game");
 				break;
 
 			default:
@@ -627,7 +617,6 @@ public class SceneMeny extends Application {
 					hit = true;
 					if (hit && hitTimer == 0) {
 						gameRoot.getChildren().remove(obsList.get(0));
-						System.out.println("Collide ============= Collide");
 						playMedia(soundEffects[3]);
 						hitTimer = 1;
 						player.setHitPoints(player.getHitPoints() - 1);
@@ -657,7 +646,6 @@ public class SceneMeny extends Application {
 			// obsList.removeAll(obsList);
 			// obsList.add(obs);
 			// gameRoot.getChildren().removeAll(obsList);
-			System.out.println("game Over");
 
 		}
 
