@@ -550,6 +550,8 @@ public class SceneMeny extends Application {
 				// if (obsList.isEmpty())
 				player.setDead(false);
 				updatePlayer();
+				updatePlayer();
+				updatePlayer();
 				if (hit == false)
 					checkCollision();
 				if (obsList.get(0).getTranslateX() <= -200) {

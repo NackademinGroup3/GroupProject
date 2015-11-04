@@ -82,12 +82,6 @@ public class Obstacle extends Group{
 		return graphics;
 	}
 
-
-	public void setGraphics(ImageView graphics) {
-		this.graphics = graphics;
-	}
-
-
 	public Rectangle getHitbox() {
 		return hitbox;
 	}
@@ -98,14 +92,7 @@ public class Obstacle extends Group{
 	}
 
 
-	public Image getImage() {
-		return image;
-	}
-
-
-	public void setImage(Image image) {
-		this.image = image;
-	}
+	
 	
 
 }
