@@ -78,7 +78,8 @@ public class SceneMeny extends Application {
 	final int SCENE_HEIGHT = 500;
 	int i = 0;
 	Label lives = new Label("3");
-	
+	boolean hit = false;
+	int hitTimer = 0;
 	Highscore highscoreRef = new Highscore();
 	List<Highscore> highscoreList;
 
@@ -107,8 +108,6 @@ public class SceneMeny extends Application {
 		    pane.setPadding(new Insets(0, 10, 0, 10));
 		b.loadBackGround();
 		b.startBackGroundLoop();
-
-		// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 		Text rules = new Text("How to play");
         
@@ -142,9 +141,6 @@ public class SceneMeny extends Application {
 		text.setTextFill(Color.WHITE);
 		
 
-		
-
-		//vbox.setAlignment(Pos.CENTER);
 
 		rules.setFont(font);
 		rules.setFill(Color.GREEN);
@@ -176,7 +172,7 @@ public class SceneMeny extends Application {
 
 		b.loadBackGround();
 		b.startBackGroundLoop();
-		// playSoundEffect(3);
+		
 
 		Font font = new Font("Arial Black", 40);
 
@@ -431,8 +427,6 @@ public class SceneMeny extends Application {
 		b.loadBackGround();
 		b.startBackGroundLoop();
 
-		// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-
 		Text header = new Text("Highscore");
 
 		highscoreList = highscoreRef.sortList(highscoreList);
@@ -604,10 +598,7 @@ public class SceneMeny extends Application {
 		counter++;
 	}
 
-	// flytta instansvariabler
-	boolean hit = false;
-	int hitTimer = 0;
-
+	
 	private void checkCollision() {
 
 		player.getGraphics().boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
