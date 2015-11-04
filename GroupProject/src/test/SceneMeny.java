@@ -9,19 +9,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
-import javafx.scene.control.Labeled;
 import javafx.scene.control.TextArea;
 import javafx.scene.effect.Glow;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -33,10 +28,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
-
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -238,8 +230,6 @@ public class SceneMeny extends Application {
 
 	private Scene createGameScene() {
 		Background b = new Background();
-		//double SCENE_WIDTH = 993;
-		//double SCENE_HEIGHT = 500;
 		Pane backgroundLayer;
 
 		timerLabel.textProperty().bind(timeSeconds.asString());
@@ -381,7 +371,6 @@ public class SceneMeny extends Application {
 		VBox scoreItems = new VBox();
 		nameEntry.setAlignment(Pos.CENTER);
 		Text score = new Text("Your score is: " + finalScore);
-		//score.setAlignment(Pos.CENTER);
 		Text enterName = new Text("Enter your name: ");
 		enterName.setFont(new Font("Arial Black", 20));
 		enterName.setFill(Color.RED);
@@ -391,7 +380,6 @@ public class SceneMeny extends Application {
 		score.setFont(new Font("Arial Black", 40));
 		score.setFill(Color.RED);
 		score.setStroke(Color.BLACK);
-		//score.setAlignment(Pos.CENTER);
 		TextField playerName = new TextField();
 		playerName.setPrefColumnCount(10);
 		
@@ -417,7 +405,6 @@ public class SceneMeny extends Application {
 		meny.setFont(new Font("Arial Black", 40));
 		meny.setFill(Color.WHITE);
 		meny.setStroke(Color.BLACK);
-		//meny.setAlignment(Pos.CENTER);
 		hoverOver(meny);
 		menyChoice(meny);
 		scoreItems.getChildren().addAll(score,nameEntry,meny);
@@ -454,10 +441,6 @@ public class SceneMeny extends Application {
 
 		Text header = new Text("Highscore");
 
-		// text.setMaxWidth(450);
-		// text.setWrapText(true);
-
-		//highscoreList = highscoreRef.readFile();
 		highscoreList = highscoreRef.sortList(highscoreList);
 		String highscoreString = "";
 		for (int i = 0; i <= 9; i++) {
@@ -542,7 +525,7 @@ public class SceneMeny extends Application {
 				
 			case "Exit Game":
 				playMedia(soundEffects[1]);
-				highscoreRef.writeFile(highscoreList);
+				//highscoreRef.writeFile(highscoreList);
 				System.exit(0);
 				break;
 

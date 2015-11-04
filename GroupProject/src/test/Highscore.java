@@ -33,10 +33,7 @@ public class Highscore {
 		return name + " - " + score;
 	}
 
-	// Sortera lista med highscore objekt
 	List<Highscore> sortList(List<Highscore> hsl){ 
-
-		System.out.println("före sortering: " + hsl);
 
 		// Alternativ Java 8 kod med lambda:
 		//Collections.sort(highScoreList, Comparator.comparingInt(obj ->
@@ -49,12 +46,9 @@ public class Highscore {
 			}
 		});
 
-		System.out.println("efter sortering: " + hsl);
-		
 		return hsl;
 		}
 		
-	// Läsa in testfil med highscores och lägg in som element i listan
 	
 	List<Highscore> readFile(){
 		
