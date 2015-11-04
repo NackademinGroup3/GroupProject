@@ -87,7 +87,7 @@ public class SceneMeny extends Application {
 		highscoreList = highscoreRef.readFile();
 		mainStage = theStage;
 		meny = createMenyScene();
-		
+		mainStage.getIcons().add(new Image("textures/player_textures/Run__007.png"));
 		mainStage.setTitle("Jump and stuff");
 		mainStage.setScene(meny);
 		mainStage.show();
