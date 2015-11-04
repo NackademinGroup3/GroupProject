@@ -17,9 +17,13 @@ public class Highscore {
 
 	private int score;
 	private String name;
-	List<Highscore> highScoreList = new LinkedList<>(Arrays.asList()); // Läs på mer om Arrays.asList
+	
+	
 	String pathName = "src/highscore/highscore.txt";
 
+	Highscore(){
+	}
+	
 	Highscore(String name, int score) {
 		this.score = score;
 		this.name = name;
@@ -27,7 +31,7 @@ public class Highscore {
 	
 	@Override
 	public String toString() {
-		return "Score = " + score + " Name = " + name;
+		return name + " - " + score;
 	}
 
 	// Sortera lista med highscore objekt
@@ -51,9 +55,10 @@ public class Highscore {
 		}
 		
 	// Läsa in testfil med highscores och lägg in som element i listan
-	void readFile(){
+	
+	List<Highscore> readFile(){
 		
-		
+		List<Highscore> highScoreList = new LinkedList<>(Arrays.asList()); // Läs på mer om Arrays.asList
 		String oneRowOfText = "";
 
 		try (BufferedReader instream = new BufferedReader(new FileReader(pathName))) { 
@@ -75,6 +80,7 @@ public class Highscore {
 			System.out.println("Fel med I/O");
 			e.printStackTrace();
 		}
+		return highScoreList;
 
 }
 	

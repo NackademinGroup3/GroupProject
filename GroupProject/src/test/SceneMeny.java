@@ -33,6 +33,10 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -83,6 +87,9 @@ public class SceneMeny extends Application {
 	final int SCENE_HEIGHT = 500;
 	int i = 0;
 	Label lives = new Label("3");
+	
+	Highscore highscoreRef = new Highscore();
+	List<Highscore> highscoreList;
 
 	public void start(Stage theStage) {
 
@@ -387,6 +394,14 @@ public class SceneMeny extends Application {
 		
 		Button submitButton = new Button("Submit");
 		submitButton.setAlignment(Pos.CENTER);
+		
+		submitButton.setOnAction(e -> {
+			
+			Highscore gamehighscore = new Highscore(playerName.getText(), finalScore);
+			highscoreList.add(gamehighscore);
+			
+		});
+		
 		Text meny = new Text("Back to main meny");
 		meny.setFont(new Font("Arial Black", 40));
 		meny.setFill(Color.WHITE);
@@ -428,16 +443,15 @@ public class SceneMeny extends Application {
 		// text.setMaxWidth(450);
 		// text.setWrapText(true);
 		
-		Highscore highscore = new Highscore("test", 5);
-		highscore.readFile();
-		highscore.sortList();
-		String highscoreList = "";
+		highscoreList = highscoreRef.readFile();
+		// highscoreRef.sortList();
+		String highscoreString = "";
 		for(int i = 0; i <= 9; i++ ){
-			highscoreList += i+1 + "  " + highscore.highScoreList.get(i).toString() + "\n";
+			highscoreString += i+1 + "." + "  " + highscoreList.get(i).toString() + "\n";
 		}
 			
 			
-		TextArea textArea = new TextArea(highscoreList);
+		TextArea textArea = new TextArea(highscoreString);
 
 		Text goBack = new Text("Return to menu");
 
