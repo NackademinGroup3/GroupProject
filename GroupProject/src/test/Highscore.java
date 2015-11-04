@@ -49,7 +49,6 @@ public class Highscore {
 		return hsl;
 		}
 		
-	
 	List<Highscore> readFile(){
 		
 		List<Highscore> highScoreList = new LinkedList<>(Arrays.asList()); // Läs på mer om Arrays.asList
@@ -78,7 +77,6 @@ public class Highscore {
 
 }
 	
-
 	void writeFile(List<Highscore> highScoreList) {
 		try (BufferedWriter outstream = new BufferedWriter(new FileWriter(pathName))){
 			String writeToFile = "";
