@@ -37,7 +37,7 @@ public class Highscore {
 	// Sortera lista med highscore objekt
 	List<Highscore> sortList(List<Highscore> hsl){ 
 
-		//System.out.println("före sortering: " + hsl);
+		System.out.println("före sortering: " + hsl);
 
 		// Alternativ Java 8 kod med lambda:
 		//Collections.sort(highScoreList, Comparator.comparingInt(obj ->
@@ -50,7 +50,7 @@ public class Highscore {
 			}
 		});
 
-		//System.out.println("efter sortering: " + hsl);
+		System.out.println("efter sortering: " + hsl);
 		
 		return hsl;
 		}
@@ -88,23 +88,15 @@ public class Highscore {
 
 	void writeFile(List<Highscore> highScoreList) {
 		try (BufferedWriter outstream = new BufferedWriter(new FileWriter(pathName))){
-		//	outstream.write();
-		//	loopa igenom 10 listan och skriv ut score + name på en ny rad för varje objekt.	
+			String writeToFile = "";
+			for(int i = 0; i <=9; i++){
+				writeToFile += highScoreList.get(i).score + " " + highScoreList.get(i).name + "\n";
+			}
+			outstream.write(writeToFile);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
 		
 	}
-
-		public static void main(String[] args) {
-			
-			// Skapa ett testobjekt bara för att komma åt att testmetoderna
-			Highscore highscore = new Highscore("test", 3);
-			
-			
-			highscore.readFile();
-			highscore.sortList();
-			
-		}
 
 }
