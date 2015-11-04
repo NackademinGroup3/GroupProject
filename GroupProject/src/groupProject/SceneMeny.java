@@ -543,7 +543,7 @@ public class SceneMeny extends Application {
 		obsList.add(new Obstacle());
 		gameRoot.getChildren().add(obsList.get(0));
 		System.out.println(obsList.isEmpty());
-		playerLoop = new Timeline(new KeyFrame(Duration.millis(1000 / 15), new EventHandler<ActionEvent>() {
+		playerLoop = new Timeline(new KeyFrame(Duration.millis(1000 / 150), new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
