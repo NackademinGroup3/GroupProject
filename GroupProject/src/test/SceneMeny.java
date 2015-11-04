@@ -88,7 +88,8 @@ public class SceneMeny extends Application {
 
 		mainStage = theStage;
 		meny = createMenyScene();
-
+		
+		mainStage.setTitle("Jump and stuff");
 		mainStage.setScene(meny);
 		mainStage.show();
 	}
