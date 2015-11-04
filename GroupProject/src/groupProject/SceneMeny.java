@@ -1,4 +1,4 @@
-package test;
+package groupProject;
 
 import javafx.application.Application;
 import javafx.beans.property.IntegerProperty;

@@ -1,4 +1,4 @@
-package test;
+package groupProject;
 
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
