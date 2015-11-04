@@ -538,7 +538,6 @@ public class SceneMeny extends Application {
 			mp.play();
 		}
 	}
-
 	private void startPlayerMovement() {
 		obsList.add(new Obstacle());
 		gameRoot.getChildren().add(obsList.get(0));
@@ -552,6 +551,13 @@ public class SceneMeny extends Application {
 				updatePlayer();
 				updatePlayer();
 				updatePlayer();
+				
+				if (Integer.parseInt(timerLabel.getText()) > 10){		
+					updatePlayer();
+					updatePlayer();
+					updatePlayer();
+				}
+				
 				if (hit == false)
 					checkCollision();
 				if (obsList.get(0).getTranslateX() <= -200) {
