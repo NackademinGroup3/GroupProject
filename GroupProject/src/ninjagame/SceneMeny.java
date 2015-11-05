@@ -51,7 +51,7 @@ public class SceneMeny extends Application {
 
 	private ImageView graphics = new ImageView();
 	private Image hearts[] = { new Image("textures/heart.gif"), new Image("textures/heart2.gif"),
-			new Image("textures/heart3.gif") };
+			new Image("textures/heart3.gif")};
 
 	private Image[] images = { new Image("textures/player_textures/Run__000.png"),
 			new Image("textures/player_textures/Run__001.png"), new Image("textures/player_textures/Run__002.png"),
