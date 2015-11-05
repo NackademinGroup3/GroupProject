@@ -90,9 +90,4 @@ public class Obstacle extends Group{
 	public void setHitbox(Rectangle hitbox) {
 		this.hitbox = hitbox;
 	}
-
-
-	
-	
-
 }
