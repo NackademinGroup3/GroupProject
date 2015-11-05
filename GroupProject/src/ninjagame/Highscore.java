@@ -16,7 +16,7 @@ public class Highscore {
 	private int score;
 	private String name;
 	
-	String pathName = "src/highscore/highscore.txt";
+	static String pathName = "src/highscore/highscore.txt";
 
 	public Highscore(){
 	}
@@ -31,7 +31,7 @@ public class Highscore {
 		return name + " - " + score;
 	}
 
-	List<Highscore> sortList(List<Highscore> hsl){ 
+	static List<Highscore> sortList(List<Highscore> hsl){ 
 
 		// Försök med lambda:
 		// Collections.sort(hsl, Comparator.comparingInt(obj ->
@@ -46,7 +46,7 @@ public class Highscore {
 		return hsl;
 		}
 		
-	List<Highscore> readFile(){
+	static List<Highscore> readFile(){
 		
 		List<Highscore> highscoreList = new LinkedList<>();
 		String oneRowOfText = "";
@@ -74,7 +74,7 @@ public class Highscore {
 
 }
 	
-	void writeFile(List<Highscore> highscoreList) {
+	static void writeFile(List<Highscore> highscoreList) {
 		
 		String writeToFile = "";
 		

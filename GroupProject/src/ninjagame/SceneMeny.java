@@ -81,12 +81,12 @@ public class SceneMeny extends Application {
 	
 	boolean hit = false;
 	int hitTimer = 0;
-	private Highscore highscoreRef = new Highscore();
+	
 	private List<Highscore> highscoreList;
 
 	public void start(Stage theStage) {
 
-		highscoreList = highscoreRef.readFile();
+		highscoreList = Highscore.readFile();
 		mainStage = theStage;
 		meny = createMenyScene();
 		mainStage.getIcons().add(new Image("textures/player_textures/Run__007.png"));
@@ -374,7 +374,7 @@ public class SceneMeny extends Application {
 			Highscore gamehighscore = new Highscore(playerName.getText(), finalScore);
 
 			highscoreList.add(gamehighscore);
-			highscoreList = highscoreRef.sortList(highscoreList);
+			highscoreList = Highscore.sortList(highscoreList);
 			mainStage.setScene(meny);
 
 		});
@@ -415,7 +415,7 @@ public class SceneMeny extends Application {
 
 		Text header = new Text("Highscore");
 
-		highscoreList = highscoreRef.sortList(highscoreList);
+		highscoreList = Highscore.sortList(highscoreList);
 		String highscoreString = "";
 		for (int i = 0; i <= 9; i++) {
 			highscoreString += i + 1 + "." + "  " + highscoreList.get(i).toString() + "\n";
