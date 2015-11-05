@@ -34,14 +34,14 @@ public class Highscore {
 
 	List<Highscore> sortList(List<Highscore> hsl){ 
 
-		// Alternativ Java 8 kod med lambda:
-		//Collections.sort(highScoreList, Comparator.comparingInt(obj ->
-		//obj.score).reversed());
+		// Försök med lambda:
+		// Collections.sort(hsl, Comparator.comparingInt(obj ->
+		// obj.score.reversed());
 		
 		Collections.sort(hsl, new Comparator<Highscore>() {
 		@Override
-		public int compare(Highscore o1, Highscore o2) {
-				return o2.score - o1.score;
+		public int compare(Highscore hsobj1, Highscore hsobj2) {
+				return hsobj2.score - hsobj1.score;
 			}
 		});
 		return hsl;
@@ -49,7 +49,7 @@ public class Highscore {
 		
 	List<Highscore> readFile(){
 		
-		List<Highscore> highscoreList = new LinkedList<>(Arrays.asList()); // Läs på mer om Arrays.asList
+		List<Highscore> highscoreList = new LinkedList<>();
 		String oneRowOfText = "";
 
 		try (BufferedReader instream = new BufferedReader(new FileReader(pathName))) { 
@@ -88,5 +88,13 @@ public class Highscore {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public String getName() {
+		return name;
 	}
 }
