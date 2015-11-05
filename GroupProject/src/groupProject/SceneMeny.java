@@ -78,7 +78,7 @@ public class SceneMeny extends Application {
 	final int SCENE_WIDTH = 990;
 	final int SCENE_HEIGHT = 500;
 	int i = 0;
-	private Label lives = new Label("3");
+	
 	boolean hit = false;
 	int hitTimer = 0;
 	private Highscore highscoreRef = new Highscore();
@@ -238,10 +238,7 @@ public class SceneMeny extends Application {
 		lifeLabel.setEffect(new Glow(10));
 
 		HBox hbox2 = new HBox(5);
-		/*
-		 * lives.setFont(Font.font("Arial Black", 40));
-		 * lives.setTextFill(Color.WHITE); lives.setAlignment(Pos.TOP_RIGHT);
-		 */
+	
 
 		graphics.setImage(hearts[2]);
 
@@ -270,7 +267,7 @@ public class SceneMeny extends Application {
 			backgroundLayer.getChildren().add(b.backgroundImageView2);
 
 			player = new Player(images);
-			lives.setText("" + player.getHitPoints());
+			
 			gameRoot.getChildren().add(player.getGraphics());
 
 			player.getGraphics().setTranslateX(100);
