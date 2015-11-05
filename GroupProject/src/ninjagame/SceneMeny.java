@@ -68,7 +68,7 @@ public class SceneMeny extends Application {
 			new Media(getClass().getResource("/sounds/game_over.mp3").toString()) };
 
 	private Player player;
-	private double counter = 1;
+	private float counter = 1;
 	private Timeline playerLoop;
 	private ArrayList<Obstacle> obsList = new ArrayList<>();
 	private Obstacle obs;
@@ -606,7 +606,6 @@ public class SceneMeny extends Application {
 						playMedia(soundEffects[3]);
 						hitTimer = 1;
 						player.setHitPoints(player.getHitPoints() - 1);
-						// lives.setText(String.valueOf(player.getHitPoints()));
 
 						if (player.getHitPoints() == 2) {
 							graphics.setImage(hearts[1]);
@@ -615,10 +614,10 @@ public class SceneMeny extends Application {
 						}
 						player.setDead(true);
 					}
-					// createGameOverScreen();
 				}
 			}
 		});
+		
 		hitTimer = 0;
 		if (player.getHitPoints() == 0) {
 
@@ -629,9 +628,6 @@ public class SceneMeny extends Application {
 			gameRoot.getChildren().removeAll(gameRoot.getChildren());
 			gameOver = createGameOverScene();
 			mainStage.setScene(gameOver);
-			// obsList.removeAll(obsList);
-			// obsList.add(obs);
-			// gameRoot.getChildren().removeAll(obsList);
 
 		}
 
