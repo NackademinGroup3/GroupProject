@@ -6,7 +6,6 @@ import org.junit.Test;
 
 public class HighscoreTest {
 	
-	Highscore highscore = new Highscore();
 
 	/*
 	@Test // Annotation som visar att detta är ett JUnit test.
@@ -25,10 +24,9 @@ public class HighscoreTest {
 	}
 	*/
 
-	@Test(timeout=100) // Annotation som visar att det är ett JUnit test.	
+	@Test(timeout=10) // Annotation som visar att det är ett JUnit test.	
 	public void readFileShouldBeFast(){
 		
-		//Highscore highscore = new Highscore();
 		Highscore.readFile();
 	}
 }

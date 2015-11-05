@@ -60,6 +60,7 @@ public class SceneMeny extends Application {
 			new Image("textures/player_textures/Run__007.png"), new Image("textures/player_textures/Run__008.png"),
 			new Image("textures/player_textures/Run__009.png"), new Image("textures/player_textures/Jump__002.png"),
 			new Image("textures/player_textures/Slide__001.png"), new Image("textures/player_textures/Dead__000.png") };
+	
 	private Media[] soundEffects = { new Media(getClass().getResource("/sounds/Click.mp3").toString()),
 			new Media(getClass().getResource("/sounds/button.mp3").toString()),
 			new Media(getClass().getResource("/sounds/jump.wav").toString()),
