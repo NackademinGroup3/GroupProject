@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -224,6 +225,7 @@ public class SceneMeny extends Application {
 	}
 
 	private Scene createGameScene() {
+		
 		Background b = new Background();
 		Pane backgroundLayer;
 
@@ -253,7 +255,6 @@ public class SceneMeny extends Application {
 		
 		graphics.setImage(hearts[2]);
 		
-		
 		VBox vbox = new VBox();
 		hbox2.getChildren().addAll(lifeLabel, graphics);
 
@@ -270,6 +271,7 @@ public class SceneMeny extends Application {
 			gameRoot.getChildren().add(backgroundLayer);
 
 			scene = new Scene(gameRoot, SCENE_WIDTH, SCENE_HEIGHT);
+			scene.setCursor(Cursor.NONE);
 
 			b.loadBackGround();
 			b.startBackGroundLoop();
