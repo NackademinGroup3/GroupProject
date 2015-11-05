@@ -8,7 +8,7 @@ public class HighscoreTest {
 	
 	Highscore highscore = new Highscore();
 
-	
+	/*
 	@Test // Annotation som visar att detta är ett JUnit test.
 	public void testSortList() {
 		fail("Not yet implemented");
@@ -23,7 +23,7 @@ public class HighscoreTest {
 	public void testWriteFile() {
 		fail("Not yet implemented");
 	}
-	
+	*/
 
 	@Test(timeout=100) // Annotation som visar att det är ett JUnit test.	
 	public void readFileShouldBeFast(){
