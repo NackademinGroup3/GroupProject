@@ -12,7 +12,7 @@ public class Obstacle extends Group{
 	private Rectangle hitbox;
 	private Image image;
 	private Random rand = new Random();
-	private int randomizedObject = rand.nextInt(12) + 1;
+	private int randomizedObject = rand.nextInt(20) + 1;
 
 	Obstacle() {
 		this.randomObstacles();
@@ -25,56 +25,88 @@ public class Obstacle extends Group{
 	private void randomObstacles() {
 		switch (randomizedObject) {
 		case 1:
-			this.image = new Image("textures/block1.jpg");
-			this.setTranslateY(350);
+			this.image = new Image("textures/block1.1.jpg");
+			this.setTranslateY(335);
 			break;
 		case 2:
-			this.image = new Image("textures/block4L.jpg");
-			this.setTranslateY(250);
+			this.image = new Image("textures/block2.2.jpg");
+			this.setTranslateY(335);
 			break;
 		case 3:
-			this.image = new Image("textures/block2L.jpg");
-			this.setTranslateY(295);
+			this.image = new Image("textures/block1.7.jpg");
+			this.setTranslateY(155);
 			break;
 		case 4:
-			this.image = new Image("textures/block3L.jpg");
-			this.setTranslateY(170);
-			break;
-		case 5:
-			this.image = new Image("textures/block1.jpg");
-			this.setTranslateY(345);
-			break;
-		case 6:
-			this.image = new Image("textures/block4L.jpg");
-			this.setTranslateY(245);
-			break;
-		case 7:
-			this.image = new Image("textures/block2L.jpg");
-			this.setTranslateY(290);
-			break;
-		case 8:
-			this.image = new Image("textures/block3L.jpg");
-			this.setTranslateY(165);
-			break;
-		case 9:
-			this.image = new Image("textures/block1.jpg");
+			this.image = new Image("textures/block1.2.png");
 			this.setTranslateY(340);
 			break;
+		case 5:
+			this.image = new Image("textures/block1.3.png");
+			this.setTranslateY(340);
+			break;
+		case 6:
+			this.image = new Image("textures/block1.4.png");
+			this.setTranslateY(340);
+			break;
+		case 7:
+			this.image = new Image("textures/block2.0.png");
+			this.setTranslateY(155);
+			break;
+		case 8:
+			this.image = new Image("textures/block1.9.png");
+			this.setTranslateY(155);
+			break;
+		case 9:
+			this.image = new Image("textures/block1.6.jpg");
+			this.setTranslateY(280);
+			break;
 		case 10:
-			this.image = new Image("textures/block4L.jpg");
-			this.setTranslateY(240);
+			this.image = new Image("textures/block1.8.png");
+			this.setTranslateY(155);
 			break;
 		case 11:
-			this.image = new Image("textures/block2L.jpg");
-			this.setTranslateY(285);
+			this.image = new Image("textures/block2.1.png");
+			this.setTranslateY(155);
 			break;
 		case 12:
-			this.image = new Image("textures/block3L.jpg");
-			this.setTranslateY(160);
+			this.image = new Image("textures/block2.3.png");
+			this.setTranslateY(295);
+			break;
+		case 13:
+			this.image = new Image("textures/block1.5.png");
+			this.setTranslateY(340);
+			break;
+		case 14:
+			this.image = new Image("textures/block2.4.png");
+			this.setTranslateY(340);
+			break;
+		case 15:
+			this.image = new Image("textures/block2.4.png");
+			this.setTranslateY(270);
+			break;
+		case 16:
+			this.image = new Image("textures/block2.5.png");
+			this.setTranslateY(200);
+			break;
+		case 17:
+			this.image = new Image("textures/block2.7.png");
+			this.setTranslateY(270);
+			break;
+		case 18:
+			this.image = new Image("textures/block2.8.png");
+			this.setTranslateY(200);
+			break;
+		case 19:
+			this.image = new Image("textures/block2.9.png");
+			this.setTranslateY(295);
+			break;
+		case 20:
+			this.image = new Image("textures/block3.0.png");
+			this.setTranslateY(335);
 			break;
 		default:
-			this.image = new Image("textures/block1.jpg");
-			this.setTranslateY(315);
+			this.image = new Image("textures/block3.0.png");
+			this.setTranslateY(335);
 			break;
 		}
 	}
