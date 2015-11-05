@@ -5,7 +5,7 @@
  * JAVA15
  */
 
-package test;
+package groupProject;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.ImageView;

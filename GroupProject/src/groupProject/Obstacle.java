@@ -1,4 +1,4 @@
-package test;
+package groupProject;
 
 import java.util.Random;
 
@@ -12,7 +12,7 @@ public class Obstacle extends Group{
 	private Rectangle hitbox;
 	private Image image;
 	private Random rand = new Random();
-	private int randomizedObject = rand.nextInt(4) + 1;
+	private int randomizedObject = rand.nextInt(12) + 1;
 
 	Obstacle() {
 		this.randomObstacles();
@@ -40,6 +40,38 @@ public class Obstacle extends Group{
 			this.image = new Image("textures/block3L.jpg");
 			this.setTranslateY(170);
 			break;
+		case 5:
+			this.image = new Image("textures/block1.jpg");
+			this.setTranslateY(345);
+			break;
+		case 6:
+			this.image = new Image("textures/block4L.jpg");
+			this.setTranslateY(245);
+			break;
+		case 7:
+			this.image = new Image("textures/block2L.jpg");
+			this.setTranslateY(290);
+			break;
+		case 8:
+			this.image = new Image("textures/block3L.jpg");
+			this.setTranslateY(165);
+			break;
+		case 9:
+			this.image = new Image("textures/block1.jpg");
+			this.setTranslateY(340);
+			break;
+		case 10:
+			this.image = new Image("textures/block4L.jpg");
+			this.setTranslateY(240);
+			break;
+		case 11:
+			this.image = new Image("textures/block2L.jpg");
+			this.setTranslateY(285);
+			break;
+		case 12:
+			this.image = new Image("textures/block3L.jpg");
+			this.setTranslateY(160);
+			break;
 		default:
 			this.image = new Image("textures/block1.jpg");
 			this.setTranslateY(315);
@@ -49,12 +81,6 @@ public class Obstacle extends Group{
 	public ImageView getGraphics() {
 		return graphics;
 	}
-
-
-	public void setGraphics(ImageView graphics) {
-		this.graphics = graphics;
-	}
-
 
 	public Rectangle getHitbox() {
 		return hitbox;
@@ -66,14 +92,7 @@ public class Obstacle extends Group{
 	}
 
 
-	public Image getImage() {
-		return image;
-	}
-
-
-	public void setImage(Image image) {
-		this.image = image;
-	}
+	
 	
 
 }

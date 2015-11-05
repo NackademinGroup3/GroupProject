@@ -1,4 +1,4 @@
-package test;
+package groupProject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -44,13 +44,12 @@ public class Highscore {
 				return o2.score - o1.score;
 			}
 		});
-
 		return hsl;
 		}
 		
 	List<Highscore> readFile(){
 		
-		List<Highscore> highScoreList = new LinkedList<>(Arrays.asList()); // Läs på mer om Arrays.asList
+		List<Highscore> highscoreList = new LinkedList<>(Arrays.asList()); // Läs på mer om Arrays.asList
 		String oneRowOfText = "";
 
 		try (BufferedReader instream = new BufferedReader(new FileReader(pathName))) { 
@@ -61,7 +60,7 @@ public class Highscore {
 				String[] rowArray = oneRowOfText.split(" ");
 				int rowScore = Integer.parseInt(rowArray[0]);
 				String rowName = rowArray[1];
-				highScoreList.add(new Highscore(rowName, rowScore));
+				highscoreList.add(new Highscore(rowName, rowScore));
 				counter ++;
 			}
 			
@@ -72,21 +71,22 @@ public class Highscore {
 			System.out.println("Fel med I/O");
 			e.printStackTrace();
 		}
-		return highScoreList;
+		return highscoreList;
 
 }
 	
-	void writeFile(List<Highscore> highScoreList) {
+	void writeFile(List<Highscore> highscoreList) {
+		
+		String writeToFile = "";
+		
 		try (BufferedWriter outstream = new BufferedWriter(new FileWriter(pathName))){
-			String writeToFile = "";
 			for(int i = 0; i <=9; i++){
-				writeToFile += highScoreList.get(i).score + " " + highScoreList.get(i).name + "\n";
+				writeToFile += highscoreList.get(i).score + " " + highscoreList.get(i).name + "\n";
 			}
 			outstream.write(writeToFile);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		
 	}
-
 }

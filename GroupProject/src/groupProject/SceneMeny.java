@@ -1,4 +1,4 @@
-package test;
+package groupProject;
 
 import javafx.application.Application;
 import javafx.beans.property.IntegerProperty;
@@ -40,54 +40,55 @@ import javafx.util.Duration;
 
 public class SceneMeny extends Application {
 
-	Scene meny;
-	Scene game;
-	Scene gameOver;
-	Scene howToPlay;
-	Scene highscore;
-	Stage mainStage;
-	Group gameRoot;
+	private Scene meny;
+	private Scene game;
+	private Scene gameOver;
+	private Scene howToPlay;
+	private Scene highscore;
+	private Stage mainStage;
+	private Group gameRoot;
 	
-	ImageView graphics = new ImageView();
-	Image hearts[] = {new Image("textures/heart.gif"),new Image("textures/heart2.gif"),new Image("textures/heart3.gif")};
+	private ImageView graphics = new ImageView();
+	private Image hearts[] = {new Image("textures/heart.gif"),new Image("textures/heart2.gif"),new Image("textures/heart3.gif")};
 	
-	Image[] images = { new Image("textures/player_textures/Run__000.png"), new Image("textures/player_textures/Run__001.png"),
+	private Image[] images = { new Image("textures/player_textures/Run__000.png"), new Image("textures/player_textures/Run__001.png"),
 			new Image("textures/player_textures/Run__002.png"), new Image("textures/player_textures/Run__003.png"),
 			new Image("textures/player_textures/Run__004.png"),new Image("textures/player_textures/Run__005.png"),
 			new Image("textures/player_textures/Run__006.png"),new Image("textures/player_textures/Run__007.png"),
 			new Image("textures/player_textures/Run__008.png"),new Image("textures/player_textures/Run__009.png"),
 			new Image("textures/player_textures/Jump__002.png"),new Image("textures/player_textures/Slide__001.png"), 
 					new Image("textures/player_textures/Dead__000.png")};
-	Media[] soundEffects = { new Media(getClass().getResource("/sounds/Click.mp3").toString()),
+	private Media[] soundEffects = { new Media(getClass().getResource("/sounds/Click.mp3").toString()),
 			new Media(getClass().getResource("/sounds/button.mp3").toString()),
 			new Media(getClass().getResource("/sounds/jump.wav").toString()),
 			new Media(getClass().getResource("/sounds/Punch.mp3").toString()),
 			new Media(getClass().getResource("/sounds/game_over.mp3").toString())
 	};
 	
-	Player player;
+	private Player player;
 	private double counter = 1;
-	Timeline playerLoop;
-	ArrayList<Obstacle> obsList = new ArrayList<>();
-	Obstacle obs;
-	Timeline timeline;
-	Duration time = Duration.ZERO;
-	Text timerLabel = new Text();
-	IntegerProperty timeSeconds = new SimpleIntegerProperty();
+	private Timeline playerLoop;
+	private ArrayList<Obstacle> obsList = new ArrayList<>();
+	private Obstacle obs;
+	private Timeline timeline;
+	private Duration time = Duration.ZERO;
+	private Text timerLabel = new Text();
+	private IntegerProperty timeSeconds = new SimpleIntegerProperty();
 	final int SCENE_WIDTH = 990;
 	final int SCENE_HEIGHT = 500;
 	int i = 0;
-	Label lives = new Label("3");
-	
-	Highscore highscoreRef = new Highscore();
-	List<Highscore> highscoreList;
+	private Label lives = new Label("3");
+	boolean hit = false;
+	int hitTimer = 0;
+	private Highscore highscoreRef = new Highscore();
+	private List<Highscore> highscoreList;
 
 	public void start(Stage theStage) {
 
 		highscoreList = highscoreRef.readFile();
 		mainStage = theStage;
 		meny = createMenyScene();
-		
+		mainStage.getIcons().add(new Image("textures/player_textures/Run__007.png"));
 		mainStage.setTitle("Jump and stuff");
 		mainStage.setScene(meny);
 		mainStage.show();
@@ -107,8 +108,6 @@ public class SceneMeny extends Application {
 		    pane.setPadding(new Insets(0, 10, 0, 10));
 		b.loadBackGround();
 		b.startBackGroundLoop();
-
-		// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 		Text rules = new Text("How to play");
         
@@ -142,9 +141,6 @@ public class SceneMeny extends Application {
 		text.setTextFill(Color.WHITE);
 		
 
-		
-
-		//vbox.setAlignment(Pos.CENTER);
 
 		rules.setFont(font);
 		rules.setFill(Color.GREEN);
@@ -176,7 +172,7 @@ public class SceneMeny extends Application {
 
 		b.loadBackGround();
 		b.startBackGroundLoop();
-		// playSoundEffect(3);
+		
 
 		Font font = new Font("Arial Black", 40);
 
@@ -431,8 +427,6 @@ public class SceneMeny extends Application {
 		b.loadBackGround();
 		b.startBackGroundLoop();
 
-		// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-
 		Text header = new Text("Highscore");
 
 		highscoreList = highscoreRef.sortList(highscoreList);
@@ -544,8 +538,7 @@ public class SceneMeny extends Application {
 			mp.play();
 		}
 	}
-
-	public void startPlayerMovement() {
+	private void startPlayerMovement() {
 		obsList.add(new Obstacle());
 		gameRoot.getChildren().add(obsList.get(0));
 		System.out.println(obsList.isEmpty());
@@ -556,6 +549,15 @@ public class SceneMeny extends Application {
 				// if (obsList.isEmpty())
 				player.setDead(false);
 				updatePlayer();
+				updatePlayer();
+				updatePlayer();
+				
+				if (Integer.parseInt(timerLabel.getText()) > 10){		
+					updatePlayer();
+					updatePlayer();
+					updatePlayer();
+				}
+				
 				if (hit == false)
 					checkCollision();
 				if (obsList.get(0).getTranslateX() <= -200) {
@@ -579,7 +581,7 @@ public class SceneMeny extends Application {
 		playerLoop.setCycleCount(-1);
 	}
 
-	public void startScoreCounter() {
+	private  void startScoreCounter() {
 		timeline = new Timeline(new KeyFrame(Duration.millis(100), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent t) {
@@ -604,10 +606,7 @@ public class SceneMeny extends Application {
 		counter++;
 	}
 
-	// flytta instansvariabler
-	boolean hit = false;
-	int hitTimer = 0;
-
+	
 	private void checkCollision() {
 
 		player.getGraphics().boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
