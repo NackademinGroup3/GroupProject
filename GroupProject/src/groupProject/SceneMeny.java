@@ -48,24 +48,24 @@ public class SceneMeny extends Application {
 	private Scene highscore;
 	private Stage mainStage;
 	private Group gameRoot;
-	
+
 	private ImageView graphics = new ImageView();
-	private Image hearts[] = {new Image("textures/heart.gif"),new Image("textures/heart2.gif"),new Image("textures/heart3.gif")};
-	
-	private Image[] images = { new Image("textures/player_textures/Run__000.png"), new Image("textures/player_textures/Run__001.png"),
-			new Image("textures/player_textures/Run__002.png"), new Image("textures/player_textures/Run__003.png"),
-			new Image("textures/player_textures/Run__004.png"),new Image("textures/player_textures/Run__005.png"),
-			new Image("textures/player_textures/Run__006.png"),new Image("textures/player_textures/Run__007.png"),
-			new Image("textures/player_textures/Run__008.png"),new Image("textures/player_textures/Run__009.png"),
-			new Image("textures/player_textures/Jump__002.png"),new Image("textures/player_textures/Slide__001.png"), 
-					new Image("textures/player_textures/Dead__000.png")};
+	private Image hearts[] = { new Image("textures/heart.gif"), new Image("textures/heart2.gif"),
+			new Image("textures/heart3.gif") };
+
+	private Image[] images = { new Image("textures/player_textures/Run__000.png"),
+			new Image("textures/player_textures/Run__001.png"), new Image("textures/player_textures/Run__002.png"),
+			new Image("textures/player_textures/Run__003.png"), new Image("textures/player_textures/Run__004.png"),
+			new Image("textures/player_textures/Run__005.png"), new Image("textures/player_textures/Run__006.png"),
+			new Image("textures/player_textures/Run__007.png"), new Image("textures/player_textures/Run__008.png"),
+			new Image("textures/player_textures/Run__009.png"), new Image("textures/player_textures/Jump__002.png"),
+			new Image("textures/player_textures/Slide__001.png"), new Image("textures/player_textures/Dead__000.png") };
 	private Media[] soundEffects = { new Media(getClass().getResource("/sounds/Click.mp3").toString()),
 			new Media(getClass().getResource("/sounds/button.mp3").toString()),
 			new Media(getClass().getResource("/sounds/jump.wav").toString()),
 			new Media(getClass().getResource("/sounds/Punch.mp3").toString()),
-			new Media(getClass().getResource("/sounds/game_over.mp3").toString())
-	};
-	
+			new Media(getClass().getResource("/sounds/game_over.mp3").toString()) };
+
 	private Player player;
 	private double counter = 1;
 	private Timeline playerLoop;
@@ -93,8 +93,7 @@ public class SceneMeny extends Application {
 		mainStage.setTitle("Jump and stuff");
 		mainStage.setScene(meny);
 		mainStage.show();
-		
-		
+
 	}
 
 	private Scene createHowToPlayScene() {
@@ -104,44 +103,35 @@ public class SceneMeny extends Application {
 		Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
 
 		GridPane pane = new GridPane();
-		 pane.setHgap(10);
-		    pane.setVgap(10);
-		    pane.setPadding(new Insets(0, 10, 0, 10));
+		pane.setHgap(10);
+		pane.setVgap(10);
+		pane.setPadding(new Insets(0, 10, 0, 10));
 		b.loadBackGround();
 		b.startBackGroundLoop();
 
 		Text rules = new Text("How to play");
-        
-		Label text = new Label(
-				"     You will encounter \n"
-			
-				+ "     obstacles that you \n "
-				+ "     have to evade.\n\n"
-			
-				+ "     CONTROLS \n\n" 
-				+ "     Jump: UP-Arrow\n"
-				+ "     Slide: DOWN-Arrow\n\n"
-				+ "     Try to survive as\n"
+
+		Label text = new Label("     You will encounter \n"
+
+		+ "     obstacles that you \n " + "     have to evade.\n\n"
+
+		+ "     CONTROLS \n\n" + "     Jump: UP-Arrow\n" + "     Slide: DOWN-Arrow\n\n" + "     Try to survive as\n"
 				+ "     long as you can!");
 		text.setMaxWidth(500);
 		text.setWrapText(true);
 		text.setTextAlignment(TextAlignment.CENTER);
-		
 
 		Text goBack = new Text("Return to menu");
 
 		Font font = new Font("Arial Black", 40);
 		Font font2 = new Font("Arial Black", 20);
 		Font font3 = new Font("Arial Black", 35);
-		
 
 		hoverOver(goBack);
 		menyChoice(goBack);
 
 		text.setFont(font2);
 		text.setTextFill(Color.WHITE);
-		
-
 
 		rules.setFont(font);
 		rules.setFill(Color.GREEN);
@@ -154,7 +144,7 @@ public class SceneMeny extends Application {
 		pane.setAlignment(Pos.CENTER);
 		root.getChildren().addAll(b.backgroundImageView, b.backgroundImageView2, pane);
 		pane.add(rules, 33, 0);
-		pane.add(text,33,1);
+		pane.add(text, 33, 1);
 		pane.add(goBack, 33, 2);
 
 		return scene;
@@ -165,20 +155,19 @@ public class SceneMeny extends Application {
 		Background b = new Background();
 		Group root = new Group();
 		Scene theScene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
-		
+
 		GridPane pane = new GridPane();
-		 pane.setHgap(10);
-		    pane.setVgap(10);
-		    pane.setPadding(new Insets(0, 10, 0, 10));
+		pane.setHgap(10);
+		pane.setVgap(10);
+		pane.setPadding(new Insets(0, 10, 0, 10));
 
 		b.loadBackGround();
 		b.startBackGroundLoop();
-		
 
 		Font font = new Font("Arial Black", 40);
 
 		Text title = new Text("Jump and stuff");
-        
+
 		title.setFont(Font.font("Arial Black", 60));
 		title.setFill(Color.GREEN);
 		title.setStroke(Color.BLACK);
@@ -215,8 +204,8 @@ public class SceneMeny extends Application {
 
 		meny.setAlignment(Pos.CENTER);
 		meny.getChildren().addAll(newGame, rules, scores, exit);
-		pane.add(title, 25,5);
-		pane.add(meny,25, 6);
+		pane.add(title, 25, 5);
+		pane.add(meny, 25, 6);
 
 		root.getChildren().addAll(b.backgroundImageView, b.backgroundImageView2, pane);
 
@@ -225,7 +214,7 @@ public class SceneMeny extends Application {
 	}
 
 	private Scene createGameScene() {
-		
+
 		Background b = new Background();
 		Pane backgroundLayer;
 
@@ -241,26 +230,27 @@ public class SceneMeny extends Application {
 		score.setFill(Color.RED);
 		score.setStroke(Color.BLACK);
 		score.setEffect(new Glow(10));
-		
+
 		Text lifeLabel = new Text("Lives : ");
 		lifeLabel.setFont(Font.font("Arial Black", 40));
 		lifeLabel.setFill(Color.RED);
 		lifeLabel.setStroke(Color.BLACK);
 		lifeLabel.setEffect(new Glow(10));
-		
+
 		HBox hbox2 = new HBox(5);
-		/*lives.setFont(Font.font("Arial Black", 40));
-		lives.setTextFill(Color.WHITE);
-		lives.setAlignment(Pos.TOP_RIGHT);*/
-		
+		/*
+		 * lives.setFont(Font.font("Arial Black", 40));
+		 * lives.setTextFill(Color.WHITE); lives.setAlignment(Pos.TOP_RIGHT);
+		 */
+
 		graphics.setImage(hearts[2]);
-		
+
 		VBox vbox = new VBox();
 		hbox2.getChildren().addAll(lifeLabel, graphics);
 
 		hbox.getChildren().addAll(score, timerLabel);
-		
-		vbox.getChildren().addAll(hbox,hbox2);
+
+		vbox.getChildren().addAll(hbox, hbox2);
 
 		gameRoot = new Group();
 		Scene scene;
@@ -280,7 +270,7 @@ public class SceneMeny extends Application {
 			backgroundLayer.getChildren().add(b.backgroundImageView2);
 
 			player = new Player(images);
-			lives.setText(""+player.getHitPoints());
+			lives.setText("" + player.getHitPoints());
 			gameRoot.getChildren().add(player.getGraphics());
 
 			player.getGraphics().setTranslateX(100);
@@ -353,8 +343,8 @@ public class SceneMeny extends Application {
 
 		GridPane pane = new GridPane();
 		pane.setHgap(10);
-	    pane.setVgap(10);
-	    pane.setPadding(new Insets(0, 5, 0, 5));
+		pane.setVgap(10);
+		pane.setPadding(new Insets(0, 5, 0, 5));
 		b.loadBackGround();
 		b.startBackGroundLoop();
 
@@ -372,40 +362,37 @@ public class SceneMeny extends Application {
 		enterName.setFont(new Font("Arial Black", 20));
 		enterName.setFill(Color.RED);
 		enterName.setStroke(Color.BLACK);
-		
-		
+
 		score.setFont(new Font("Arial Black", 40));
 		score.setFill(Color.RED);
 		score.setStroke(Color.BLACK);
 		TextField playerName = new TextField();
 		playerName.setPrefColumnCount(10);
-		
+
 		Button submitButton = new Button("Submit");
 		submitButton.setAlignment(Pos.CENTER);
-		
+
 		submitButton.setOnAction(e -> {
-			
+
 			Highscore gamehighscore = new Highscore(playerName.getText(), finalScore);
-			
+
 			highscoreList.add(gamehighscore);
 			highscoreList = highscoreRef.sortList(highscoreList);
 			mainStage.setScene(meny);
-			
+
 		});
-		
+
 		Text meny = new Text("Back to main meny");
 		meny.setFont(new Font("Arial Black", 40));
 		meny.setFill(Color.WHITE);
 		meny.setStroke(Color.BLACK);
 		hoverOver(meny);
 		menyChoice(meny);
-		scoreItems.getChildren().addAll(score,nameEntry,meny);
-		nameEntry.getChildren().addAll(enterName,playerName,submitButton);
+		scoreItems.getChildren().addAll(score, nameEntry, meny);
+		nameEntry.getChildren().addAll(enterName, playerName, submitButton);
 		scoreItems.setAlignment(Pos.CENTER);
-		pane.add(gameOver,15,1);
-		pane.add(scoreItems,15,2);
-		
-
+		pane.add(gameOver, 15, 1);
+		pane.add(scoreItems, 15, 2);
 
 		root.getChildren().add(b.backgroundImageView);
 		root.getChildren().add(b.backgroundImageView2);
@@ -414,7 +401,7 @@ public class SceneMeny extends Application {
 		return gameOverScene;
 
 	}
-	
+
 	private Scene createHighscoreScene() {
 
 		Background b = new Background();
@@ -450,7 +437,7 @@ public class SceneMeny extends Application {
 
 		textArea.setFont(font2);
 		textArea.setEditable(false);
-		textArea.setPrefSize(180,300);
+		textArea.setPrefSize(180, 300);
 
 		header.setFont(font);
 		header.setFill(Color.GREEN);
@@ -496,23 +483,23 @@ public class SceneMeny extends Application {
 				mainStage.setScene(game);
 				startScoreCounter();
 				break;
-				
+
 			case "How to play":
 				playMedia(soundEffects[1]);
 				howToPlay = createHowToPlayScene();
 				mainStage.setScene(howToPlay);
 				break;
-				
+
 			case "High score":
 				highscore = createHighscoreScene();
 				mainStage.setScene(highscore);
 				playMedia(soundEffects[1]);
 				System.out.println("high score");
 				break;
-				
+
 			case "Exit Game":
 				playMedia(soundEffects[1]);
-				//highscoreRef.writeFile(highscoreList);
+				// highscoreRef.writeFile(highscoreList);
 				System.exit(0);
 				break;
 
@@ -533,13 +520,14 @@ public class SceneMeny extends Application {
 		});
 
 	}
-	
+
 	private void playMedia(Media m) {
 		if (m != null) {
 			MediaPlayer mp = new MediaPlayer(m);
 			mp.play();
 		}
 	}
+
 	private void startPlayerMovement() {
 		obsList.add(new Obstacle());
 		gameRoot.getChildren().add(obsList.get(0));
@@ -553,13 +541,13 @@ public class SceneMeny extends Application {
 				updatePlayer();
 				updatePlayer();
 				updatePlayer();
-				
-				if (Integer.parseInt(timerLabel.getText()) > 10){		
+
+				if (Integer.parseInt(timerLabel.getText()) > 10) {
 					updatePlayer();
 					updatePlayer();
 					updatePlayer();
 				}
-				
+
 				if (hit == false)
 					checkCollision();
 				if (obsList.get(0).getTranslateX() <= -200) {
@@ -583,7 +571,7 @@ public class SceneMeny extends Application {
 		playerLoop.setCycleCount(-1);
 	}
 
-	private  void startScoreCounter() {
+	private void startScoreCounter() {
 		timeline = new Timeline(new KeyFrame(Duration.millis(100), new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent t) {
@@ -608,7 +596,6 @@ public class SceneMeny extends Application {
 		counter++;
 	}
 
-	
 	private void checkCollision() {
 
 		player.getGraphics().boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
@@ -621,11 +608,11 @@ public class SceneMeny extends Application {
 						playMedia(soundEffects[3]);
 						hitTimer = 1;
 						player.setHitPoints(player.getHitPoints() - 1);
-						//lives.setText(String.valueOf(player.getHitPoints()));
-						
+						// lives.setText(String.valueOf(player.getHitPoints()));
+
 						if (player.getHitPoints() == 2) {
 							graphics.setImage(hearts[1]);
-						}else if (player.getHitPoints() == 1) {
+						} else if (player.getHitPoints() == 1) {
 							graphics.setImage(hearts[0]);
 						}
 						player.setDead(true);
@@ -636,7 +623,7 @@ public class SceneMeny extends Application {
 		});
 		hitTimer = 0;
 		if (player.getHitPoints() == 0) {
-			
+
 			playMedia(soundEffects[4]);
 			playerLoop.stop();
 			timeline.stop();
