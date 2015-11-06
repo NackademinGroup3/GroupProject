@@ -565,10 +565,10 @@ public class SceneMeny extends Application {
 					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
 					
 					if (time.toSeconds() > 10){
-						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
-						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
-						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
-						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
+						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 5);
+						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 5);
+						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 5);
+						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 5);
 					}
 				}
 				hit = false;
