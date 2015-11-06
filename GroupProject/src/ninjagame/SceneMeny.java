@@ -529,7 +529,6 @@ public class SceneMeny extends Application {
 	private void startPlayerMovement() {
 		obsList.add(new Obstacle());
 		gameRoot.getChildren().add(obsList.get(0));
-		System.out.println(obsList.isEmpty());
 		playerLoop = new Timeline(new KeyFrame(Duration.millis(1000 / 15), new EventHandler<ActionEvent>() {
 
 			@Override
@@ -560,7 +559,17 @@ public class SceneMeny extends Application {
 					gameRoot.getChildren().add(obst);
 				}
 				for (int i = 0; i < obsList.size(); i++) {
-					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 50);
+					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
+					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
+					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
+					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
+					
+					if (time.toSeconds() > 10){
+						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
+						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
+						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
+						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
+					}
 				}
 				hit = false;
 
