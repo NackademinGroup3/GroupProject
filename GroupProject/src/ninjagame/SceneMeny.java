@@ -51,7 +51,7 @@ public class SceneMeny extends Application {
 
 	private ImageView graphics = new ImageView();
 	private Image hearts[] = { new Image("textures/heart.gif"), new Image("textures/heart2.gif"),
-			new Image("textures/heart3.gif")};
+			new Image("textures/heart3.gif") };
 
 	private Image[] images = { new Image("textures/player_textures/Run__000.png"),
 			new Image("textures/player_textures/Run__001.png"), new Image("textures/player_textures/Run__002.png"),
@@ -60,7 +60,7 @@ public class SceneMeny extends Application {
 			new Image("textures/player_textures/Run__007.png"), new Image("textures/player_textures/Run__008.png"),
 			new Image("textures/player_textures/Run__009.png"), new Image("textures/player_textures/Jump__002.png"),
 			new Image("textures/player_textures/Slide__001.png"), new Image("textures/player_textures/Dead__000.png") };
-	
+
 	private Media[] soundEffects = { new Media(getClass().getResource("/sounds/Click.mp3").toString()),
 			new Media(getClass().getResource("/sounds/button.mp3").toString()),
 			new Media(getClass().getResource("/sounds/jump.wav").toString()),
@@ -79,10 +79,10 @@ public class SceneMeny extends Application {
 	final int SCENE_WIDTH = 990;
 	final int SCENE_HEIGHT = 500;
 	int i = 0;
-	
+
 	boolean hit = false;
 	int hitTimer = 0;
-	
+
 	private List<Highscore> highscoreList;
 
 	public void start(Stage theStage) {
@@ -239,7 +239,6 @@ public class SceneMeny extends Application {
 		lifeLabel.setEffect(new Glow(10));
 
 		HBox hbox2 = new HBox(5);
-	
 
 		graphics.setImage(hearts[2]);
 
@@ -268,7 +267,7 @@ public class SceneMeny extends Application {
 			backgroundLayer.getChildren().add(b.backgroundImageView2);
 
 			player = new Player(images);
-			
+
 			gameRoot.getChildren().add(player.getGraphics());
 
 			player.getGraphics().setTranslateX(100);
@@ -536,12 +535,9 @@ public class SceneMeny extends Application {
 				// if (obsList.isEmpty())
 				player.setDead(false);
 				updatePlayer();
-				updatePlayer();
-				updatePlayer();
-
+			
 				if (Integer.parseInt(timerLabel.getText()) > 10) {
 					updatePlayer();
-					
 				}
 
 				if (hit == false)
@@ -559,13 +555,10 @@ public class SceneMeny extends Application {
 				}
 				for (int i = 0; i < obsList.size(); i++) {
 					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
-					
-					
-					
-					if (time.toSeconds() > 10){
+
+					if (time.toSeconds() > 10) {
 						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 5);
-						
-						
+
 					}
 				}
 				hit = false;
@@ -623,7 +616,7 @@ public class SceneMeny extends Application {
 				}
 			}
 		});
-		
+
 		hitTimer = 0;
 		if (player.getHitPoints() == 0) {
 
