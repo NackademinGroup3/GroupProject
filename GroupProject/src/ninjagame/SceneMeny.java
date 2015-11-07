@@ -529,7 +529,7 @@ public class SceneMeny extends Application {
 	private void startPlayerMovement() {
 		obsList.add(new Obstacle());
 		gameRoot.getChildren().add(obsList.get(0));
-		playerLoop = new Timeline(new KeyFrame(Duration.millis(1000 / 15), new EventHandler<ActionEvent>() {
+		playerLoop = new Timeline(new KeyFrame(Duration.millis(1000 / 60), new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
@@ -541,8 +541,7 @@ public class SceneMeny extends Application {
 
 				if (Integer.parseInt(timerLabel.getText()) > 10) {
 					updatePlayer();
-					updatePlayer();
-					updatePlayer();
+					
 				}
 
 				if (hit == false)
@@ -560,15 +559,13 @@ public class SceneMeny extends Application {
 				}
 				for (int i = 0; i < obsList.size(); i++) {
 					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
-					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
-					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
-					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
+					
+					
 					
 					if (time.toSeconds() > 10){
 						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 5);
-						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 5);
-						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 5);
-						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 5);
+						
+						
 					}
 				}
 				hit = false;
