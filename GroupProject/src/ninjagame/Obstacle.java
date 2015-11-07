@@ -12,7 +12,7 @@ public class Obstacle extends Group{
 	private Rectangle hitbox;
 	private Image image;
 	private Random rand = new Random();
-	private int randomizedObject = rand.nextInt(20) + 1;
+	private int randomizedObject = rand.nextInt(21) + 1;
 
 	Obstacle() {
 		this.randomObstacles();
@@ -38,11 +38,11 @@ public class Obstacle extends Group{
 			break;
 		case 4:
 			this.image = new Image("textures/block1.2.png");
-			this.setTranslateY(340);
+			this.setTranslateY(350);
 			break;
 		case 5:
 			this.image = new Image("textures/block1.3.png");
-			this.setTranslateY(340);
+			this.setTranslateY(350);
 			break;
 		case 6:
 			this.image = new Image("textures/block1.4.png");
@@ -57,8 +57,8 @@ public class Obstacle extends Group{
 			this.setTranslateY(155);
 			break;
 		case 9:
-			this.image = new Image("textures/block1.6.jpg");
-			this.setTranslateY(280);
+			this.image = new Image("textures/block3.2.png");
+			this.setTranslateY(350);
 			break;
 		case 10:
 			this.image = new Image("textures/block1.8.png");
@@ -69,16 +69,16 @@ public class Obstacle extends Group{
 			this.setTranslateY(155);
 			break;
 		case 12:
-			this.image = new Image("textures/block2.3.png");
-			this.setTranslateY(295);
+			this.image = new Image("textures/block3.1.png");
+			this.setTranslateY(350);
 			break;
 		case 13:
 			this.image = new Image("textures/block1.5.png");
-			this.setTranslateY(340);
+			this.setTranslateY(350);
 			break;
 		case 14:
 			this.image = new Image("textures/block2.4.png");
-			this.setTranslateY(340);
+			this.setTranslateY(350);
 			break;
 		case 15:
 			this.image = new Image("textures/block2.4.png");
@@ -86,7 +86,7 @@ public class Obstacle extends Group{
 			break;
 		case 16:
 			this.image = new Image("textures/block2.5.png");
-			this.setTranslateY(200);
+			this.setTranslateY(210);
 			break;
 		case 17:
 			this.image = new Image("textures/block2.7.png");
@@ -94,15 +94,19 @@ public class Obstacle extends Group{
 			break;
 		case 18:
 			this.image = new Image("textures/block2.8.png");
-			this.setTranslateY(200);
+			this.setTranslateY(210);
 			break;
 		case 19:
-			this.image = new Image("textures/block2.9.png");
-			this.setTranslateY(295);
+			this.image = new Image("textures/block1.6.jpg");
+			this.setTranslateY(210);
 			break;
 		case 20:
 			this.image = new Image("textures/block3.0.png");
 			this.setTranslateY(335);
+			break;
+		case 21:
+			this.image = new Image("textures/block2.3.png");
+			this.setTranslateY(210);
 			break;
 		default:
 			this.image = new Image("textures/block3.0.png");
