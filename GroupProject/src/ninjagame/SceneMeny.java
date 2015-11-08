@@ -528,12 +528,15 @@ public class SceneMeny extends Application {
 	private void startPlayerMovement() {
 		obsList.add(new Obstacle());
 		gameRoot.getChildren().add(obsList.get(0));
-		playerLoop = new Timeline(new KeyFrame(Duration.millis(1000 / 60), new EventHandler<ActionEvent>() {
+		playerLoop = new Timeline(new KeyFrame(Duration.millis(1000 / 15), new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
-				// if (obsList.isEmpty())
+				//if (obsList.isEmpty())
+				
 				player.setDead(false);
+				updatePlayer();
+				updatePlayer();
 				updatePlayer();
 			
 				if (Integer.parseInt(timerLabel.getText()) > 10) {
@@ -542,8 +545,10 @@ public class SceneMeny extends Application {
 
 				if (hit == false)
 					checkCollision();
+					
+					
 				if (obsList.get(0).getTranslateX() <= -200) {
-					// obsList.remove(0);
+					obsList.remove(0);
 					obsList.removeAll(obsList);
 
 					Obstacle obst = new Obstacle();
@@ -555,8 +560,11 @@ public class SceneMeny extends Application {
 				}
 				for (int i = 0; i < obsList.size(); i++) {
 					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
+					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 10);
+					obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 5);
 
 					if (time.toSeconds() > 10) {
+						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 5);
 						obsList.get(i).setTranslateX(obsList.get(i).getTranslateX() - 5);
 
 					}
