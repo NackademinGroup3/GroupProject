@@ -16,12 +16,12 @@ import javafx.scene.image.ImageView;
 public class Background
 {
 	private AnimationTimer gameLoop;	
-	private double backgroundScrollSpeed;
+	private float backgroundScrollSpeed;
 	ImageView backgroundImageView, backgroundImageView2;
 	
 	Background()
 	{
-		backgroundScrollSpeed = 1.5;
+		backgroundScrollSpeed = 1.5f;
 	}
 
 	 public ImageView getBackgroundImageView() {
@@ -40,11 +40,11 @@ public class Background
 		this.backgroundImageView2 = backgroundImageView2;
 	}
 	
-	public double getBackgroundScrollSpeed() {
+	public float getBackgroundScrollSpeed() {
 		return backgroundScrollSpeed;
 	}
 	
-	public void setBackgroundScrollSpeed(double backgroundScrollSpeed) {
+	public void setBackgroundScrollSpeed(float backgroundScrollSpeed) {
 		this.backgroundScrollSpeed = backgroundScrollSpeed;
 	}
 	
@@ -65,8 +65,8 @@ public class Background
             public void handle(long l) 
             {
             
-             double x = backgroundImageView.getLayoutX() - backgroundScrollSpeed;
-             double x2 = backgroundImageView2.getLayoutX() - backgroundScrollSpeed;
+             float x = (float) (backgroundImageView.getLayoutX() - backgroundScrollSpeed);
+             float x2 = (float) (backgroundImageView2.getLayoutX() - backgroundScrollSpeed);
              
              if(backgroundImageView.getLayoutX() < -993)
              {
