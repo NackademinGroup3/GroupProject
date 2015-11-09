@@ -30,10 +30,6 @@ public class Highscore {
 
 	static List<Highscore> sortList(List<Highscore> hsl){ 
 
-		// Försök med lambda:
-		// Collections.sort(hsl, Comparator.comparingInt(obj ->
-		// obj.score.reversed());
-		
 		Collections.sort(hsl, new Comparator<Highscore>() {
 		@Override
 		public int compare(Highscore hsobj1, Highscore hsobj2) {

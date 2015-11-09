@@ -496,7 +496,7 @@ public class SceneMeny extends Application {
 
 			case "Exit Game":
 				playMedia(soundEffects[1]);
-				// Highscore.writeFile(highscoreList);
+				Highscore.writeFile(highscoreList);
 				System.exit(0);
 				break;
 
